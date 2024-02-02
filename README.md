@@ -36,5 +36,5 @@ either save and close, or close without saving.
 - As a user, I want to be able to open another photo to edit
 without having to close the entire program.
 
-- As a user, I want to tell the program where to pull my
-photos from.
+- As a user, I want to add photos to edit or tell the 
+program where to pull my photos from.
