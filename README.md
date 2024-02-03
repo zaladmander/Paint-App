@@ -1,16 +1,20 @@
 # Photo App
 
+## Overview
+
 This project is a **photo drawing/editing app** with a photo selector, 
 similar to a *simple* markup photo app. It will let the user choose photos from
-their computer to edit. Editing can involve drawing with **varying brush strokes/sizes**,
+their computer to edit. 
+## Features
+Editing can involve drawing with **varying brush strokes/sizes**,
 **colours**, **opacities**, **brush types** (felts, pens, pencils, etc.)
 
 
-The people who will use it are people who want to **quickly edit** a photo 
+The people who will use it are people who want to **draw** on a photo 
 or draw for the fun of it. I'm interested in a project 
 like this because I personally enjoy art
 (although I'm not great myself...) and I believe I would
-find an app like this useful for my own everyday tasks.
+find an app like this useful for my own everyday entertainment.
 
 
 ## User Stories
