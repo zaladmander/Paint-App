@@ -16,6 +16,10 @@ find an app like this useful for my own everyday entertainment.
 Editing can involve drawing with **varying brush strokes/sizes**,
 **colours**, **opacities**, **brush types** (felts, pens, pencils, etc.)
 
+Users can create custom brushes and save them
+to a "pencil-case."
+
+Users may also export their photos.
 
 
 
