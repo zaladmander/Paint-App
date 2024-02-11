@@ -1,5 +1,6 @@
 package model;
 
+// represents a paintbrush with RGB values, a brush size, and opacity
 public class Paintbrush {
     private int opacity;
     private int size;
