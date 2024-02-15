@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // represents a default brush with RGB values, a brush size,
 // opacity, texture
 public class Brush {
@@ -8,11 +11,13 @@ public class Brush {
     private int red;
     private int green;
     private int blue;
+    private String texture;
 
     // EFFECTS: constructs a Paintbrush
-    public Brush(int opacity, int size) {
-        this.opacity = opacity;
+    public Brush(int size) {
+        this.opacity = 1;
         this.size = size;
+        this.texture = "default";
     }
 
     // setters
@@ -60,6 +65,18 @@ public class Brush {
     public void setBlue(int blue) {
         if (blue <= 255 && blue >= 0) {
             this.blue = blue;
+        }
+    }
+
+    // REQUIRES: given texture is valid
+    // EFFECTS: set texture to given texture
+    //          only if it's a valid texture
+    public void setTexture(String texture) {
+        List<String> validTextures = new ArrayList<>();
+        for (String s : validTextures) {
+            if (texture == s) {
+                this.texture = texture;
+            }
         }
     }
 
