@@ -15,12 +15,27 @@ public class Brush {
         this.size = size;
     }
 
+    // setters
+
+    // getters
     public int getOpacity() {
         return opacity;
     }
 
     public int getSize() {
         return size;
+    }
+
+    public int getRed() {
+        return red;
+    }
+
+    public int getGreen() {
+        return green;
+    }
+
+    public int getBlue() {
+        return blue;
     }
 
 }
