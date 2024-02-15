@@ -14,4 +14,9 @@ public class Case {
     public void addBrush(Brush brush) {
         this.brushes.add(brush);
     }
+
+    // REQUIRES: index is in brushes list range
+    public Brush getBrush(int index) {
+        return this.brushes.get(index);
+    }
 }
