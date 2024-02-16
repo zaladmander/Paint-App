@@ -12,12 +12,14 @@ public class Brush {
     private int green;
     private int blue;
     private String texture;
+    private String name;
 
     // EFFECTS: constructs a Paintbrush
-    public Brush(int size) {
+    public Brush(int size, String name) {
         this.opacity = 1;
         this.size = size;
         this.texture = "default";
+        this.name = name;
     }
 
     // setters
@@ -92,6 +94,10 @@ public class Brush {
         }
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     // getters
     public double getOpacity() {
         return opacity;
@@ -111,6 +117,10 @@ public class Brush {
 
     public int getBlue() {
         return blue;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }
