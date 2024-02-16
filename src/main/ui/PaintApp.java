@@ -15,7 +15,26 @@ public class PaintApp {
     }
 
     private void runPaintApp() {
+        boolean run = true;
+        String command = null;
 
+        initialize();
+
+        while (run) {
+            displayMainMenu();
+            command = input.next();
+
+            if (command.equals("q")) {
+                run = false;
+            } else {
+                processCommand();
+            }
+        }
+        System.out.println("Quitting...");
+    }
+
+    private void processCommand() {
+        
     }
 
     private void displayMainMenu() {
@@ -25,7 +44,7 @@ public class PaintApp {
 
     private void displayListOfBrushes() {
         for (Brush b : pencilCase.getBrushes()) {
-            System.out.println();
+            System.out.println(b.getName());
         }
     }
 
@@ -39,6 +58,7 @@ public class PaintApp {
     }
 
     private void initialize() {
-
+        pencilCase = new Case();
+        input = new Scanner(System.in);
     }
 }
