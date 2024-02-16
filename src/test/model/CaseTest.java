@@ -11,7 +11,7 @@ public class CaseTest {
     @BeforeEach
     void setup() {
         c1 = new Case();
-        b1 = new Brush(1, 25);
+        b1 = new Brush(25);
     }
 
     @Test

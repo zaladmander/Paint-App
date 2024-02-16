@@ -10,8 +10,8 @@ class BrushTest {
 
     @BeforeEach
     void setup() {
-        b1 = new Brush(1, 10);
-        b2 = new Brush(1, 50);
+        b1 = new Brush(10);
+        b2 = new Brush(50);
     }
 
     @Test
