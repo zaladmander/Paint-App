@@ -6,7 +6,7 @@ import java.util.List;
 // represents a default brush with RGB values, a brush size,
 // opacity, texture
 public class Brush {
-    private int opacity;
+    private double opacity;
     private int size;
     private int red;
     private int green;
@@ -22,16 +22,21 @@ public class Brush {
 
     // setters
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    public void setOpacity(int opacity) {
-        //TODO: limit max and min opacity
-        this.opacity = opacity;
+    // REQUIRES: 0 <= opacity <= 1
+    // MODIFIES: this
+    // EFFECTS: set opacity to given double
+    public void setOpacity(double opacity) {
+        if (opacity > 1) {
+            this.opacity = 1;
+        } else if (opacity < 0) {
+            this.opacity = 0;
+        } else {
+            this.opacity = opacity;
+        }
     }
 
-    // REQUIRES:
-    // MODIFIES:
+    // REQUIRES: size > 0
+    // MODIFIES: this
     // EFFECTS:
     public void setSize(int size) {
         //TODO: limit max and min size
@@ -93,7 +98,7 @@ public class Brush {
     }
 
     // getters
-    public int getOpacity() {
+    public double getOpacity() {
         return opacity;
     }
 

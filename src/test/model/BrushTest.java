@@ -23,7 +23,7 @@ class BrushTest {
     @Test
     void testSetRedOverMax() {
         b1.setRed(256);
-        assertEquals(0, b1.getRed());
+        assertEquals(255, b1.getRed());
     }
 
     @Test
@@ -41,7 +41,7 @@ class BrushTest {
     @Test
     void testSetGreenOverMax() {
         b1.setGreen(256);
-        assertEquals(0, b1.getGreen());
+        assertEquals(255, b1.getGreen());
     }
 
     @Test
@@ -54,5 +54,23 @@ class BrushTest {
     void testSetGreenUnderMin() {
         b1.setGreen(-1);
         assertEquals(0, b1.getGreen());
+    }
+
+    @Test
+    void testSetBlueOverMax() {
+        b1.setBlue(256);
+        assertEquals(255, b1.getBlue());
+    }
+
+    @Test
+    void testSetBlueInBetweenRange() {
+        b1.setBlue(255);
+        assertEquals(255, b1.getBlue());
+    }
+
+    @Test
+    void testSetBlueUnderMin() {
+        b1.setBlue(-1);
+        assertEquals(0, b1.getBlue());
     }
 }
