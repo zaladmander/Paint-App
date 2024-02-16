@@ -28,4 +28,8 @@ public class Case {
     public int getNumBrushes() {
         return this.brushes.size();
     }
+
+    public List<Brush> getBrushes() {
+        return brushes;
+    }
 }
