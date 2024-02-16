@@ -48,12 +48,12 @@ public class Brush {
     //          if given int > 255, set red to 255
     //          if given int < 0, set red to 0
     public void setRed(int red) {
-        if (red <= 255 && red >= 0) {
-            this.red = red;
-        } else if (red > 255) {
+        if (red > 255) {
             this.red = 255;
         } else if (red < 0) {
             this.red = 0;
+        } else {
+            this.red = red;
         }
     }
 
@@ -62,12 +62,12 @@ public class Brush {
     //          if given int > 255, set green to 255
     //          if given int < 0, set green to 0
     public void setGreen(int green) {
-        if (green <= 255 && green >= 0) {
-            this.green = green;
-        } else if (green > 255) {
+        if (green > 255) {
             this.green = 255;
         } else if (green < 0) {
             this.green = 0;
+        } else {
+            this.green = green;
         }
     }
 
@@ -76,12 +76,12 @@ public class Brush {
     //          if given int > 255, set blue to 255
     //          if given int < 0, set blue to 0
     public void setBlue(int blue) {
-        if (blue <= 255 && blue >= 0) {
-            this.blue = blue;
-        } else if (blue > 255) {
+        if (blue > 255) {
             this.blue = 255;
         } else if (blue < 0) {
             this.blue = 0;
+        } else {
+            this.blue = blue;
         }
     }
 
