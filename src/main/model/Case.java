@@ -15,8 +15,17 @@ public class Case {
         this.brushes.add(brush);
     }
 
+    // REQUIRES: index in brushes list range and brushes must not be empty
+    public void removeBrush(int index) {
+        this.brushes.remove(index);
+    }
+
     // REQUIRES: index is in brushes list range
     public Brush getBrush(int index) {
         return this.brushes.get(index);
+    }
+
+    public int getNumBrushes() {
+        return this.brushes.size();
     }
 }
