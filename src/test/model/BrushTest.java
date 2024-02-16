@@ -1,8 +1,9 @@
 package model;
 
 import org.junit.jupiter.api.BeforeEach;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class BrushTest {
     Brush b1;
@@ -102,5 +103,17 @@ class BrushTest {
     void testSetOpacityDouble() {
         b1.setOpacity(0.35897);
         assertEquals(0.35897, b1.getOpacity());
+    }
+
+    @Test
+    void testSetSizeLessThanBounds() {
+        b1.setSize(0);
+        assertEquals(1, b1.getSize());
+    }
+
+    @Test
+    void testSetSize() {
+        b1.setSize(256);
+        assertEquals(256, b1.getSize());
     }
 }

@@ -35,12 +35,12 @@ public class Brush {
         }
     }
 
-    // REQUIRES: size > 0
+    // REQUIRES: size >= 1
     // MODIFIES: this
-    // EFFECTS:
+    // EFFECTS: sets size to given int, if < 1,
+    //          set to 1
     public void setSize(int size) {
-        //TODO: limit max and min size
-        this.size = size;
+        this.size = Math.max(size, 1);
     }
 
     // MODIFIES: this
@@ -50,10 +50,8 @@ public class Brush {
     public void setRed(int red) {
         if (red > 255) {
             this.red = 255;
-        } else if (red < 0) {
-            this.red = 0;
         } else {
-            this.red = red;
+            this.red = Math.max(red, 0);
         }
     }
 
@@ -64,10 +62,8 @@ public class Brush {
     public void setGreen(int green) {
         if (green > 255) {
             this.green = 255;
-        } else if (green < 0) {
-            this.green = 0;
         } else {
-            this.green = green;
+            this.green = Math.max(green, 0);
         }
     }
 
@@ -78,10 +74,8 @@ public class Brush {
     public void setBlue(int blue) {
         if (blue > 255) {
             this.blue = 255;
-        } else if (blue < 0) {
-            this.blue = 0;
         } else {
-            this.blue = blue;
+            this.blue = Math.max(blue, 0);
         }
     }
 
@@ -93,6 +87,7 @@ public class Brush {
         for (String s : validTextures) {
             if (texture == s) {
                 this.texture = texture;
+                break;
             }
         }
     }
