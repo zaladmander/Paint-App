@@ -38,33 +38,45 @@ public class Brush {
         this.size = size;
     }
 
-    // REQUIRES: 0 <= red <= 255
     // MODIFIES: this
-    // EFFECTS: set red to given int,
-    //          only if given int in range
+    // EFFECTS: set red to given int unless,
+    //          if given int > 255, set red to 255
+    //          if given int < 0, set red to 0
     public void setRed(int red) {
         if (red <= 255 && red >= 0) {
             this.red = red;
+        } else if (red > 255) {
+            this.red = 255;
+        } else if (red < 0) {
+            this.red = 0;
         }
     }
 
-    // REQUIRES: 0 <= green <= 255
     // MODIFIES: this
-    // EFFECTS: set green to given int,
-    //          only if given int in range
+    // EFFECTS: set green to given int unless,
+    //          if given int > 255, set green to 255
+    //          if given int < 0, set green to 0
     public void setGreen(int green) {
         if (green <= 255 && green >= 0) {
             this.green = green;
+        } else if (green > 255) {
+            this.green = 255;
+        } else if (green < 0) {
+            this.green = 0;
         }
     }
 
-    // REQUIRES: 0 <= blue <= 255
     // MODIFIES: this
-    // EFFECTS: set blue to given int,
-    //          only if given int in range
+    // EFFECTS: set blue to given int unless,
+    //          if given int > 255, set blue to 255
+    //          if given int < 0, set blue to 0
     public void setBlue(int blue) {
         if (blue <= 255 && blue >= 0) {
             this.blue = blue;
+        } else if (blue > 255) {
+            this.blue = 255;
+        } else if (blue < 0) {
+            this.blue = 0;
         }
     }
 
