@@ -116,4 +116,16 @@ class BrushTest {
         b1.setSize(256);
         assertEquals(256, b1.getSize());
     }
+
+    @Test
+    void testSetName() {
+        b1.setName("CoolerBrush");
+        assertEquals("CoolerBrush", b1.getName());
+    }
+
+    @Test
+    void testSetNameEmptyString() {
+        b1.setName("");
+        assertEquals("coolBrush", b1.getName());
+    }
 }

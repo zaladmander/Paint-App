@@ -94,8 +94,12 @@ public class Brush {
         }
     }
 
+    // REQUIRES: String must be at least one letter
+    // EFFECTS: sets name to given name
     public void setName(String name) {
-        this.name = name;
+        if (name.length() >= 1) {
+            this.name = name;
+        }
     }
 
     // getters
