@@ -11,10 +11,13 @@ public class Brush {
     private String name;
 
     // EFFECTS: constructs a Paintbrush
-    public Brush(int size, String name) {
-        this.opacity = 1;
-        this.size = size;
-        this.name = name;
+    public Brush(int size, String name, int red, int green, int blue, int opacity) {
+        setOpacity(opacity);
+        setSize(size);
+        setName(name);
+        setRed(red);
+        setGreen(green);
+        setBlue(blue);
     }
 
     // setters

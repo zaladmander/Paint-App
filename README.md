@@ -46,5 +46,5 @@ file type, or a different one.
 - As a user, if I click to close a window, I want to be prompted to
 either save and close, or close without saving.
 
-- As a user, I want to be able to open another photo to edit
-without having to close the entire program.
+- As a user, I want to be able to go back and forth between menus without having to commit to a task
+  (forced to make a new paintbrush or etc.)

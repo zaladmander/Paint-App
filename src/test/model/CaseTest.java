@@ -12,8 +12,8 @@ public class CaseTest {
     @BeforeEach
     void setup() {
         c1 = new Case("my cool brushes");
-        b1 = new Brush(25, "stinky");
-        b2 = new Brush(50, "abstract");
+        b1 = new Brush(25, "stinky",0,0,0,1);
+        b2 = new Brush(50, "abstract",0,0,0,1);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class CaseTest {
 
     @Test
     void testGetBrushWithNameNull() {
-        assertEquals(null, c1.getBrushWithName("abstract"));
+        assertNull(c1.getBrushWithName("abstract"));
     }
 
     @Test

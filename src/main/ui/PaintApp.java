@@ -131,11 +131,7 @@ public class PaintApp {
 
     private void processBrushesCommand(String command, Case pencilCase) {
         if (command.equals("1")) {
-            System.out.println("Type name:");
-            String name = input.next();
-            System.out.println("Type brush size:");
-            int size = stringToInt(input.next());
-            pencilCase.addBrush(new Brush(size, name));
+            editBrush(pencilCase);
         } else if (command.equals("2")) {
             System.out.println("Type brush to DELETE");
             String brushToDelete = input.next();
@@ -169,6 +165,18 @@ public class PaintApp {
         }
     }
 
+    private void editBrush(Case pencilCase) {
+        Brush brush = new Brush(10, "default", 0,0,0,1);
+        System.out.println("Set brush name:");
+        brush.setName(input.next());
+        editColor(brush);
+        System.out.println("Set brush size:");
+        brush.setSize(stringToInt(input.next()));
+        System.out.println("Set brush opacity:");
+        brush.setSize(stringToInt(input.next()));
+        pencilCase.addBrush(brush);
+    }
+
     private void editColor(Brush brush) {
         System.out.println("Type red value [0 - 255]");
         brush.setRed(stringToInt(input.next()));
@@ -181,7 +189,7 @@ public class PaintApp {
     public void editCanvas() {
         System.out.println("Canvas type (blank or photo)");
         String type = input.next();
-        System.out.println("Width");
+        System.out.println("Width:");
         int width = stringToInt(input.next());
         System.out.println("Height:");
         int height = stringToInt(input.next());
@@ -194,7 +202,7 @@ public class PaintApp {
             System.out.println("No canvases...");
         } else {
             for (Canvas c : canvases) {
-                System.out.println(c.getWidth() + "x" + c.getHeight());
+                System.out.println(c.getWidth() + "x" + c.getHeight() + "-" + c.getType());
             }
         }
         System.out.println("\t(1) Make a canvas");

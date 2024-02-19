@@ -11,8 +11,8 @@ class BrushTest {
 
     @BeforeEach
     void setup() {
-        b1 = new Brush(10, "coolBrush");
-        b2 = new Brush(50, "felt");
+        b1 = new Brush(10, "coolBrush", 0,0,0,1);
+        b2 = new Brush(50, "felt",0,0,0,1);
     }
 
     @Test
