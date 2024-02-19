@@ -7,15 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// represents a paint application with ui
+// represents a paint application with ui, different menus
+// main menu, cases menu, brushes menu, edit menu, canvas menu
+// takes user input to travel from menu to menu
 public class PaintApp {
     private Scanner input;
     private List<Case> cases;
 
+    // EFFECTS: constructs a PaintApp
     public PaintApp() {
         runPaintApp();
     }
 
+    // EFFECTS: runs a console based ui for PaintApp
     private void runPaintApp() {
         boolean run = true;
         initialize();
@@ -24,6 +28,7 @@ public class PaintApp {
         System.out.println("Quitting...");
     }
 
+    // EFFECTS: runs (displays and processes) main menu
     private void runMainMenu(boolean run) {
         String command;
         while (run) {
