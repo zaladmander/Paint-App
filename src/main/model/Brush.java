@@ -1,24 +1,19 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // represents a default brush with RGB values, a brush size,
-// opacity, texture
+// opacity, and a name. All can be changed with setters
 public class Brush {
     private double opacity;
     private int size;
     private int red;
     private int green;
     private int blue;
-    private String texture;
     private String name;
 
     // EFFECTS: constructs a Paintbrush
     public Brush(int size, String name) {
         this.opacity = 1;
         this.size = size;
-        this.texture = "default";
         this.name = name;
     }
 
@@ -81,21 +76,7 @@ public class Brush {
         }
     }
 
-    // REQUIRES: given texture is valid
-    // EFFECTS: set texture to given texture
-    //          only if it's a valid texture
-    public void setTexture(String texture) {
-        List<String> validTextures = new ArrayList<>();
-        for (String s : validTextures) {
-            if (texture.equals(s)) {
-                this.texture = texture;
-                break;
-            }
-        }
-    }
-
-    // REQUIRES: String must be at least one letter
-    // EFFECTS: sets name to given name
+    // EFFECTS: sets name to given name if string at least one letter length
     public void setName(String name) {
         if (name.length() >= 1) {
             this.name = name;
