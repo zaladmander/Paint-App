@@ -62,7 +62,7 @@ class BrushTest {
         b1.setSize(256);
         assertEquals(256, b1.getSize());
     }
-    
+
     @Test
     void testSetRedOverMax() {
         b1.setRed(256);

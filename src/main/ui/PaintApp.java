@@ -243,7 +243,8 @@ public class PaintApp {
     }
 
     private void deleteBrush(String brushToDelete, Case pencilCase) {
-        pencilCase.removeBrushWithName(brushToDelete);
+        Brush brush = pencilCase.getBrushWithName(brushToDelete);
+        pencilCase.getBrushes().remove(brush);
     }
 
 }

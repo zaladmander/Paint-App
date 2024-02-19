@@ -22,14 +22,6 @@ public class Case {
         this.brushes.remove(index);
     }
 
-    public void removeBrushWithName(String name) {
-        for (Brush b: brushes) {
-            if (b.getName().equals(name)) {
-                brushes.remove(b);
-            }
-        }
-    }
-
     public void setName(String name) {
         this.name = name;
     }

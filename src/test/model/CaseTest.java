@@ -24,7 +24,23 @@ public class CaseTest {
 
     @Test
     void testRemoveBrush() {
+        c1.addBrush(b2);
+        assertEquals(1, c1.getBrushes().size());
+        c1.removeBrush(0);
+        assertEquals(0, c1.getBrushes().size());
+    }
 
+    @Test
+    void testGetBrushWithName() {
+        c1.addBrush(b2);
+        assertEquals(b2, c1.getBrushWithName("abstract"));
+    }
+
+    @Test
+    void testGetBrushWithNameMultiple() {
+        c1.addBrush(b2);
+        c1.addBrush(b1);
+        assertEquals(b1, c1.getBrushWithName("stinky"));
     }
 
     @Test
@@ -43,5 +59,11 @@ public class CaseTest {
         c1.addBrush(b1);
         c1.addBrush(b2);
         assertEquals(2, c1.getNumBrushes());
+    }
+
+    @Test
+    void testSetName() {
+        c1.setName("cooooool");
+        assertEquals("cooooool", c1.getName());
     }
 }
