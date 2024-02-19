@@ -52,6 +52,21 @@ public class PaintApp {
         }
     }
 
+    private void runBrushesMenu(boolean run, String name) {
+        String command = null;
+        Case pencilCase = getCaseWithName(name);
+        while (run) {
+            displayBrushesMenu(pencilCase);
+            command = input.next();
+
+            if (command.equals("q")) {
+                run = false;
+            } else {
+                processBrushesCommand(command, pencilCase);
+            }
+        }
+    }
+
     private void processMainCommand(String command) {
         if (command.equals("d")) {
             draw();
@@ -67,8 +82,23 @@ public class PaintApp {
             System.out.println("Name your case");
             String name = input.next();
             cases.add(new Case(name));
-        } else if (command.equals("o")) {
-            System.out.println(cases);
+        } else if (isNameInListCases(command)) {
+            runBrushesMenu(true, command);
+        } else {
+            System.out.println("invalid input...");
+        }
+    }
+
+    private void processBrushesCommand(String command, Case pencilCase) {
+        if (command.equals("m")) {
+            displayEditMenu();
+            String name = input.next();
+            pencilCase.addBrush(new Brush(10, name));
+        } else if (isNameInListBrushes(command, pencilCase)) {
+            displayEditMenu();
+            String name = input.next();
+            //TODO: change to editing
+            pencilCase.addBrush(new Brush(10, name));
         } else {
             System.out.println("invalid input...");
         }
@@ -79,13 +109,13 @@ public class PaintApp {
     }
 
     private void displayMainMenu() {
-        System.out.println("Press 'd' to draw on a new canvas");
-        System.out.println("Press 'c' to look at brushes");
-        System.out.println("Press 'q' to quit");
+        System.out.println("MAIN MENU");
+        System.out.println("\tPress 'd' to draw on a new canvas");
+        System.out.println("\tPress 'c' to look at brushes");
+        System.out.println("\tPress 'q' to quit");
     }
 
     private void displayCasesMenu() {
-        String command = null;
         System.out.println("Your cases:");
         if (cases.isEmpty()) {
             System.out.println("You have no cases.");
@@ -94,12 +124,13 @@ public class PaintApp {
                 System.out.println(c.getName());
             }
         }
-        System.out.println("Press 'm' to make a case");
-        System.out.println("Press 'o' to look into a case");
-        System.out.println("Press 'q' to go back");
+        System.out.println("\tPress 'm' to make a case");
+        System.out.println("\tType case name (case sensitive) to open");
+        System.out.println("\tPress 'q' to go back");
     }
 
-    private void displayListOfBrushes(Case pencilCase) {
+    private void displayBrushesMenu(Case pencilCase) {
+        System.out.println("Your brushes:");
         if (pencilCase.getBrushes().isEmpty()) {
             System.out.println("No brushes :(");
         } else {
@@ -107,6 +138,9 @@ public class PaintApp {
                 System.out.println(b.getName());
             }
         }
+        System.out.println("\tPress 'm' to make a brush");
+        System.out.println("\tType brush name (case sensitive) to edit");
+        System.out.println("\tor press 'q' to go back");
     }
 
     private void displayBrushMenu() {
@@ -120,6 +154,33 @@ public class PaintApp {
         System.out.println("(3) - Name");
         System.out.println("(4) - Size");
         System.out.println("or press 'q' to go back");
+    }
+
+    private boolean isNameInListCases(String name) {
+        for (Case c : cases) {
+            if (c.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isNameInListBrushes(String name, Case pencilCase) {
+        for (Brush b : pencilCase.getBrushes()) {
+            if (b.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Case getCaseWithName(String name) {
+        for (Case c : cases) {
+            if (c.getName().equals(name)) {
+                return c;
+            }
+        }
+        return null;
     }
 
     private void initialize() {
