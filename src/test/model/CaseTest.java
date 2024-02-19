@@ -44,6 +44,11 @@ public class CaseTest {
     }
 
     @Test
+    void testGetBrushWithNameNull() {
+        assertEquals(null, c1.getBrushWithName("abstract"));
+    }
+
+    @Test
     void testGetNumBrushesNone() {
         assertEquals(0, c1.getNumBrushes());
     }
