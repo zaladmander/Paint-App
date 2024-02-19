@@ -1,6 +1,7 @@
 package ui;
 
 import model.Brush;
+import model.Canvas;
 import model.Case;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.Scanner;
 public class PaintApp {
     private Scanner input;
     private List<Case> cases;
+    private List<Canvas> canvases;
 
     // EFFECTS: constructs a PaintApp
     public PaintApp() {
@@ -90,6 +92,15 @@ public class PaintApp {
     }
 
     private void processDrawCommand(String command) {
+        if (command.equals("1")) {
+            editCanvas();
+        } else if (command.equals("2")) {
+            System.out.println("Type canvas position on list to DELETE");
+            int index = stringToInt(input.next());
+            deleteCanvas(index);
+        } else {
+            System.out.println("invalid input...");
+        }
     }
 
     private void processMainCommand(String command) {
@@ -167,10 +178,27 @@ public class PaintApp {
         brush.setBlue(stringToInt(input.next()));
     }
 
+    public void editCanvas() {
+        System.out.println("Canvas type (blank or photo)");
+        String type = input.next();
+        System.out.println("Width");
+        int width = stringToInt(input.next());
+        System.out.println("Height:");
+        int height = stringToInt(input.next());
+        canvases.add(new Canvas(type, height, width));
+    }
+
     private void displayDrawMenu() {
+        System.out.println("CANVAS MENU");
+        if (canvases.isEmpty()) {
+            System.out.println("No canvases...");
+        } else {
+            for (Canvas c : canvases) {
+                System.out.println(c.getWidth() + "x" + c.getHeight());
+            }
+        }
         System.out.println("\t(1) Make a canvas");
         System.out.println("\t(2) Delete a canvas");
-        System.out.println("\tType canvas name (case sensitive) to open");
         System.out.println("\tPress 'q' to go back");
     }
 
@@ -255,6 +283,7 @@ public class PaintApp {
     private void initialize() {
         input = new Scanner(System.in);
         cases = new ArrayList<>();
+        canvases = new ArrayList<>();
     }
 
     private int stringToInt(String string) {
@@ -273,6 +302,12 @@ public class PaintApp {
     private void deleteBrush(String brushToDelete, Case pencilCase) {
         Brush brush = pencilCase.getBrushWithName(brushToDelete);
         pencilCase.getBrushes().remove(brush);
+    }
+
+    private void deleteCanvas(int index) {
+        if (index > 0) {
+            canvases.remove(index - 1);
+        }
     }
 
 }

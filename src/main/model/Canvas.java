@@ -9,9 +9,9 @@ public class Canvas {
 
     // EFFECTS: constructs a canvas with type, height and width
     public Canvas(String type, int height, int width) {
-        this.type = type;
-        this.height = height;
-        this.width = width;
+        setType(type);
+        setHeight(height);
+        setWidth(width);
     }
 
     // setters
@@ -20,6 +20,8 @@ public class Canvas {
     public void setType(String type) {
         if (type.equals("photo") || type.equals("blank")) {
             this.type = type;
+        } else {
+            this.type = "blank";
         }
     }
 
