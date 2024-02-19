@@ -25,7 +25,7 @@ public class PaintApp {
     }
 
     private void runMainMenu(boolean run) {
-        String command = null;
+        String command;
         while (run) {
             displayMainMenu();
             command = input.next();
@@ -39,7 +39,7 @@ public class PaintApp {
     }
 
     private void runCasesMenu(boolean run) {
-        String command = null;
+        String command;
         while (run) {
             displayCasesMenu();
             command = input.next();
@@ -53,7 +53,7 @@ public class PaintApp {
     }
 
     private void runBrushesMenu(boolean run, String name) {
-        String command = null;
+        String command;
         Case pencilCase = getCaseWithName(name);
         while (run) {
             displayBrushesMenu(pencilCase);
@@ -114,17 +114,22 @@ public class PaintApp {
     }
 
     private void processEditCommand(String command, Brush brush) {
-        if (command.equals("1")) {
-            editColor(command, brush);
-        } else if (command.equals("2")) {
-            System.out.println("Type opacity value [0 - 1]");
-            brush.setOpacity(stringToInt(input.next()));
-        } else if (command.equals("3")) {
-            System.out.println("Type name:");
-            brush.setName(input.next());
-        } else if (command.equals("4")) {
-            System.out.println("Type size value (>=1)");
-            brush.setSize(stringToInt(input.next()));
+        switch (command) {
+            case "1":
+                editColor(command, brush);
+                break;
+            case "2":
+                System.out.println("Type opacity value [0 - 1]");
+                brush.setOpacity(stringToInt(input.next()));
+                break;
+            case "3":
+                System.out.println("Type name:");
+                brush.setName(input.next());
+                break;
+            case "4":
+                System.out.println("Type size value (>=1)");
+                brush.setSize(stringToInt(input.next()));
+                break;
         }
     }
 
@@ -181,8 +186,11 @@ public class PaintApp {
     }
 
     private void displayEditMenu(String name, Case pencilCase) {
+        String red = String.valueOf(pencilCase.getBrushWithName(name).getRed());
+        String green = String.valueOf(pencilCase.getBrushWithName(name).getGreen());
+        String blue = String.valueOf(pencilCase.getBrushWithName(name).getBlue());
         System.out.println("EDIT MENU");
-        System.out.println("\t(1) - Color = ");
+        System.out.println("\t(1) - Color = " + red + "-" + green + "-" + blue);
         System.out.println("\t(2) - Opacity = " + String.valueOf(pencilCase.getBrushWithName(name).getOpacity()));
         System.out.println("\t(3) - Name = " + name);
         System.out.println("\t(4) - Size = " + String.valueOf(pencilCase.getBrushWithName(name).getSize()));
