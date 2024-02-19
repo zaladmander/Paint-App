@@ -21,15 +21,15 @@ public class PaintApp {
 
     // EFFECTS: runs a console based ui for PaintApp
     private void runPaintApp() {
-        boolean run = true;
         initialize();
 
-        runMainMenu(run);
+        runMainMenu();
         System.out.println("Quitting...");
     }
 
     // EFFECTS: runs (displays and processes) main menu
-    private void runMainMenu(boolean run) {
+    private void runMainMenu() {
+        boolean run = true;
         String command;
         while (run) {
             displayMainMenu();
@@ -43,7 +43,8 @@ public class PaintApp {
         }
     }
 
-    private void runCasesMenu(boolean run) {
+    private void runCasesMenu() {
+        boolean run = true;
         String command;
         while (run) {
             displayCasesMenu();
@@ -57,7 +58,8 @@ public class PaintApp {
         }
     }
 
-    private void runBrushesMenu(boolean run, String name) {
+    private void runBrushesMenu(String name) {
+        boolean run = true;
         String command;
         Case pencilCase = getCaseWithName(name);
         while (run) {
@@ -72,11 +74,29 @@ public class PaintApp {
         }
     }
 
+    private void runDrawMenu() {
+        boolean run = true;
+        String command;
+        while (run) {
+            displayDrawMenu();
+            command = input.next();
+
+            if (command.equals("q")) {
+                run = false;
+            } else {
+                processDrawCommand(command);
+            }
+        }
+    }
+
+    private void processDrawCommand(String command) {
+    }
+
     private void processMainCommand(String command) {
         if (command.equals("1")) {
-            draw();
+            runDrawMenu();
         } else if (command.equals("2")) {
-            runCasesMenu(true);
+            runCasesMenu();
         } else {
             System.out.println("invalid input...");
         }
@@ -92,7 +112,7 @@ public class PaintApp {
             String caseToDelete = input.next();
             deleteCase(caseToDelete);
         } else if (isNameInListCases(command)) {
-            runBrushesMenu(true, command);
+            runBrushesMenu(command);
         } else {
             System.out.println("invalid input...");
         }
@@ -147,8 +167,11 @@ public class PaintApp {
         brush.setBlue(stringToInt(input.next()));
     }
 
-    private void draw() {
-        System.out.println("You try to draw, but unfortunately your canvas is in another dimension");
+    private void displayDrawMenu() {
+        System.out.println("\t(1) Make a canvas");
+        System.out.println("\t(2) Delete a canvas");
+        System.out.println("\tType canvas name (case sensitive) to open");
+        System.out.println("\tPress 'q' to go back");
     }
 
     private void displayMainMenu() {
