@@ -116,7 +116,7 @@ public class PaintApp {
     private void processEditCommand(String command, Brush brush) {
         switch (command) {
             case "1":
-                editColor(command, brush);
+                editColor(brush);
                 break;
             case "2":
                 System.out.println("Type opacity value [0 - 1]");
@@ -133,7 +133,7 @@ public class PaintApp {
         }
     }
 
-    private void editColor(String command, Brush brush) {
+    private void editColor(Brush brush) {
         System.out.println("Type red value [0 - 255]");
         brush.setRed(stringToInt(input.next()));
         System.out.println("Type green value [0 - 255]");
@@ -191,9 +191,9 @@ public class PaintApp {
         String blue = String.valueOf(pencilCase.getBrushWithName(name).getBlue());
         System.out.println("EDIT MENU");
         System.out.println("\t(1) - Color = " + red + "-" + green + "-" + blue);
-        System.out.println("\t(2) - Opacity = " + String.valueOf(pencilCase.getBrushWithName(name).getOpacity()));
+        System.out.println("\t(2) - Opacity = " + pencilCase.getBrushWithName(name).getOpacity());
         System.out.println("\t(3) - Name = " + name);
-        System.out.println("\t(4) - Size = " + String.valueOf(pencilCase.getBrushWithName(name).getSize()));
+        System.out.println("\t(4) - Size = " + pencilCase.getBrushWithName(name).getSize());
         System.out.println("or press 'q' to go back");
     }
 
@@ -231,8 +231,7 @@ public class PaintApp {
 
     private int stringToInt(String string) {
         try {
-            int output = Integer.parseInt(string);
-            return output;
+            return Integer.parseInt(string);
         } catch (NumberFormatException e) {
             // default size
             return 10;
