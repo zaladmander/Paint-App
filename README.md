@@ -48,3 +48,5 @@ either save and close, or close without saving.
 
 - As a user, I want to be able to go back and forth between menus without having to commit to a task
   (forced to make a new paintbrush or etc.)
+
+- As a user, I want to be able to see a list of all my canvases, brushes, and pencilcases.
