@@ -27,14 +27,18 @@ public class PaintApp {
             if (command.equals("q")) {
                 run = false;
             } else {
-                processCommand();
+                processCommand(command);
             }
         }
         System.out.println("Quitting...");
     }
 
-    private void processCommand() {
-        
+    private void processCommand(String command) {
+        if (command.equals("c")) {
+            displayListOfBrushes();
+        } else {
+            System.out.println("invalid input...");
+        }
     }
 
     private void displayMainMenu() {
@@ -43,8 +47,12 @@ public class PaintApp {
     }
 
     private void displayListOfBrushes() {
-        for (Brush b : pencilCase.getBrushes()) {
-            System.out.println(b.getName());
+        if (pencilCase.getBrushes().isEmpty()) {
+            System.out.println("No brushes :(");
+        } else {
+            for (Brush b : pencilCase.getBrushes()) {
+                System.out.println(b.getName());
+            }
         }
     }
 
