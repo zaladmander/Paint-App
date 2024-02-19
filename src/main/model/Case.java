@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// represents a case that can hold brushes of any type
+// represents a case that can hold brushes of any type, has a
+// list of brushes, and a case name, brushes can be added and removed,
+// case name can be changed
 public class Case {
     private List<Brush> brushes;
     private String name;
