@@ -87,7 +87,7 @@ public class Brush {
     public void setTexture(String texture) {
         List<String> validTextures = new ArrayList<>();
         for (String s : validTextures) {
-            if (texture == s) {
+            if (texture.equals(s)) {
                 this.texture = texture;
                 break;
             }
