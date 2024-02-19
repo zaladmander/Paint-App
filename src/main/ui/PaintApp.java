@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 // represents a paint application with ui, different menus
 // main menu, cases menu, brushes menu, edit menu, canvas menu
-// takes user input to travel from menu to menu
+// takes user input to travel from menu to menu, lets the user customize
+// brushes, pencilcases, and canvases
 public class PaintApp {
     private Scanner input;
     private List<Case> cases;
@@ -94,6 +95,7 @@ public class PaintApp {
         }
     }
 
+    // REQUIRES: index input is valid range in list
     // EFFECTS: processes commands from draw menu, 1 = make a canvas,
     //          2 = delete a canvas, invalid input otherwise
     private void processDrawCommand(String command) {
@@ -352,6 +354,7 @@ public class PaintApp {
         pencilCase.getBrushes().remove(brush);
     }
 
+    // REQUIRES: canvases not empty and index is a valid position in canvases
     // MODIFIES: canvases
     // EFFECTS: removes a canvas from index -1
     private void deleteCanvas(int index) {
