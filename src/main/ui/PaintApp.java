@@ -66,7 +66,7 @@ public class PaintApp {
     }
 
     private void initialize() {
-        pencilCase = new Case();
+        pencilCase = new Case("default case");
         input = new Scanner(System.in);
     }
 }

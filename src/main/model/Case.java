@@ -6,9 +6,11 @@ import java.util.List;
 // represents a case that can hold brushes of any type
 public class Case {
     private List<Brush> brushes;
+    private String name;
 
-    public Case() {
+    public Case(String name) {
         brushes = new ArrayList<>();
+        this.name = name;
     }
 
     public void addBrush(Brush brush) {
@@ -18,6 +20,10 @@ public class Case {
     // REQUIRES: index in brushes list range and brushes must not be empty
     public void removeBrush(int index) {
         this.brushes.remove(index);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     // REQUIRES: index is in brushes list range
@@ -31,5 +37,9 @@ public class Case {
 
     public List<Brush> getBrushes() {
         return brushes;
+    }
+
+    public String getName() {
+        return name;
     }
 }
