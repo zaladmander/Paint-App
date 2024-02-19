@@ -91,17 +91,43 @@ public class PaintApp {
 
     private void processBrushesCommand(String command, Case pencilCase) {
         if (command.equals("m")) {
-            displayEditMenu();
+            System.out.println("Type name:");
             String name = input.next();
-            pencilCase.addBrush(new Brush(10, name));
+            System.out.println("Type brush size:");
+            int size = stringToInt(input.next());
+            pencilCase.addBrush(new Brush(size, name));
         } else if (isNameInListBrushes(command, pencilCase)) {
             displayEditMenu();
-            String name = input.next();
+            String edit = input.next();
+            processEditCommand(edit, pencilCase.getBrushWithName(command));
             //TODO: change to editing
-            pencilCase.addBrush(new Brush(10, name));
         } else {
             System.out.println("invalid input...");
         }
+    }
+
+    private void processEditCommand(String command, Brush brush) {
+        if (command.equals("1")) {
+            editColor(command, brush);
+        } else if (command.equals("2")) {
+            System.out.println("Type opacity value [0 - 1]");
+            brush.setOpacity(stringToInt(input.next()));
+        } else if (command.equals("3")) {
+            System.out.println("Type name:");
+            brush.setName(input.next());
+        } else if (command.equals("4")) {
+            System.out.println("Type size value (>=1)");
+            brush.setSize(stringToInt(input.next()));
+        }
+    }
+
+    private void editColor(String command, Brush brush) {
+        System.out.println("Type red value [0 - 255]");
+        brush.setRed(stringToInt(input.next()));
+        System.out.println("Type green value [0 - 255]");
+        brush.setGreen(stringToInt(input.next()));
+        System.out.println("Type blue value [0 - 255]");
+        brush.setBlue(stringToInt(input.next()));
     }
 
     private void draw() {
@@ -139,13 +165,8 @@ public class PaintApp {
             }
         }
         System.out.println("\tPress 'm' to make a brush");
-        System.out.println("\tType brush name (case sensitive) to edit");
+        System.out.println("\tType brush name (case sensitive) to look or edit");
         System.out.println("\tor press 'q' to go back");
-    }
-
-    private void displayBrushMenu() {
-
-        System.out.println("Press 'e' to edit your brush");
     }
 
     private void displayEditMenu() {
@@ -186,5 +207,15 @@ public class PaintApp {
     private void initialize() {
         input = new Scanner(System.in);
         cases = new ArrayList<>();
+    }
+
+    private int stringToInt(String string) {
+        try {
+            int output = Integer.parseInt(string);
+            return output;
+        } catch (NumberFormatException e) {
+            // default size
+            return 10;
+        }
     }
 }
