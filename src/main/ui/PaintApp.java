@@ -138,7 +138,7 @@ public class PaintApp {
     }
 
     private void draw() {
-        System.out.println("This functionality does not work yet!");
+        System.out.println("You try to draw, but unfortunately your canvas is in another dimension");
     }
 
     private void displayMainMenu() {
@@ -149,6 +149,7 @@ public class PaintApp {
     }
 
     private void displayCasesMenu() {
+        System.out.println("CASES MENU");
         System.out.println("Your cases:");
         if (cases.isEmpty()) {
             System.out.println("You have no cases.");
@@ -164,6 +165,7 @@ public class PaintApp {
     }
 
     private void displayBrushesMenu(Case pencilCase) {
+        System.out.println("BRUSHES MENU");
         System.out.println("Your brushes:");
         if (pencilCase.getBrushes().isEmpty()) {
             System.out.println("No brushes :(");
@@ -179,6 +181,7 @@ public class PaintApp {
     }
 
     private void displayEditMenu(String name, Case pencilCase) {
+        System.out.println("EDIT MENU");
         System.out.println("\t(1) - Color = ");
         System.out.println("\t(2) - Opacity = " + String.valueOf(pencilCase.getBrushWithName(name).getOpacity()));
         System.out.println("\t(3) - Name = " + name);
