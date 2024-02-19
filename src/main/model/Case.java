@@ -31,6 +31,16 @@ public class Case {
         return this.brushes.get(index);
     }
 
+    // REQUIRES: // TODO i forgor
+    public Brush getBrushWithName(String name) {
+        for (Brush b: brushes) {
+            if (b.getName().equals(name)) {
+                return b;
+            }
+        }
+        return null;
+    }
+
     public int getNumBrushes() {
         return this.brushes.size();
     }
