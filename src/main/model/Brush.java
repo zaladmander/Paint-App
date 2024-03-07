@@ -1,14 +1,18 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // represents a default brush with RGB values, a brush size,
 // opacity, and a name. All can be changed with setters
-public class Brush {
+public class Brush implements Writable {
+    private String name;
+    //TODO: change opacity to int, use [0,100] or something
     private double opacity;
     private int size;
     private int red;
     private int green;
     private int blue;
-    private String name;
 
     // EFFECTS: constructs a Paintbrush
     public Brush(int size, String name, int red, int green, int blue, int opacity) {
@@ -111,4 +115,18 @@ public class Brush {
         return name;
     }
 
+    //Referenced from JsonSerializationDemo
+    //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // converts a Brush into a JSONObject
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("opacity", opacity);
+        json.put("size", size);
+        json.put("red", red);
+        json.put("green", green);
+        json.put("blue", blue);
+        return json;
+    }
 }
