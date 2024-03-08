@@ -5,6 +5,7 @@ import model.BrushesRoom;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,12 +15,24 @@ public class JsonReaderTest extends JsonTest{
     @Test
     void testSourceNotFound() {
         JsonReader jsonReader = new JsonReader("this//:aint:a..source:playboicarti");
+        JsonReader jsonReader2 = new JsonReader("./data/testARRRRGGGGG.json");
         try {
-            BrushesRoom brushroom = jsonReader.readBrushesRoom();
+            jsonReader.readBrushesRoom();
             fail("No exceptions thrown :( ");
         } catch (IOException e) {
             // good stuff
+        } catch (InvalidPathException e) {
+            // ok
         }
+        try {
+            jsonReader2.readBrushesRoom();
+            fail("No exceptions thrown :( ");
+        } catch (IOException e) {
+            // good stuff
+        } catch (InvalidPathException e) {
+            // ok
+        }
+
     }
 
     @Test
