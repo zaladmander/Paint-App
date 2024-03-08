@@ -1,6 +1,7 @@
 package persistence;
 
 import model.BrushesRoom;
+import model.DrawingRoom;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -28,9 +29,16 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of BrushRoom to file
     public void writeBrushRoom(BrushesRoom br) {
         JSONObject json = br.toJson();
+        saveToFile(json.toString(TAB));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of DrawingRoom to file
+    public void writeDrawingRoom(DrawingRoom dr) {
+        JSONObject json = dr.toJson();
         saveToFile(json.toString(TAB));
     }
 

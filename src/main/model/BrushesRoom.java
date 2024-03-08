@@ -11,6 +11,7 @@ import java.util.List;
 public class BrushesRoom implements Writable {
     private List<PencilCase> cases;
 
+    // EFFECTS: constructs a BrushesRoom with an empty cases list
     public BrushesRoom() {
         cases = new ArrayList<>();
     }
@@ -58,6 +59,8 @@ public class BrushesRoom implements Writable {
         return null;
     }
 
+    // MODIFIES: cases
+    // EFFECTS: adds the given pencilCase to the BrushesRoom cases list
     public void addPencilCase(PencilCase pc) {
         cases.add(pc);
     }
@@ -68,7 +71,7 @@ public class BrushesRoom implements Writable {
 
     //Referenced from JsonSerializationDemo
     //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-    // converts a PencilCase into a JSONObject
+    // EFFECTS: converts a PencilCase into a JSONObject
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -76,7 +79,7 @@ public class BrushesRoom implements Writable {
         return json;
     }
 
-    // EFFECTS: converts and returns brushes to Json Array
+    // EFFECTS: converts and returns cases into Json Array format
     private JSONArray casesToJson() {
         JSONArray jsonArray = new JSONArray();
         for (PencilCase c : cases) {

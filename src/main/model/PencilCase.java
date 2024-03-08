@@ -75,7 +75,7 @@ public class PencilCase implements Writable {
 
     //Referenced from JsonSerializationDemo
     //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-    // converts a PencilCase into a JSONObject
+    //EFFECTS: converts a PencilCase into a JSONObject
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -84,7 +84,7 @@ public class PencilCase implements Writable {
         return json;
     }
 
-    // EFFECTS: converts and returns brushes to Json Array
+    // EFFECTS: converts and returns brushes into Json Array
     private JSONArray brushesToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Brush b : brushes) {

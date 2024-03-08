@@ -1,8 +1,6 @@
 package persistence;
 
-import model.Brush;
-import model.BrushesRoom;
-import model.PencilCase;
+import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,6 +30,14 @@ public class JsonReader {
         return parseBrushesRoom(jsonObject);
     }
 
+    // EFFECTS: reads DrawingRoom from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    public DrawingRoom readDrawingRoom() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseDrawingRoom(jsonObject);
+    }
+
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
@@ -48,6 +54,29 @@ public class JsonReader {
         BrushesRoom br = new BrushesRoom();
         addPencilCases(br, jsonObject);
         return br;
+    }
+
+    // EFFECTS: parses DrawingRoom from JSON object and returns it
+    private DrawingRoom parseDrawingRoom(JSONObject jsonObject) {
+        DrawingRoom dr = new DrawingRoom();
+        addCanvases(dr, jsonObject);
+        return dr;
+    }
+
+    private void addCanvases(DrawingRoom dr, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("canvases");
+        for (Object c : jsonArray) {
+            JSONObject nextPencilCase = (JSONObject) c;
+            addCanvas(dr, nextPencilCase);
+        }
+    }
+
+    private void addCanvas(DrawingRoom dr, JSONObject jsonObject) {
+        String type = jsonObject.getString("type");
+        int height = jsonObject.getInt("height");
+        int width = jsonObject.getInt("width");
+        Canvas c = new Canvas(type, height, width);
+        dr.addCanvas(c);
     }
 
     private void addPencilCases(BrushesRoom br, JSONObject jsonObject) {

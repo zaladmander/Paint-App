@@ -14,6 +14,7 @@ import java.util.Scanner;
 // brushes, pencilcases, and canvases
 public class PaintApp {
     private static final String JSON_STORE_BR = "./data/brushesroom.json";
+    private static final String JSON_STORE_DR = "./data/drawingroom.json";
     private static final String BACKTEXT = "\tPress 'q' to go back";
     private static final String INVALIDTEXT = "invalid input...";
 
@@ -22,6 +23,8 @@ public class PaintApp {
     private DrawingRoom drawroom;
     private JsonWriter jsonWriterBrushesRoom;
     private JsonReader jsonReaderBrushesRoom;
+    private JsonWriter jsonWriterDrawingRoom;
+    private JsonReader jsonReaderDrawingRoom;
 
     // EFFECTS: constructs a PaintApp
     public PaintApp() {
@@ -123,10 +126,14 @@ public class PaintApp {
             runDrawMenu();
         } else if (command.equals("2")) {
             runCasesMenu();
-        } else if (command.equals("save")) {
+        } else if (command.equals("3")) {
             saveBrushesRoom();
-        } else if (command.equals("load")) {
+            saveDrawingRoom();
+            System.out.println("Saving Complete!");
+        } else if (command.equals("4")) {
             loadBrushesRoom();
+            loadDrawingRoom();
+            System.out.println("Loading Complete!");
         } else {
             System.out.println(INVALIDTEXT);
         }
@@ -253,8 +260,8 @@ public class PaintApp {
         System.out.println("MAIN MENU");
         System.out.println("\t(1) Draw on a new canvas");
         System.out.println("\t(2) Look at brushes");
-        System.out.println("\t(save)");
-        System.out.println("\t(load)");
+        System.out.println("\t(3) Save all changes");
+        System.out.println("\t(4) Load from save");
         System.out.println("\tPress 'q' to quit");
     }
 
@@ -312,6 +319,8 @@ public class PaintApp {
         drawroom = new DrawingRoom();
         jsonWriterBrushesRoom = new JsonWriter(JSON_STORE_BR);
         jsonReaderBrushesRoom = new JsonReader(JSON_STORE_BR);
+        jsonWriterDrawingRoom = new JsonWriter(JSON_STORE_DR);
+        jsonReaderDrawingRoom = new JsonReader(JSON_STORE_DR);
         loadBrushesRoom();
     }
 
@@ -341,6 +350,24 @@ public class PaintApp {
             brushroom = jsonReaderBrushesRoom.readBrushesRoom();
         } catch (IOException e) {
             System.out.println("Unable to load file: " + JSON_STORE_BR);
+        }
+    }
+
+    private void saveDrawingRoom() {
+        try {
+            jsonWriterDrawingRoom.open();
+            jsonWriterDrawingRoom.writeDrawingRoom(drawroom);
+            jsonWriterDrawingRoom.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE_DR);
+        }
+    }
+
+    private void loadDrawingRoom() {
+        try {
+            drawroom = jsonReaderDrawingRoom.readDrawingRoom();
+        } catch (IOException e) {
+            System.out.println("Unable to load file: " + JSON_STORE_DR);
         }
     }
 }

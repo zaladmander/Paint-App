@@ -1,8 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // represents a canvas which has a height, width, canvas type
 // (photo or blank)
-public class Canvas {
+public class Canvas implements Writable {
     private String type;
     private int height;
     private int width;
@@ -45,5 +48,17 @@ public class Canvas {
 
     public int getWidth() {
         return width;
+    }
+
+    //Referenced from JsonSerializationDemo
+    //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: converts a Canvas into a JSONObject
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("type", type);
+        json.put("height", height);
+        json.put("width", width);
+        return json;
     }
 }
