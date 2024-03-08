@@ -58,6 +58,10 @@ public class BrushesRoom implements Writable {
         return null;
     }
 
+    public void addPencilCase(PencilCase pc) {
+        cases.add(pc);
+    }
+
     public List<PencilCase> getCases() {
         return cases;
     }

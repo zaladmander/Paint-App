@@ -1,38 +1,11 @@
-{"cases": [
-    {
-        "name": "test",
-        "brushes": [
-            {
-                "red": 1,
-                "green": 1,
-                "size": 1,
-                "blue": 1,
-                "name": "ar",
-                "opacity": 1
-            },
-            {
-                "red": 1,
-                "green": 2,
-                "size": 50,
-                "blue": 3,
-                "name": "bg",
-                "opacity": 1
-            }
-        ]
-    },
-    {
-        "name": "goof",
-        "brushes": []
-    },
-    {
-        "name": "izzo",
-        "brushes": [{
-            "red": 255,
-            "green": 0,
-            "size": 1629,
-            "blue": 0,
-            "name": "carti",
-            "opacity": 1
-        }]
-    }
-]}
+{"cases": [{
+    "name": "arg",
+    "brushes": [{
+        "red": 25,
+        "green": 0,
+        "size": 45,
+        "blue": 0,
+        "name": "carti",
+        "opacity": 1
+    }]
+}]}

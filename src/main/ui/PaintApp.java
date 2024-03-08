@@ -5,6 +5,7 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // represents a paint application with ui, different menus
@@ -122,8 +123,10 @@ public class PaintApp {
             runDrawMenu();
         } else if (command.equals("2")) {
             runCasesMenu();
-        } else if (command.equals("t")) {
+        } else if (command.equals("save")) {
             saveBrushesRoom();
+        } else if (command.equals("load")) {
+            loadBrushesRoom();
         } else {
             System.out.println(INVALIDTEXT);
         }
@@ -250,6 +253,8 @@ public class PaintApp {
         System.out.println("MAIN MENU");
         System.out.println("\t(1) Draw on a new canvas");
         System.out.println("\t(2) Look at brushes");
+        System.out.println("\t(save)");
+        System.out.println("\t(load)");
         System.out.println("\tPress 'q' to quit");
     }
 
@@ -306,7 +311,7 @@ public class PaintApp {
         brushroom = new BrushesRoom();
         drawroom = new DrawingRoom();
         jsonWriterBrushesRoom = new JsonWriter(JSON_STORE_BR);
-        //jsonReaderBrushesRoom = new JsonReader(JSON_STORE_BR);
+        jsonReaderBrushesRoom = new JsonReader(JSON_STORE_BR);
     }
 
     // EFFECTS: prevent exception, try to turn string to int but if exception is thrown,
@@ -327,6 +332,14 @@ public class PaintApp {
             jsonWriterBrushesRoom.close();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE_BR);
+        }
+    }
+
+    private void loadBrushesRoom() {
+        try {
+            brushroom = jsonReaderBrushesRoom.readBrushesRoom();
+        } catch (IOException e) {
+            System.out.println("Unable to load file: " + JSON_STORE_BR);
         }
     }
 }

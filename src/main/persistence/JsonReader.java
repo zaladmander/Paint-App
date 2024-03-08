@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Stream;
 
 //Referenced from JsonSerializationDemo
@@ -51,10 +52,21 @@ public class JsonReader {
 
     private void addPencilCases(BrushesRoom br, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("cases");
+        for (Object pc : jsonArray) {
+            JSONObject nextPencilCase = (JSONObject) pc;
+            addPencilCase(br, nextPencilCase);
+        }
     }
 
     private void addPencilCase(BrushesRoom br, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
+        JSONArray brushes = jsonObject.getJSONArray("brushes");
+        PencilCase pc = new PencilCase(name);
+        for (Object brush : brushes) {
+            JSONObject nextBrush = (JSONObject) brush;
+            addBrush(pc, nextBrush);
+        }
+        br.addPencilCase(pc);
     }
 
     private void addBrushes(BrushesRoom br, JSONObject jsonObject) {
@@ -70,24 +82,5 @@ public class JsonReader {
         int blue = jsonObject.getInt("blue");
         Brush brush = new Brush(size, name, red, green, blue, opacity);
         pc.addBrush(brush);
-    }
-
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
-    private void addCases(BrushesRoom br, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("cases");
-        for (Object json : jsonArray) {
-            JSONObject nextThingy = (JSONObject) json;
-            addThingy(br, nextThingy);
-        }
-    }
-
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
-    private void addThingy(BrushesRoom wr, JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        //Category category = Category.valueOf(jsonObject.getString("category"));
-        //Thingy thingy = new Thingy(name, category);
-        //wr.addThingy(thingy);
     }
 }
