@@ -26,13 +26,13 @@ Users may also export their photos.
 ## User Stories
 
 - As a user, I want to be able to customize my brush colour, texture, size,
-or opacity.
+or opacity. ✓
 
 - As a user, I want to be able to create more custom brushes and add them
-to a collection of brushes.
+to a collection of brushes. ✓
 
 - As a user, I want to be able to either draw from a blank canvas
-or photos from my computer
+or photos from my computer.
 
 - As a user, I want to be able to have the choice of overwriting my 
 edits to a photo or making a copy.
@@ -47,15 +47,17 @@ file type, or a different one.
 either save and close, or close without saving.
 
 - As a user, I want to be able to go back and forth between menus without having to commit to a task
-  (forced to make a new paintbrush or etc.)
+  (forced to make a new paintbrush or etc.) 
 
-- As a user, I want to be able to see a list of all my canvases, brushes, and pencilcases.
+- As a user, I want to be able to see a list of all my canvases, brushes, and pencilcases. ✓
 
-- As a user, I want to be able to save my brushes, canvases, pencilcases (by choice)
+### Phase 2
 
-- As a user, I want to be able to reload my work previously made on canvases (by choice)
+- As a user, I want to be able to save my brushes, canvases, pencilcases (by choice) ✓
+
+- As a user, I want to be able to reload my work previously made on canvases (by choice) ✓
 
 - As a user, I want to open the application
   and reload automatically all of my created brushes in their respective pencilcases
 
-- As a user, I want to be able to remove all saved data by choice like a factory reset
+- As a user, I want to be able to remove all saved data by choice like a factory reset ✓

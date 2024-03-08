@@ -247,7 +247,7 @@ public class PaintApp {
 
     // EFFECTS: displays draw menu and options in console based ui
     private void displayDrawMenu() {
-        System.out.println("CANVAS MENU");
+        System.out.println("\nCANVAS MENU");
         if (drawroom.getCanvases().isEmpty()) {
             System.out.println("No canvases...");
         } else {
@@ -262,7 +262,7 @@ public class PaintApp {
 
     // EFFECTS: displays main menu and options in console based ui
     private void displayMainMenu() {
-        System.out.println("MAIN MENU");
+        System.out.println("\nMAIN MENU");
         System.out.println("\t(1) Draw on a new canvas");
         System.out.println("\t(2) Look at brushes");
         System.out.println("\t(3) Save all changes");
@@ -273,7 +273,7 @@ public class PaintApp {
 
     // EFFECTS: displays case menu and options in console based ui
     private void displayCasesMenu() {
-        System.out.println("CASES MENU");
+        System.out.println("\nCASES MENU");
         System.out.println("Your cases:");
         if (brushroom.getCases().isEmpty()) {
             System.out.println("You have no cases.");
@@ -290,7 +290,7 @@ public class PaintApp {
 
     // EFFECTS: displays brush menu and options in console based ui
     private void displayBrushesMenu(PencilCase pencilCase) {
-        System.out.println("BRUSHES MENU");
+        System.out.println("\nBRUSHES MENU");
         System.out.println("Your brushes:");
         if (pencilCase.getBrushes().isEmpty()) {
             System.out.println("No brushes :(");
@@ -310,7 +310,7 @@ public class PaintApp {
         String red = String.valueOf(pencilCase.getBrushWithName(name).getRed());
         String green = String.valueOf(pencilCase.getBrushWithName(name).getGreen());
         String blue = String.valueOf(pencilCase.getBrushWithName(name).getBlue());
-        System.out.println("EDIT MENU");
+        System.out.println("\nEDIT MENU");
         System.out.println("\t(1) - Color = " + red + "-" + green + "-" + blue);
         System.out.println("\t(2) - Opacity = " + pencilCase.getBrushWithName(name).getOpacity());
         System.out.println("\t(3) - Name = " + name);
