@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,5 +38,18 @@ public class CanvasTest {
     void testSetHeight() {
         c1.setHeight(1000);
         assertEquals(1000, c1.getHeight());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject jsc1 = c1.toJson();
+        assertEquals("blank", jsc1.getString("type"));
+        assertEquals(800, jsc1.getInt("height"));
+        assertEquals(800, jsc1.getInt("width"));
+
+        JSONObject jsc2 = c2.toJson();
+        assertEquals("photo", jsc2.getString("type"));
+        assertEquals(1080, jsc2.getInt("height"));
+        assertEquals(800, jsc2.getInt("width"));
     }
 }
