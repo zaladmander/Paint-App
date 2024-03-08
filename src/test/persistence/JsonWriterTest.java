@@ -12,7 +12,6 @@ public class JsonWriterTest extends JsonTest{
 
     @Test
     void testSourceNotFound() {
-        BrushesRoom br = new BrushesRoom();
         JsonWriter writer = new JsonWriter("./data/heehoo/testARRRRGGGGG.json");
         try {
             writer.open();
@@ -35,9 +34,7 @@ public class JsonWriterTest extends JsonTest{
             writer.close();
             dr = reader.readDrawingRoom();
             assertTrue(dr.getCanvases().isEmpty());
-        } catch (IOException e) {
-            fail("Exception not expected");
-        } catch (InvalidPathException e) {
+        } catch (IOException | InvalidPathException e) {
             fail("Exception not expected");
         }
     }
@@ -65,9 +62,7 @@ public class JsonWriterTest extends JsonTest{
             assertEquals("photo", jsonCanvas2.getType());
             assertEquals(1800, jsonCanvas2.getWidth());
             assertEquals(850, jsonCanvas2.getHeight());
-        } catch (IOException e) {
-            fail("Exception not expected");
-        } catch (InvalidPathException e) {
+        } catch (IOException | InvalidPathException e) {
             fail("Exception not expected");
         }
     }
@@ -83,9 +78,7 @@ public class JsonWriterTest extends JsonTest{
             writer.close();
             br = reader.readBrushesRoom();
             assertTrue(br.getCases().isEmpty());
-        } catch (IOException e) {
-            fail("Exception not expected");
-        } catch (InvalidPathException e) {
+        } catch (IOException | InvalidPathException e) {
             fail("Exception not expected");
         }
     }
@@ -109,9 +102,7 @@ public class JsonWriterTest extends JsonTest{
             assertTrue(c1.getBrushes().isEmpty());
             assertEquals("felts", c2.getName());
             assertTrue(c2.getBrushes().isEmpty());
-        } catch (IOException e) {
-            fail("Exception not expected");
-        } catch (InvalidPathException e) {
+        } catch (IOException | InvalidPathException e) {
             fail("Exception not expected");
         }
     }
@@ -143,9 +134,7 @@ public class JsonWriterTest extends JsonTest{
             assertFalse(c2.getBrushes().isEmpty());
             Brush b2 = c2.getBrush(0);
             checkBrushValues(b2, 50, "face", 50, 50, 50, 1);
-        } catch (IOException e) {
-            fail("Exception not expected");
-        } catch (InvalidPathException e) {
+        } catch (IOException | InvalidPathException e) {
             fail("Exception not expected");
         }
     }
