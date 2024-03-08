@@ -1,13 +1,10 @@
 package ui;
 
 import model.*;
-import org.json.JSONObject;
-import org.json.JSONWriter;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 // represents a paint application with ui, different menus
@@ -15,14 +12,15 @@ import java.util.Scanner;
 // takes user input to travel from menu to menu, lets the user customize
 // brushes, pencilcases, and canvases
 public class PaintApp {
+    private static final String JSON_STORE_BR = "./data/brushesroom.json";
     private static final String BACKTEXT = "\tPress 'q' to go back";
     private static final String INVALIDTEXT = "invalid input...";
 
     private Scanner input;
     private BrushesRoom brushroom;
     private DrawingRoom drawroom;
-    private JsonWriter jsonWriterPencilCases;
-    private JsonReader jsonReaderPencilCases;
+    private JsonWriter jsonWriterBrushesRoom;
+    private JsonReader jsonReaderBrushesRoom;
 
     // EFFECTS: constructs a PaintApp
     public PaintApp() {
@@ -124,6 +122,8 @@ public class PaintApp {
             runDrawMenu();
         } else if (command.equals("2")) {
             runCasesMenu();
+        } else if (command.equals("t")) {
+            saveBrushesRoom();
         } else {
             System.out.println(INVALIDTEXT);
         }
@@ -305,8 +305,8 @@ public class PaintApp {
         input = new Scanner(System.in);
         brushroom = new BrushesRoom();
         drawroom = new DrawingRoom();
-        //jsonWriter = new JsonWriter(JSON_STORE);
-        //jsonReader = new JsonReader(JSON_STORE);
+        jsonWriterBrushesRoom = new JsonWriter(JSON_STORE_BR);
+        //jsonReaderBrushesRoom = new JsonReader(JSON_STORE_BR);
     }
 
     // EFFECTS: prevent exception, try to turn string to int but if exception is thrown,
@@ -317,6 +317,16 @@ public class PaintApp {
         } catch (NumberFormatException e) {
             // default size
             return 50;
+        }
+    }
+
+    private void saveBrushesRoom() {
+        try {
+            jsonWriterBrushesRoom.open();
+            jsonWriterBrushesRoom.writeBrushRoom(brushroom);
+            jsonWriterBrushesRoom.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE_BR);
         }
     }
 }

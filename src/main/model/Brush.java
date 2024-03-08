@@ -15,7 +15,7 @@ public class Brush implements Writable {
     private int blue;
 
     // EFFECTS: constructs a Paintbrush
-    public Brush(int size, String name, int red, int green, int blue, int opacity) {
+    public Brush(int size, String name, int red, int green, int blue, double opacity) {
         setOpacity(opacity);
         setSize(size);
         setName(name);

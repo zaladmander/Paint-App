@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // a class that contains all PencilCases with their respective brushes
-public class BrushesRoom {
+public class BrushesRoom implements Writable {
     private List<PencilCase> cases;
 
     public BrushesRoom() {
@@ -56,5 +60,24 @@ public class BrushesRoom {
 
     public List<PencilCase> getCases() {
         return cases;
+    }
+
+    //Referenced from JsonSerializationDemo
+    //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // converts a PencilCase into a JSONObject
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("cases", casesToJson());
+        return json;
+    }
+
+    // EFFECTS: converts and returns brushes to Json Array
+    private JSONArray casesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (PencilCase c : cases) {
+            jsonArray.put(c.toJson());
+        }
+        return jsonArray;
     }
 }
