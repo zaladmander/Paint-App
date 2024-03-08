@@ -1,8 +1,10 @@
 package ui;
 
-import model.Brush;
-import model.Canvas;
-import model.PencilCase;
+import model.*;
+import org.json.JSONObject;
+import org.json.JSONWriter;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +19,10 @@ public class PaintApp {
     private static final String INVALIDTEXT = "invalid input...";
 
     private Scanner input;
-    private List<PencilCase> cases;
-    private List<Canvas> canvases;
+    private BrushesRoom brushroom;
+    private DrawingRoom drawroom;
+    private JsonWriter jsonWriterPencilCases;
+    private JsonReader jsonReaderPencilCases;
 
     // EFFECTS: constructs a PaintApp
     public PaintApp() {
@@ -69,7 +73,7 @@ public class PaintApp {
     private void runBrushesMenu(String name) {
         boolean run = true;
         String command;
-        PencilCase pencilCase = getCaseWithName(name);
+        PencilCase pencilCase = brushroom.getCaseWithName(name);
         while (run) {
             displayBrushesMenu(pencilCase);
             command = input.next();
@@ -107,7 +111,7 @@ public class PaintApp {
         } else if (command.equals("2")) {
             System.out.println("Type canvas position on list to DELETE");
             int index = stringToInt(input.next());
-            deleteCanvas(index);
+            drawroom.deleteCanvas(index);
         } else {
             System.out.println(INVALIDTEXT);
         }
@@ -132,12 +136,12 @@ public class PaintApp {
         if (command.equals("1")) {
             System.out.println("Name your case");
             String name = input.next();
-            cases.add(new PencilCase(name));
+            brushroom.getCases().add(new PencilCase(name));
         } else if (command.equals("2")) {
             System.out.println("Type case to DELETE");
             String caseToDelete = input.next();
-            deleteCase(caseToDelete);
-        } else if (isNameInListCases(command)) {
+            brushroom.deleteCase(caseToDelete);
+        } else if (brushroom.isNameInListCases(command)) {
             runBrushesMenu(command);
         } else {
             System.out.println(INVALIDTEXT);
@@ -153,8 +157,8 @@ public class PaintApp {
         } else if (command.equals("2")) {
             System.out.println("Type brush to DELETE");
             String brushToDelete = input.next();
-            deleteBrush(brushToDelete, pencilCase);
-        } else if (isNameInListBrushes(command, pencilCase)) {
+            brushroom.deleteBrush(brushToDelete, pencilCase);
+        } else if (brushroom.isNameInListBrushes(command, pencilCase)) {
             displayEditMenu(command, pencilCase);
             String edit = input.next();
             processEditCommand(edit, pencilCase.getBrushWithName(command));
@@ -223,16 +227,16 @@ public class PaintApp {
         int width = stringToInt(input.next());
         System.out.println("Height:");
         int height = stringToInt(input.next());
-        canvases.add(new Canvas(type, height, width));
+        drawroom.getCanvases().add(new Canvas(type, height, width));
     }
 
     // EFFECTS: displays draw menu and options in console based ui
     private void displayDrawMenu() {
         System.out.println("CANVAS MENU");
-        if (canvases.isEmpty()) {
+        if (drawroom.getCanvases().isEmpty()) {
             System.out.println("No canvases...");
         } else {
-            for (Canvas c : canvases) {
+            for (Canvas c : drawroom.getCanvases()) {
                 System.out.println(c.getWidth() + "x" + c.getHeight() + "-" + c.getType());
             }
         }
@@ -253,10 +257,10 @@ public class PaintApp {
     private void displayCasesMenu() {
         System.out.println("CASES MENU");
         System.out.println("Your cases:");
-        if (cases.isEmpty()) {
+        if (brushroom.getCases().isEmpty()) {
             System.out.println("You have no cases.");
         } else {
-            for (PencilCase c : cases) {
+            for (PencilCase c : brushroom.getCases()) {
                 System.out.println(c.getName());
             }
         }
@@ -296,41 +300,13 @@ public class PaintApp {
         System.out.println(BACKTEXT);
     }
 
-    // EFFECTS: return true if name is in the cases list, false otherwise
-    private boolean isNameInListCases(String name) {
-        for (PencilCase c : cases) {
-            if (c.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // EFFECTS: return true if name is in the brushes list, false otherwise
-    private boolean isNameInListBrushes(String name, PencilCase pencilCase) {
-        for (Brush b : pencilCase.getBrushes()) {
-            if (b.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // EFFECTS: return case with given name if case in the cases list, null otherwise
-    private PencilCase getCaseWithName(String name) {
-        for (PencilCase c : cases) {
-            if (c.getName().equals(name)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
     // EFFECTS: initialize input, cases, and canvases
     private void initialize() {
         input = new Scanner(System.in);
-        cases = new ArrayList<>();
-        canvases = new ArrayList<>();
+        brushroom = new BrushesRoom();
+        drawroom = new DrawingRoom();
+        //jsonWriter = new JsonWriter(JSON_STORE);
+        //jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: prevent exception, try to turn string to int but if exception is thrown,
@@ -343,27 +319,4 @@ public class PaintApp {
             return 50;
         }
     }
-
-    // MODIFIES: cases
-    // EFFECTS: deletes a case with same string name as caseToDelete
-    private void deleteCase(String caseToDelete) {
-        cases.remove(getCaseWithName(caseToDelete));
-    }
-
-    // MODIFIES: pencilCase
-    // EFFECTS: deletes a brush with same string name as brushToDelete
-    private void deleteBrush(String brushToDelete, PencilCase pencilCase) {
-        Brush brush = pencilCase.getBrushWithName(brushToDelete);
-        pencilCase.getBrushes().remove(brush);
-    }
-
-    // REQUIRES: canvases not empty and index is a valid position in canvases
-    // MODIFIES: canvases
-    // EFFECTS: removes a canvas from index -1
-    private void deleteCanvas(int index) {
-        if (index > 0) {
-            canvases.remove(index - 1);
-        }
-    }
-
 }
