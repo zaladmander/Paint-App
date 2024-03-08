@@ -25,6 +25,15 @@ public class DrawingRoomTest {
     }
 
     @Test
+    void testDeleteCanvasPositionInvalid() {
+        assertEquals(c1, dr1.getCanvases().get(0));
+        dr1.deleteCanvas(0);
+        assertFalse(dr1.getCanvases().isEmpty());
+        dr1.deleteCanvas(-1);
+        assertFalse(dr1.getCanvases().isEmpty());
+    }
+
+    @Test
     void testToJson() {
         JSONObject jsdr1 = dr1.toJson();
         JSONObject jsc1 = jsdr1.getJSONArray("canvases").getJSONObject(0);

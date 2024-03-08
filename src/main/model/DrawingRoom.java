@@ -52,7 +52,7 @@ public class DrawingRoom implements Writable {
 
     // MODIFIES: cases
     // EFFECTS: adds the given canvas to the DrawingRoom cases list
-    public void addCanvas(Canvas c) {
-        canvases.add(c);
+    public void addCanvas(Canvas canvas) {
+        canvases.add(canvas);
     }
 }

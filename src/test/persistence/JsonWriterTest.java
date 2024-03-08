@@ -1,8 +1,6 @@
 package persistence;
 
-import model.Brush;
-import model.BrushesRoom;
-import model.PencilCase;
+import model.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -23,6 +21,54 @@ public class JsonWriterTest extends JsonTest{
             // good stuff
         } catch (InvalidPathException e) {
             // ok
+        }
+    }
+
+    @Test
+    void testWriterDrawingRoomEmpty() {
+        DrawingRoom dr = new DrawingRoom();
+        JsonWriter writer = new JsonWriter("./data/testWriterDrawingRoomEmpty.json");
+        JsonReader reader = new JsonReader("./data/testWriterDrawingRoomEmpty.json");
+        try {
+            writer.open();
+            writer.writeDrawingRoom(dr);
+            writer.close();
+            dr = reader.readDrawingRoom();
+            assertTrue(dr.getCanvases().isEmpty());
+        } catch (IOException e) {
+            fail("Exception not expected");
+        } catch (InvalidPathException e) {
+            fail("Exception not expected");
+        }
+    }
+
+    @Test
+    void testWriterDrawingRoomCanvasesPresent() {
+        DrawingRoom dr = new DrawingRoom();
+        Canvas c1 = new Canvas("blank", 800, 800);
+        Canvas c2 = new Canvas("photo", 850, 1800);
+        dr.addCanvas(c1);
+        dr.addCanvas(c2);
+        JsonWriter writer = new JsonWriter("./data/testWriterDrawingRoomCanvasesPresent.json");
+        JsonReader reader = new JsonReader("./data/testWriterDrawingRoomCanvasesPresent.json");
+        try {
+            writer.open();
+            writer.writeDrawingRoom(dr);
+            writer.close();
+            dr = reader.readDrawingRoom();
+            assertFalse(dr.getCanvases().isEmpty());
+            Canvas jsonCanvas1 = dr.getCanvases().get(0);
+            Canvas jsonCanvas2 = dr.getCanvases().get(1);
+            assertEquals("blank", jsonCanvas1.getType());
+            assertEquals(800, jsonCanvas1.getWidth());
+            assertEquals(800, jsonCanvas1.getHeight());
+            assertEquals("photo", jsonCanvas2.getType());
+            assertEquals(1800, jsonCanvas2.getWidth());
+            assertEquals(850, jsonCanvas2.getHeight());
+        } catch (IOException e) {
+            fail("Exception not expected");
+        } catch (InvalidPathException e) {
+            fail("Exception not expected");
         }
     }
 
