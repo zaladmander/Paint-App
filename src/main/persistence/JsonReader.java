@@ -62,15 +62,15 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         JSONArray brushes = jsonObject.getJSONArray("brushes");
         PencilCase pc = new PencilCase(name);
+        addBrushes(pc, brushes);
+        br.addPencilCase(pc);
+    }
+
+    private void addBrushes(PencilCase pc, JSONArray brushes) {
         for (Object brush : brushes) {
             JSONObject nextBrush = (JSONObject) brush;
             addBrush(pc, nextBrush);
         }
-        br.addPencilCase(pc);
-    }
-
-    private void addBrushes(BrushesRoom br, JSONObject jsonObject) {
-
     }
 
     private void addBrush(PencilCase pc, JSONObject jsonObject) {

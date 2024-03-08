@@ -57,3 +57,5 @@ either save and close, or close without saving.
 
 - As a user, I want to open the application
   and reload automatically all of my created brushes in their respective pencilcases
+
+- As a user, I want to be able to remove all saved data by choice like a factory reset

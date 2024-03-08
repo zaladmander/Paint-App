@@ -1,11 +1,24 @@
-{"cases": [{
-    "name": "arg",
-    "brushes": [{
-        "red": 25,
-        "green": 0,
-        "size": 45,
-        "blue": 0,
-        "name": "carti",
-        "opacity": 1
-    }]
-}]}
+{"cases": [
+    {
+        "name": "arg",
+        "brushes": [{
+            "red": 25,
+            "green": 0,
+            "size": 45,
+            "blue": 0,
+            "name": "carti",
+            "opacity": 1
+        }]
+    },
+    {
+        "name": "HESCOMIN",
+        "brushes": [{
+            "red": 0,
+            "green": 0,
+            "size": 50,
+            "blue": 0,
+            "name": "felt",
+            "opacity": 1
+        }]
+    }
+]}
