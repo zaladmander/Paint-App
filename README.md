@@ -51,9 +51,9 @@ either save and close, or close without saving.
 
 - As a user, I want to be able to see a list of all my canvases, brushes, and pencilcases.
 
-- As a user, I want to be able to save my brushes, canvases, pencilcases
+- As a user, I want to be able to save my brushes, canvases, pencilcases (by choice)
 
-- As a user, I want to be able to reload my work previously made on canvases
+- As a user, I want to be able to reload my work previously made on canvases (by choice)
 
 - As a user, I want to open the application
   and reload automatically all of my created brushes in their respective pencilcases

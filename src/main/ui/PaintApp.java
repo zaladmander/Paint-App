@@ -312,6 +312,7 @@ public class PaintApp {
         drawroom = new DrawingRoom();
         jsonWriterBrushesRoom = new JsonWriter(JSON_STORE_BR);
         jsonReaderBrushesRoom = new JsonReader(JSON_STORE_BR);
+        loadBrushesRoom();
     }
 
     // EFFECTS: prevent exception, try to turn string to int but if exception is thrown,
