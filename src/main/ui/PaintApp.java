@@ -21,6 +21,8 @@ public class PaintApp {
     private Scanner input;
     private BrushesRoom brushroom;
     private DrawingRoom drawroom;
+    private BrushesRoom emptyBrushRoom;
+    private DrawingRoom emptyDrawingRoom;
     private JsonWriter jsonWriterBrushesRoom;
     private JsonReader jsonReaderBrushesRoom;
     private JsonWriter jsonWriterDrawingRoom;
@@ -134,6 +136,8 @@ public class PaintApp {
             loadBrushesRoom();
             loadDrawingRoom();
             System.out.println("Loading Complete!");
+        } else if (command.equals("5")) {
+            reset();
         } else {
             System.out.println(INVALIDTEXT);
         }
@@ -262,6 +266,7 @@ public class PaintApp {
         System.out.println("\t(2) Look at brushes");
         System.out.println("\t(3) Save all changes");
         System.out.println("\t(4) Load from save");
+        System.out.println("\t(5) Reset all save data");
         System.out.println("\tPress 'q' to quit");
     }
 
@@ -317,6 +322,8 @@ public class PaintApp {
         input = new Scanner(System.in);
         brushroom = new BrushesRoom();
         drawroom = new DrawingRoom();
+        emptyBrushRoom = new BrushesRoom();
+        emptyDrawingRoom = new DrawingRoom();
         jsonWriterBrushesRoom = new JsonWriter(JSON_STORE_BR);
         jsonReaderBrushesRoom = new JsonReader(JSON_STORE_BR);
         jsonWriterDrawingRoom = new JsonWriter(JSON_STORE_DR);
@@ -368,6 +375,23 @@ public class PaintApp {
             drawroom = jsonReaderDrawingRoom.readDrawingRoom();
         } catch (IOException e) {
             System.out.println("Unable to load file: " + JSON_STORE_DR);
+        }
+    }
+
+    private void reset() {
+        try {
+            jsonWriterBrushesRoom.open();
+            jsonWriterBrushesRoom.writeBrushRoom(emptyBrushRoom);
+            jsonWriterBrushesRoom.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE_BR);
+        }
+        try {
+            jsonWriterDrawingRoom.open();
+            jsonWriterDrawingRoom.writeDrawingRoom(emptyDrawingRoom);
+            jsonWriterDrawingRoom.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE_DR);
         }
     }
 }
