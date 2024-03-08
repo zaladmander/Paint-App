@@ -117,7 +117,8 @@ public class Brush implements Writable {
 
     //Referenced from JsonSerializationDemo
     //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-    // converts a Brush into a JSONObject
+    //MODIFIES: this
+    //EFFECTS: converts a Brush into a JSONObject
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

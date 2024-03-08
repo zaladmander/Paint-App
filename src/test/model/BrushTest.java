@@ -2,6 +2,7 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.json.JSONObject;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -127,5 +128,16 @@ class BrushTest {
     void testSetNameEmptyString() {
         b1.setName("");
         assertEquals("coolBrush", b1.getName());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject jsb1 = b1.toJson();
+        assertEquals("coolBrush", jsb1.getString("name"));
+        assertEquals(0, jsb1.getInt("red"));
+        assertEquals(0, jsb1.getInt("green"));
+        assertEquals(0, jsb1.getInt("blue"));
+        assertEquals(1, jsb1.getDouble("opacity"));
+        assertEquals(10, jsb1.getInt("size"));
     }
 }

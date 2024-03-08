@@ -1,24 +1,24 @@
 {"cases": [
-  {
-    "name": "realistic",
-    "brushes": [{
-      "red": 100,
-      "green": 100,
-      "size": 50,
-      "blue": 0,
-      "name": "tree",
-      "opacity": 1
-    }]
-  },
-  {
-    "name": "stamps",
-    "brushes": [{
-      "red": 50,
-      "green": 50,
-      "size": 50,
-      "blue": 50,
-      "name": "face",
-      "opacity": 1
-    }]
-  }
+    {
+        "name": "realistic",
+        "brushes": [{
+            "red": 100,
+            "green": 100,
+            "size": 50,
+            "blue": 0,
+            "name": "tree",
+            "opacity": 1
+        }]
+    },
+    {
+        "name": "stamps",
+        "brushes": [{
+            "red": 50,
+            "green": 50,
+            "size": 50,
+            "blue": 50,
+            "name": "face",
+            "opacity": 1
+        }]
+    }
 ]}
