@@ -138,6 +138,7 @@ public class PaintApp {
             System.out.println("Loading Complete!");
         } else if (command.equals("5")) {
             reset();
+            System.out.println("Reset Complete!");
         } else {
             System.out.println(INVALIDTEXT);
         }
@@ -393,5 +394,7 @@ public class PaintApp {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE_DR);
         }
+        loadBrushesRoom();
+        loadDrawingRoom();
     }
 }
