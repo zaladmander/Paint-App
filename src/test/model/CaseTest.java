@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class CaseTest {
-    Case c1;
+    PencilCase c1;
     Brush b1;
     Brush b2;
 
     @BeforeEach
     void setup() {
-        c1 = new Case("my cool brushes");
+        c1 = new PencilCase("my cool brushes");
         b1 = new Brush(25, "stinky",0,0,0,1);
         b2 = new Brush(50, "abstract",0,0,0,1);
     }

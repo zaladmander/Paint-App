@@ -2,7 +2,7 @@ package ui;
 
 import model.Brush;
 import model.Canvas;
-import model.Case;
+import model.PencilCase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,11 @@ import java.util.Scanner;
 // takes user input to travel from menu to menu, lets the user customize
 // brushes, pencilcases, and canvases
 public class PaintApp {
+    private static final String BACKTEXT = "\tPress 'q' to go back";
+    private static final String INVALIDTEXT = "invalid input...";
+
     private Scanner input;
-    private List<Case> cases;
+    private List<PencilCase> cases;
     private List<Canvas> canvases;
 
     // EFFECTS: constructs a PaintApp
@@ -66,7 +69,7 @@ public class PaintApp {
     private void runBrushesMenu(String name) {
         boolean run = true;
         String command;
-        Case pencilCase = getCaseWithName(name);
+        PencilCase pencilCase = getCaseWithName(name);
         while (run) {
             displayBrushesMenu(pencilCase);
             command = input.next();
@@ -106,7 +109,7 @@ public class PaintApp {
             int index = stringToInt(input.next());
             deleteCanvas(index);
         } else {
-            System.out.println("invalid input...");
+            System.out.println(INVALIDTEXT);
         }
     }
 
@@ -118,7 +121,7 @@ public class PaintApp {
         } else if (command.equals("2")) {
             runCasesMenu();
         } else {
-            System.out.println("invalid input...");
+            System.out.println(INVALIDTEXT);
         }
     }
 
@@ -129,7 +132,7 @@ public class PaintApp {
         if (command.equals("1")) {
             System.out.println("Name your case");
             String name = input.next();
-            cases.add(new Case(name));
+            cases.add(new PencilCase(name));
         } else if (command.equals("2")) {
             System.out.println("Type case to DELETE");
             String caseToDelete = input.next();
@@ -137,14 +140,14 @@ public class PaintApp {
         } else if (isNameInListCases(command)) {
             runBrushesMenu(command);
         } else {
-            System.out.println("invalid input...");
+            System.out.println(INVALIDTEXT);
         }
     }
 
     // EFFECTS: processes commands from brush menu, 1 = make a brush,
     //          2 = delete a brush, type EXACT name of brush to look
     //          or edit, invalid otherwise
-    private void processBrushesCommand(String command, Case pencilCase) {
+    private void processBrushesCommand(String command, PencilCase pencilCase) {
         if (command.equals("1")) {
             editBrush(pencilCase);
         } else if (command.equals("2")) {
@@ -156,7 +159,7 @@ public class PaintApp {
             String edit = input.next();
             processEditCommand(edit, pencilCase.getBrushWithName(command));
         } else {
-            System.out.println("invalid input...");
+            System.out.println(INVALIDTEXT);
         }
     }
 
@@ -187,7 +190,7 @@ public class PaintApp {
     // MODIFIES: pencilCase and brush
     // EFFECTS:  creates new brush with input from user and puts brush
     //           into pencilCase
-    private void editBrush(Case pencilCase) {
+    private void editBrush(PencilCase pencilCase) {
         Brush brush = new Brush(10, "default", 0,0,0,1);
         System.out.println("Set brush name:");
         brush.setName(input.next());
@@ -235,7 +238,7 @@ public class PaintApp {
         }
         System.out.println("\t(1) Make a canvas");
         System.out.println("\t(2) Delete a canvas");
-        System.out.println("\tPress 'q' to go back");
+        System.out.println(BACKTEXT);
     }
 
     // EFFECTS: displays main menu and options in console based ui
@@ -253,18 +256,18 @@ public class PaintApp {
         if (cases.isEmpty()) {
             System.out.println("You have no cases.");
         } else {
-            for (Case c : cases) {
+            for (PencilCase c : cases) {
                 System.out.println(c.getName());
             }
         }
         System.out.println("\t(1) Make a case");
         System.out.println("\t(2) Delete a case");
         System.out.println("\tType case name (case sensitive) to open");
-        System.out.println("\tPress 'q' to go back");
+        System.out.println(BACKTEXT);
     }
 
     // EFFECTS: displays brush menu and options in console based ui
-    private void displayBrushesMenu(Case pencilCase) {
+    private void displayBrushesMenu(PencilCase pencilCase) {
         System.out.println("BRUSHES MENU");
         System.out.println("Your brushes:");
         if (pencilCase.getBrushes().isEmpty()) {
@@ -277,11 +280,11 @@ public class PaintApp {
         System.out.println("\t(1) Make a brush");
         System.out.println("\t(2) Delete a brush");
         System.out.println("\tType brush name (case sensitive) to look or edit");
-        System.out.println("\tor press 'q' to go back");
+        System.out.println(BACKTEXT);
     }
 
     // EFFECTS: displays edit menu and options in console based ui
-    private void displayEditMenu(String name, Case pencilCase) {
+    private void displayEditMenu(String name, PencilCase pencilCase) {
         String red = String.valueOf(pencilCase.getBrushWithName(name).getRed());
         String green = String.valueOf(pencilCase.getBrushWithName(name).getGreen());
         String blue = String.valueOf(pencilCase.getBrushWithName(name).getBlue());
@@ -290,12 +293,12 @@ public class PaintApp {
         System.out.println("\t(2) - Opacity = " + pencilCase.getBrushWithName(name).getOpacity());
         System.out.println("\t(3) - Name = " + name);
         System.out.println("\t(4) - Size = " + pencilCase.getBrushWithName(name).getSize());
-        System.out.println("\tor press 'q' to go back");
+        System.out.println(BACKTEXT);
     }
 
     // EFFECTS: return true if name is in the cases list, false otherwise
     private boolean isNameInListCases(String name) {
-        for (Case c : cases) {
+        for (PencilCase c : cases) {
             if (c.getName().equals(name)) {
                 return true;
             }
@@ -304,7 +307,7 @@ public class PaintApp {
     }
 
     // EFFECTS: return true if name is in the brushes list, false otherwise
-    private boolean isNameInListBrushes(String name, Case pencilCase) {
+    private boolean isNameInListBrushes(String name, PencilCase pencilCase) {
         for (Brush b : pencilCase.getBrushes()) {
             if (b.getName().equals(name)) {
                 return true;
@@ -314,8 +317,8 @@ public class PaintApp {
     }
 
     // EFFECTS: return case with given name if case in the cases list, null otherwise
-    private Case getCaseWithName(String name) {
-        for (Case c : cases) {
+    private PencilCase getCaseWithName(String name) {
+        for (PencilCase c : cases) {
             if (c.getName().equals(name)) {
                 return c;
             }
@@ -349,7 +352,7 @@ public class PaintApp {
 
     // MODIFIES: pencilCase
     // EFFECTS: deletes a brush with same string name as brushToDelete
-    private void deleteBrush(String brushToDelete, Case pencilCase) {
+    private void deleteBrush(String brushToDelete, PencilCase pencilCase) {
         Brush brush = pencilCase.getBrushWithName(brushToDelete);
         pencilCase.getBrushes().remove(brush);
     }
