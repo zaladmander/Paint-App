@@ -16,12 +16,12 @@ public class DrawingRoom implements Writable {
         canvases = new ArrayList<>();
     }
 
-    // REQUIRES: canvases not empty and index is a valid position in canvases
+    // REQUIRES: canvases not empty and position is a valid position in canvases
     // MODIFIES: canvases
-    // EFFECTS: removes a canvas from index -1
-    public void deleteCanvas(int index) {
-        if (index > 0) {
-            canvases.remove(index - 1);
+    // EFFECTS: removes a canvas from position -1
+    public void deleteCanvas(int position) {
+        if (position > 0) {
+            canvases.remove(position - 1);
         }
     }
 
