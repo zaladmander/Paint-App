@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -70,5 +71,19 @@ public class CaseTest {
     void testSetName() {
         c1.setName("cooooool");
         assertEquals("cooooool", c1.getName());
+    }
+
+    @Test
+    void testToJson() {
+        c1.addBrush(b1);
+        JSONObject jsc1 = c1.toJson();
+        assertEquals("my cool brushes", jsc1.getString("name"));
+        JSONObject jsb1 = jsc1.getJSONArray("brushes").getJSONObject(0);
+        assertEquals("stinky", jsb1.getString("name"));
+        assertEquals(0, jsb1.getInt("red"));
+        assertEquals(0, jsb1.getInt("green"));
+        assertEquals(0, jsb1.getInt("blue"));
+        assertEquals(1, jsb1.getDouble("opacity"));
+        assertEquals(25, jsb1.getInt("size"));
     }
 }
