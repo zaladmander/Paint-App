@@ -9,6 +9,7 @@ public class Canvas implements Writable {
     private String type;
     private int height;
     private int width;
+    //TODO: maybe add a field of type String for import location (for photos)
 
     // EFFECTS: constructs a canvas with type, height and width
     public Canvas(String type, int height, int width) {
