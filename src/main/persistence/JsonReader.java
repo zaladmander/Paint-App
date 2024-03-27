@@ -63,6 +63,7 @@ public class JsonReader {
         return dr;
     }
 
+    // EFFECTS: reads canvases from JSONArray and adds to dr DrawingRoom
     private void addCanvases(DrawingRoom dr, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("canvases");
         for (Object c : jsonArray) {
@@ -71,6 +72,8 @@ public class JsonReader {
         }
     }
 
+    // EFFECTS: reads individual canvas from given JSONObject and parses into Canvas
+    //          type, then adds the canvas to the given dr DrawingRoom
     private void addCanvas(DrawingRoom dr, JSONObject jsonObject) {
         String type = jsonObject.getString("type");
         int height = jsonObject.getInt("height");
@@ -79,6 +82,8 @@ public class JsonReader {
         dr.addCanvas(c);
     }
 
+    // EFFECTS: gets array of cases from saved JSONArray and for each
+    //          case in the array, parse the case
     private void addPencilCases(BrushesRoom br, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("cases");
         for (Object pc : jsonArray) {
@@ -87,6 +92,9 @@ public class JsonReader {
         }
     }
 
+    // EFFECTS: gets an individual pencilCase JSONObject and parses its
+    //          fields, then calls helpers to parse the brushes, then adds
+    //          the cases to the given BrushesRoom
     private void addPencilCase(BrushesRoom br, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         JSONArray brushes = jsonObject.getJSONArray("brushes");
@@ -95,6 +103,8 @@ public class JsonReader {
         br.addPencilCase(pc);
     }
 
+    // EFFECTS: gets JSONArray of brushes, and for each brush, parse
+    //          the brush
     private void addBrushes(PencilCase pc, JSONArray brushes) {
         for (Object brush : brushes) {
             JSONObject nextBrush = (JSONObject) brush;
@@ -102,6 +112,10 @@ public class JsonReader {
         }
     }
 
+    // REQUIRES: given JSONObject has key values for same fields of a brush
+    // MODIFIES: pc
+    // EFFECTS: parse given JSONObject into a brush, then add the brush to
+    //          the given PencilCase pc
     private void addBrush(PencilCase pc, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         double opacity = jsonObject.getDouble("opacity");
