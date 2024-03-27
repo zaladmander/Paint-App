@@ -3,7 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-// represents a canvas which has a height, width, canvas type
+// represents a canvas or layer which has a height, width, canvas type
 // (photo or blank)
 public class Canvas implements Writable {
     private String type;
