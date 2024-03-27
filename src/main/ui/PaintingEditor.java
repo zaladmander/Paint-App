@@ -22,8 +22,8 @@ public class PaintingEditor extends WindowGUI {
 
     // EFFECTS: constructs a window, default brush, and JFrame, panels, entire GUI
     PaintingEditor() {
-        super("Paint!");
-        initializeWindow(new BorderLayout());
+        super(windowLabel);
+        initializeWindow(new BorderLayout(), new Color(160, 160, 160), WIDTH, HEIGHT);
     }
 
     // EFFECTS: returns currentBrush
@@ -33,9 +33,8 @@ public class PaintingEditor extends WindowGUI {
 
     // EFFECTS: initialize window GUI frame
     @Override
-    protected void initializeWindow(LayoutManager layout) {
-        super.initializeWindow(layout);
-        getContentPane().setBackground(new Color(160, 160, 160));
+    protected void initializeWindow(LayoutManager layout, Color color, int width, int height) {
+        super.initializeWindow(layout, color, width, height);
         initializeToolbar();
         setVisible(true);
     }
