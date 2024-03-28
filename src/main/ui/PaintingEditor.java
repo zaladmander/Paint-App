@@ -22,6 +22,7 @@ public class PaintingEditor extends WindowGUI implements ActionListener, ChangeL
 
     private Brush currentBrush = new Brush(20, "Default", 0, 0, 0, 1);
     private List<Dot> currentPath;
+    private List<List<Dot>> allPaths = new ArrayList<>();
     private JSlider slider;
 
     // EFFECTS: constructs a window, default brush, and JFrame, panels, entire GUI
@@ -72,7 +73,7 @@ public class PaintingEditor extends WindowGUI implements ActionListener, ChangeL
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        super.actionPerformed(e);
     }
 
     @Override
@@ -145,10 +146,13 @@ public class PaintingEditor extends WindowGUI implements ActionListener, ChangeL
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                super.mouseReleased(e);
+                allPaths.add(currentPath);
+                currentPath = null;
             }
         };
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
     }
+
+
 }

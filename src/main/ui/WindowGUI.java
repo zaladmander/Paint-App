@@ -13,6 +13,10 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
     protected JMenuBar menuBar;
 
     private JButton button;
+    private JMenuItem saveMenuItem;
+    private JMenuItem loadMenuItem;
+    private JMenuItem quitMenuItem;
+
 
     public WindowGUI(String windowLabel) {
         super(windowLabel);
@@ -35,10 +39,47 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
+        addMenuItemsFile(fileMenu);
         menuBar.add(fileMenu);
         frame.setJMenuBar(menuBar);
     }
 
+    // EFFECTS: adds file menu dropdowns to given JMenu
+    protected void addMenuItemsFile(JMenu menu) {
+        saveMenuItem = new JMenuItem("Save");
+        loadMenuItem = new JMenuItem("Load");
+        quitMenuItem = new JMenuItem("Quit");
+
+
+        saveMenuItem.addActionListener(this);
+        loadMenuItem.addActionListener(this);
+        quitMenuItem.addActionListener(this);
+
+
+        menu.add(saveMenuItem);
+        menu.add(loadMenuItem);
+        menu.add(quitMenuItem);
+    }
+
+
+
     @Override
-    public abstract void actionPerformed(ActionEvent e);
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == saveMenuItem) {
+            JOptionPane.showMessageDialog(null,
+                    "Drawing has been (un)successfully saved!",
+                    windowLabel, JOptionPane.PLAIN_MESSAGE);
+        } else if (e.getSource() == loadMenuItem) {
+            JOptionPane.showMessageDialog(null,
+                    "Drawing has been (un)successfully loaded!",
+                    windowLabel, JOptionPane.PLAIN_MESSAGE);
+        } else if (e.getSource() == quitMenuItem) {
+            int response = JOptionPane.showConfirmDialog(null,
+                    "Are you sure you want to quit?",
+                    windowLabel, JOptionPane.OK_CANCEL_OPTION);
+            if (response == 0) {
+                this.dispose();
+            }
+        }
+    }
 }

@@ -39,16 +39,17 @@ public class ColorSelecterTool extends Tool {
         //          selected color changes current brush color
         @Override
         public void actionPerformed(ActionEvent e) {
-            JColorChooser colorChooser = new JColorChooser();
-            Color chosenColor = colorChooser.showDialog(null, label, previousColor);
-            int red = chosenColor.getRed();
-            int green = chosenColor.getGreen();
-            int blue = chosenColor.getBlue();
-            editor.getCurrentBrush().setRed(red);
-            editor.getCurrentBrush().setGreen(green);
-            editor.getCurrentBrush().setBlue(blue);
+            Color chosenColor = JColorChooser.showDialog(null, label, previousColor);
+            if (chosenColor != null) {
+                int red = chosenColor.getRed();
+                int green = chosenColor.getGreen();
+                int blue = chosenColor.getBlue();
+                editor.getCurrentBrush().setRed(red);
+                editor.getCurrentBrush().setGreen(green);
+                editor.getCurrentBrush().setBlue(blue);
 
-            previousColor = chosenColor;
+                previousColor = chosenColor;
+            }
         }
     }
 }
