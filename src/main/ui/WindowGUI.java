@@ -12,12 +12,13 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
 
     protected JMenuBar menuBar;
 
-    private JButton button;
     private JMenuItem saveMenuItem;
     private JMenuItem loadMenuItem;
     private JMenuItem quitMenuItem;
+    private JMenuItem paintMainMenuItem;
+    private JMenuItem brushesMenuItem;
 
-
+    // EFFECTS: constructs a JFrame with the title windowLabel
     public WindowGUI(String windowLabel) {
         super(windowLabel);
     }
@@ -34,52 +35,86 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         setLayout(layout);
     }
 
+    // Menu Bar
+
     // EFFECTS: adds a menu bar to the given frame
     protected void initializeMenuBar(JFrame frame) {
         menuBar = new JMenuBar();
-
+        JMenu paintMenu = new JMenu("Paint!");
         JMenu fileMenu = new JMenu("File");
+        JMenu toolsMenu = new JMenu("Tools");
+        addMenuItemsPaint(paintMenu);
         addMenuItemsFile(fileMenu);
+        addMenuItemsTools(toolsMenu);
+        menuBar.add(paintMenu);
         menuBar.add(fileMenu);
+        menuBar.add(toolsMenu);
         frame.setJMenuBar(menuBar);
     }
 
+    // MODIFIES: menu
+    // EFFECTS: adds tools menu dropdowns to given JMenu
+    private void addMenuItemsTools(JMenu menu) {
+        brushesMenuItem = new JMenuItem("Brushes");
+        brushesMenuItem.addActionListener(this);
+        menu.add(brushesMenuItem);
+    }
+
+    // MODIFIES: menu
+    // EFFECTS: adds "paint" menu dropdowns to given JMenu
+    private void addMenuItemsPaint(JMenu menu) {
+        paintMainMenuItem = new JMenuItem("Main Menu");
+        quitMenuItem = new JMenuItem("Quit");
+        paintMainMenuItem.addActionListener(this);
+        quitMenuItem.addActionListener(this);
+        menu.add(paintMainMenuItem);
+        menu.add(quitMenuItem);
+    }
+
+    // MODIFIES: menu
     // EFFECTS: adds file menu dropdowns to given JMenu
     protected void addMenuItemsFile(JMenu menu) {
         saveMenuItem = new JMenuItem("Save");
         loadMenuItem = new JMenuItem("Load");
-        quitMenuItem = new JMenuItem("Quit");
-
-
         saveMenuItem.addActionListener(this);
         loadMenuItem.addActionListener(this);
-        quitMenuItem.addActionListener(this);
-
-
         menu.add(saveMenuItem);
         menu.add(loadMenuItem);
-        menu.add(quitMenuItem);
     }
 
+    // popup windows
 
+    // EFFECTS: shows abstract popup message window for a menu item
+    private void textMenuItemDialog(String text) {
+        JOptionPane.showMessageDialog(null, text, windowLabel, JOptionPane.PLAIN_MESSAGE);
+    }
+
+    // EFFECTS: an abstract popup dialog response window that has
+    //          buttons for OK or Cancel, returns an int response depending
+    //          on what buttons are clicked in popup window
+    private int confirmMenuItemDialog(String text) {
+        int response = JOptionPane.showConfirmDialog(null, text,
+                windowLabel, JOptionPane.OK_CANCEL_OPTION);
+        if (response == 0) {
+            this.dispose();
+        }
+        return response;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveMenuItem) {
-            JOptionPane.showMessageDialog(null,
-                    "Drawing has been (un)successfully saved!",
-                    windowLabel, JOptionPane.PLAIN_MESSAGE);
+            textMenuItemDialog("Drawing has been (un)successfully saved!");
         } else if (e.getSource() == loadMenuItem) {
-            JOptionPane.showMessageDialog(null,
-                    "Drawing has been (un)successfully loaded!",
-                    windowLabel, JOptionPane.PLAIN_MESSAGE);
+            textMenuItemDialog("Drawing has been (un)successfully loaded!");
         } else if (e.getSource() == quitMenuItem) {
-            int response = JOptionPane.showConfirmDialog(null,
-                    "Are you sure you want to quit?",
-                    windowLabel, JOptionPane.OK_CANCEL_OPTION);
-            if (response == 0) {
-                this.dispose();
+            confirmMenuItemDialog("Are you sure you want to quit?");
+        } else if (e.getSource() == paintMainMenuItem) {
+            if (confirmMenuItemDialog("Are you sure you want to go to the Main Menu?") == 0) {
+                new MainMenu();
             }
+        } else if (e.getSource() == brushesMenuItem) {
+            textMenuItemDialog("Add functionality here");
         }
     }
 }
