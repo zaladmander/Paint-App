@@ -2,11 +2,17 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 // represents an abstract GUI window
-public abstract class WindowGUI extends JFrame {
+public abstract class WindowGUI extends JFrame implements ActionListener {
     protected static final Color BG_COLOR = Color.white;
     protected static final String windowLabel = "Paint!";
+
+    protected JMenuBar menuBar;
+
+    private JButton button;
 
     public WindowGUI(String windowLabel) {
         super(windowLabel);
@@ -24,5 +30,15 @@ public abstract class WindowGUI extends JFrame {
         setLayout(layout);
     }
 
+    // EFFECTS: adds a menu bar to the given frame
+    protected void initializeMenuBar(JFrame frame) {
+        menuBar = new JMenuBar();
 
+        JMenu fileMenu = new JMenu("File");
+        menuBar.add(fileMenu);
+        frame.setJMenuBar(menuBar);
+    }
+
+    @Override
+    public abstract void actionPerformed(ActionEvent e);
 }

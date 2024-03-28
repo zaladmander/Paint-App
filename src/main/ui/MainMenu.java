@@ -1,6 +1,9 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,6 +49,7 @@ public class MainMenu extends WindowGUI implements ActionListener {
         button.setBounds((WIDTH / 2) - 125, (HEIGHT / 2) - 50, 250, 100);
         button.setFocusable(false);
         button.addActionListener(this);
+        //button.setBorder(new MatteBorder(10, 10, 10, 10, Color.CYAN));
 
         this.add(button);
     }

@@ -1,24 +1,28 @@
 package ui;
 
 import model.Brush;
-import model.Canvas;
 import model.Dot;
 import ui.tools.ColorSelecterTool;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaintingEditor extends WindowGUI {
+public class PaintingEditor extends WindowGUI implements ActionListener, ChangeListener {
     //TODO: these will be inputs
     private static final int WIDTH = 900;
     private static final int HEIGHT = 600;
 
     private Brush currentBrush = new Brush(20, "Default", 0, 0, 0, 1);
     private List<Dot> currentPath;
+    private JSlider slider;
 
     // EFFECTS: constructs a window, default brush, and JFrame, panels, entire GUI
     PaintingEditor() {
@@ -36,41 +40,47 @@ public class PaintingEditor extends WindowGUI {
     protected void initializeWindow(LayoutManager layout, Color color, int width, int height) {
         super.initializeWindow(layout, color, width, height);
         initializeToolbar();
+        initializeMenuBar(this);
+        initializeDrawingSpace();
         setVisible(true);
+
+        initializeMouseInput(currentBrush);
     }
 
     private void initializeToolbar() {
         JPanel toolBar = new JPanel();
         toolBar.setBackground(new Color(250, 250, 210));
         toolBar.setPreferredSize(new Dimension(100, 100));
+
+        addSlider(toolBar);
+        new ColorSelecterTool(this, toolBar);
+
         this.add(toolBar, BorderLayout.NORTH);
     }
 
-    // EFFECTS: initializes all GUI components
-    //private void initializeWindow() {
-    //    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    //    setSize(WIDTH, HEIGHT);
-    //    setMinimumSize(new Dimension(WIDTH, HEIGHT));
-    //    getContentPane().setBackground(new Color(160, 160, 160));
-//
-    //    // make the layers
-    //    JLayeredPane layers = new JLayeredPane();
-    //    //layers.setLayout(new BorderLayout());
-    //    setVisible(true);
-    //    this.add(layers);
-//
-    //    initializeToolBar(layers, 1);
-    //    initializeDrawingSpace(layers, 0);
-//
-    //    JPanel test = new JPanel();
-    //    test.setBackground(Color.CYAN);
-    //    this.add(test, BorderLayout.CENTER);
-//
-    //    //setLocationRelativeTo(null);
-//
-    //    //initializeMouseInput(currentBrush);
-    //}
-//
+    private void addSlider(JComponent parent) {
+        slider = new JSlider(0, 100);
+        slider.setPaintTicks(true);
+        slider.setPaintTrack(true);
+        slider.setMinorTickSpacing(10);
+        slider.setMajorTickSpacing(25);
+        slider.setPaintLabels(true);
+        slider.addChangeListener(this);
+
+        parent.add(slider);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        currentBrush.setSize(slider.getValue());
+        System.out.println(slider.getValue());
+    }
+
     //private void initializeToolBar(JLayeredPane parent, int level) {
     //    JPanel toolBar = new JPanel();
     //    //toolBar.setLayout(null);
@@ -82,13 +92,12 @@ public class PaintingEditor extends WindowGUI {
     //    parent.add(toolBar, JLayeredPane.DEFAULT_LAYER);
     //}
 //
-    //private void initializeDrawingSpace(JComponent parent, int level) {
-    //    JPanel drawingSpace = new JPanel();
-    //    //drawingSpace.setBackground(new Color(255, 255, 255));
-    //    drawingSpace.setBackground(BG_COLOR);
-    //    setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    //    parent.add(drawingSpace);
-    //}
+    private void initializeDrawingSpace() {
+        JPanel drawingSpace = new JPanel();
+        drawingSpace.setBackground(BG_COLOR);
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        this.add(drawingSpace, BorderLayout.CENTER);
+    }
 
     // EFFECTS: initializes all mouse input for drawing on the canvas
     // referenced and inspired by https://www.youtube.com/watch?v=vcgeCYKdyC4 by "TapTap"
