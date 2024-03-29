@@ -17,6 +17,7 @@ public class PaintApp {
     private static final String JSON_STORE_DR = "./data/drawingroom.json";
     private static final String BACKTEXT = "\tPress 'q' to go back";
     private static final String INVALIDTEXT = "invalid input...";
+    private static final int DEFAULT_SIZE = 50;
 
     private Scanner input;
     private BrushesRoom brushroom;
@@ -120,25 +121,29 @@ public class PaintApp {
     }
 
     // EFFECTS: processes commands from main menu, 1 = go to canvases,
-    //          2 = go to cases, invalid otherwise
+    //          2 = go to cases, 3 = save all, 4 = load all,
+    //          5 = "factory" reset, invalid otherwise
     private void processMainCommand(String command) {
-        if (command.equals("1")) {
-            runDrawMenu();
-        } else if (command.equals("2")) {
-            runCasesMenu();
-        } else if (command.equals("3")) {
-            saveBrushesRoom();
-            saveDrawingRoom();
-            System.out.println("Saving Complete!");
-        } else if (command.equals("4")) {
-            loadBrushesRoom();
-            loadDrawingRoom();
-            System.out.println("Loading Complete!");
-        } else if (command.equals("5")) {
-            reset();
-            System.out.println("Reset Complete!");
-        } else {
-            System.out.println(INVALIDTEXT);
+        switch (command) {
+            case "1":
+                runDrawMenu();
+                break;
+            case "2":
+                runCasesMenu();
+                break;
+            case "3":
+                saveAll();
+                break;
+            case "4":
+                loadAll();
+                break;
+            case "5":
+                reset();
+                System.out.println("Reset Complete!");
+                break;
+            default:
+                System.out.println(INVALIDTEXT);
+                break;
         }
     }
 
@@ -335,10 +340,25 @@ public class PaintApp {
             return Integer.parseInt(string);
         } catch (NumberFormatException e) {
             // default size
-            return 50;
+            return DEFAULT_SIZE;
         }
     }
 
+    // EFFECTS: saves brushes and drawing room to file
+    private void saveAll() {
+        saveBrushesRoom();
+        saveDrawingRoom();
+        System.out.println("Saving Complete!");
+    }
+
+    // EFFECTS: loads all brushes and drawing room from file
+    private void loadAll() {
+        loadBrushesRoom();
+        loadDrawingRoom();
+        System.out.println("Loading Complete!");
+    }
+
+    // EFFECTS: saves the current brushes room to file
     private void saveBrushesRoom() {
         try {
             jsonWriterBrushesRoom.open();
@@ -349,7 +369,9 @@ public class PaintApp {
         }
     }
 
+    // EFFECTS: loads the brush room from save
     private void loadBrushesRoom() {
+        brushroom.reset();
         try {
             jsonReaderBrushesRoom.readBrushesRoom();
         } catch (IOException e) {
@@ -357,6 +379,7 @@ public class PaintApp {
         }
     }
 
+    // EFFECTS: saves the current drawing room to file
     private void saveDrawingRoom() {
         try {
             jsonWriterDrawingRoom.open();
@@ -367,7 +390,9 @@ public class PaintApp {
         }
     }
 
+    // EFFECTS: loads the drawing room from save
     private void loadDrawingRoom() {
+        drawroom.reset();
         try {
             jsonReaderDrawingRoom.readDrawingRoom();
         } catch (IOException e) {
