@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import model.Canvas;
 import model.DrawingRoom;
+import ui.FileHelper;
 
 // represents a GUI for the main menu
 public class MainMenu extends WindowGUI implements ActionListener {
@@ -101,6 +102,7 @@ public class MainMenu extends WindowGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newCanvasButton) {
+            FileHelper.getFileHelper().loadAll();
             String width = JOptionPane.showInputDialog(null,
                     "give width of canvas (600 - 1800)",
                     windowLabel, JOptionPane.QUESTION_MESSAGE);
@@ -111,7 +113,7 @@ public class MainMenu extends WindowGUI implements ActionListener {
                         windowLabel, JOptionPane.QUESTION_MESSAGE);
             }
             if (height != null) {
-                Canvas canvas = new Canvas("blank", Integer.parseInt(width), Integer.parseInt(height));
+                Canvas canvas = new Canvas("blank", Integer.parseInt(height), Integer.parseInt(width));
                 DrawingRoom.getDrawingRoom().addCanvas(canvas);
                 new PaintingEditorMenu(canvas);
                 this.dispose();

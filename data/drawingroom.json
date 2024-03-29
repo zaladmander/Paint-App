@@ -1,5 +1,37 @@
-{"canvases": [{
-    "width": 1200,
-    "type": "blank",
-    "height": 800
-}]}
+{"canvases": [
+    {
+        "width": 600,
+        "type": "blank",
+        "height": 1420
+    },
+    {
+        "width": 1200,
+        "type": "blank",
+        "height": 800
+    },
+    {
+        "width": 600,
+        "type": "blank",
+        "height": 600
+    },
+    {
+        "width": 1420,
+        "type": "blank",
+        "height": 1420
+    },
+    {
+        "width": 1200,
+        "type": "blank",
+        "height": 800
+    },
+    {
+        "width": 1200,
+        "type": "blank",
+        "height": 800
+    },
+    {
+        "width": 1200,
+        "type": "blank",
+        "height": 800
+    }
+]}

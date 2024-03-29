@@ -1,110 +1,45 @@
-{"cases": [
-    {
-        "name": "Fortnite",
-        "brushes": []
-    },
-    {
-        "name": "Blue",
-        "brushes": []
-    },
-    {
-        "name": "blue_fn",
-        "brushes": []
-    },
-    {
-        "name": "goldfish",
-        "brushes": []
-    },
-    {
-        "name": "felts",
-        "brushes": []
-    },
-    {
-        "name": "goober",
-        "brushes": []
-    },
-    {
-        "name": "as",
-        "brushes": []
-    },
-    {
-        "name": "weeee",
-        "brushes": []
-    },
-    {
-        "name": "orrrrr",
-        "brushes": []
-    },
-    {
-        "name": "BLAAA",
-        "brushes": []
-    },
-    {
-        "name": "ookie",
-        "brushes": []
-    },
-    {
-        "name": "goooo",
-        "brushes": []
-    },
-    {
-        "name": "lool",
-        "brushes": []
-    },
-    {
-        "name": "long",
-        "brushes": []
-    },
-    {
-        "name": "short",
-        "brushes": []
-    },
-    {
-        "name": "cookie",
-        "brushes": []
-    },
-    {
-        "name": "spong",
-        "brushes": []
-    },
-    {
-        "name": "mario",
-        "brushes": []
-    },
-    {
-        "name": "lbp",
-        "brushes": []
-    },
-    {
-        "name": "fortni",
-        "brushes": []
-    },
-    {
-        "name": "future",
-        "brushes": []
-    },
-    {
-        "name": "ye",
-        "brushes": []
-    },
-    {
-        "name": "fish",
-        "brushes": []
-    },
-    {
-        "name": "yandhi",
-        "brushes": []
-    },
-    {
-        "name": "donda",
-        "brushes": []
-    },
-    {
-        "name": "tpab",
-        "brushes": []
-    },
-    {
-        "name": "arrgg",
-        "brushes": []
-    }
-]}
+{"cases": [{
+    "name": "ok",
+    "brushes": [
+        {
+            "red": 0,
+            "green": 0,
+            "size": 1,
+            "blue": 0,
+            "name": "laflame",
+            "opacity": 0
+        },
+        {
+            "red": 0,
+            "green": 0,
+            "size": 20,
+            "blue": 0,
+            "name": "green",
+            "opacity": 0
+        },
+        {
+            "red": 204,
+            "green": 255,
+            "size": 87,
+            "blue": 204,
+            "name": "lol",
+            "opacity": 1
+        },
+        {
+            "red": 0,
+            "green": 153,
+            "size": 14,
+            "blue": 153,
+            "name": "turq",
+            "opacity": 1
+        },
+        {
+            "red": 102,
+            "green": 255,
+            "size": 51,
+            "blue": 102,
+            "name": "new green",
+            "opacity": 1
+        }
+    ]
+}]}

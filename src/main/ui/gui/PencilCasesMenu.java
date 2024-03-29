@@ -1,6 +1,5 @@
 package ui.gui;
 
-import model.Brush;
 import model.BrushesRoom;
 import model.PencilCase;
 import persistence.JsonReader;
@@ -10,11 +9,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BrushesMenu extends WindowGUI {
+public class PencilCasesMenu extends WindowGUI {
     protected static final int WIDTH = 300;
     protected static final int HEIGHT = 450;
     private JPanel brushesPanel;
@@ -23,12 +21,10 @@ public class BrushesMenu extends WindowGUI {
     private JsonReader jsonReader = new JsonReader(FileHelper.JSON_STORE_BR);
     private JButton addButton;
     private JButton deleteButton;
-    private PencilCase pc;
-    private PaintingEditorMenu parent;
+    private WindowGUI parent;
 
-    BrushesMenu(PencilCase pencilCase, PaintingEditorMenu parent) {
+    PencilCasesMenu(WindowGUI parent) {
         super(windowLabel);
-        pc = pencilCase;
         this.parent = parent;
         brushesRoom.reset();
         try {
@@ -57,11 +53,11 @@ public class BrushesMenu extends WindowGUI {
 
     private void addBrushesPanel(WindowGUI parent) {
         brushesPanel = new JPanel(brushesPanelGrid);
-        addButton = new JButton("Create a Brush");
+        addButton = new JButton("Create a PencilCase");
         addButton.setPreferredSize(new Dimension(100, 100));
         addButton.addActionListener(this);
         brushesPanel.add(addButton);
-        deleteButton = new JButton("Delete a Brush");
+        deleteButton = new JButton("Delete a PencilCase");
         deleteButton.setPreferredSize(new Dimension(100, 100));
         deleteButton.addActionListener(this);
         brushesPanel.add(deleteButton);
@@ -75,18 +71,17 @@ public class BrushesMenu extends WindowGUI {
     private void addCases() {
         Map<JButton, Integer> map = new HashMap<>();
         int i = 1;
-        for (Brush br : pc.getBrushes()) {
+        for (PencilCase pc : brushesRoom.getCases()) {
             brushesPanelGrid.setRows(brushesPanelGrid.getRows() + 1);
-            JButton b = new JButton(br.getName());
+            JButton b = new JButton(pc.getName());
             brushesPanel.add(b);
             this.add(brushesPanel);
             // Add a mapping
             map.put(b, i);
             i++;
             b.addActionListener(e -> {
-                System.out.println(br.getName());
-                parent.setCurrentBrush(br);
-                parent.initializeMouseInput(br);
+                System.out.println(pc.getName());
+                new BrushesMenu(pc, (PaintingEditorMenu) parent);
                 this.dispose();
             });
         }
@@ -95,38 +90,33 @@ public class BrushesMenu extends WindowGUI {
     // EFFECTS: shows an input window for the addButton
     private void addButtonPopup() {
         String name = JOptionPane.showInputDialog(null,
-                "Type name of Brush",
+                "Type name of PencilCase",
                 windowLabel, JOptionPane.QUESTION_MESSAGE);
         if (name != null && !isNameAlreadyExist(name) && name.length() > 0) {
-            // TODO: inputs
-            Brush brush = new Brush(parent.getCurrentBrush().getSize(), name, parent.getCurrentBrush().getRed(),
-                    parent.getCurrentBrush().getGreen(), parent.getCurrentBrush().getBlue(), 1);
-            pc = BrushesRoom.getBrushesRoom().getCaseWithName(pc.getName());
-            BrushesRoom.getBrushesRoom().getCaseWithName(pc.getName()).addBrush(brush);
+            brushesRoom.addPencilCase(new PencilCase(name));
             textMenuItemDialog("Successfully created");
             addCases();
             repaint();
             FileHelper.getFileHelper().saveBrushesRoom();
-            new BrushesMenu(pc, parent);
+            new PencilCasesMenu(parent);
             this.dispose();
         } else {
-            textMenuItemDialog("Invalid Brush name");
+            textMenuItemDialog("Invalid PencilCase name");
         }
     }
 
     // EFFECTS: shows an input window for the delete button
     private void deleteButtonPopup() {
         String name = JOptionPane.showInputDialog(null,
-                "Type name of Brush to delete (case sensitive)",
+                "Type name of PencilCase to delete (case sensitive)",
                 windowLabel, JOptionPane.QUESTION_MESSAGE);
         if (name != null && isNameAlreadyExist(name)) {
-            pc = BrushesRoom.getBrushesRoom().getCaseWithName(pc.getName());
-            brushesRoom.deleteBrush(name, pc);
+            brushesRoom.deleteCase(name);
             textMenuItemDialog("Successfully deleted");
             addCases();
             repaint();
             FileHelper.getFileHelper().saveBrushesRoom();
-            new BrushesMenu(pc, parent);
+            new PencilCasesMenu(parent);
             this.dispose();
         } else {
             textMenuItemDialog("Invalid PencilCase name");
@@ -135,8 +125,8 @@ public class BrushesMenu extends WindowGUI {
 
     private boolean isNameAlreadyExist(String name) {
         boolean invalidName = false;
-        for (Brush b : pc.getBrushes()) {
-            if (name.equals(b.getName())) {
+        for (PencilCase pc : brushesRoom.getCases()) {
+            if (name.equals(pc.getName())) {
                 invalidName = true;
                 break;
             }

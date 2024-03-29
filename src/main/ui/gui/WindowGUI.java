@@ -108,14 +108,15 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         return response;
     }
 
+    // EFFECTS: listens for ActionEvent, and displays message depending on input
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveMenuItem) {
             FileHelper.getFileHelper().saveAll();
-            textMenuItemDialog("Drawing has been (un)successfully saved!");
+            textMenuItemDialog("All data has been successfully saved!");
         } else if (e.getSource() == loadMenuItem) {
-            //FileHelper.getFileHelper().loadAll();
-            textMenuItemDialog("Drawing has been (un)successfully loaded!");
+            FileHelper.getFileHelper().loadAll();
+            textMenuItemDialog("All data has been successfully loaded!");
         } else if (e.getSource() == quitMenuItem) {
             confirmMenuItemDialog("Are you sure you want to quit?");
         } else if (e.getSource() == paintMainMenuItem) {
@@ -123,7 +124,7 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
                 new MainMenu();
             }
         } else if (e.getSource() == brushesMenuItem) {
-            new BrushesMenu();
+            new PencilCasesMenu(this);
         }
     }
 }

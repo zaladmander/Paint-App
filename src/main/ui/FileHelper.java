@@ -8,6 +8,7 @@ import persistence.JsonWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// represents a singular file helper that can be invoked to save and load
 public class FileHelper {
     public static final String JSON_STORE_BR = "./data/brushesroom.json";
     public static final String JSON_STORE_DR = "./data/drawingroom.json";

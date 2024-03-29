@@ -24,6 +24,7 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
     private final int width;
     private final int height;
     private JPanel drawingSpace;
+    private PaintingEditorMouseAdapter mouseAdapter;
 
     // EFFECTS: constructs a window, default brush, and JFrame, panels, entire GUI
     PaintingEditorMenu(Canvas canvas) {
@@ -83,11 +84,17 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
 
     // EFFECTS: initializes all mouse input for drawing on the canvas
     // referenced and inspired by https://www.youtube.com/watch?v=vcgeCYKdyC4 by "TapTap"
-    private void initializeMouseInput(Brush currentBrush) {
-        PaintingEditorMouseAdapter mouseAdapter;
+    public void initializeMouseInput(Brush currentBrush) {
+        removeMouseListener(mouseAdapter);
+        removeMouseMotionListener(mouseAdapter);
         mouseAdapter = new PaintingEditorMouseAdapter(currentBrush, currentPath, allPaths, drawingSpace);
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
+    }
+
+    // EFFECTS: sets currentBrush to given brush
+    public void setCurrentBrush(Brush brush) {
+        this.currentBrush = brush;
     }
 
     // EFFECTS: returns currentBrush
@@ -104,6 +111,8 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
     public void stateChanged(ChangeEvent e) {
         currentBrush.setSize(slider.getValue());
         System.out.println(slider.getValue());
+        System.out.println(currentBrush.getName());
+        System.out.println("size: " + currentBrush.getSize());
     }
 
 }
