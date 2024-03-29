@@ -2,15 +2,20 @@ package persistence;
 
 import model.Brush;
 import model.BrushesRoom;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonReaderTest extends JsonTest{
+
+    @BeforeEach
+    void reset() {
+        BrushesRoom.getBrushesRoom().reset();
+    }
 
     @Test
     void testSourceNotFound() {
@@ -38,8 +43,9 @@ public class JsonReaderTest extends JsonTest{
     @Test
     void testReaderEmptyBrushesRoom() {
         JsonReader jsonReader = new JsonReader("./data/testReaderEmptyBrushesRoom.json");
+        BrushesRoom br = BrushesRoom.getBrushesRoom();
         try {
-            BrushesRoom br = jsonReader.readBrushesRoom();
+            jsonReader.readBrushesRoom();
             assertEquals(0, br.getCases().size());
         } catch (IOException e) {
             fail("Didn't expect an exception");
@@ -49,8 +55,9 @@ public class JsonReaderTest extends JsonTest{
     @Test
     void testReaderCasesNoBrushes() {
         JsonReader jsonReader = new JsonReader("./data/testReaderCasesNoBrushes.json");
+        BrushesRoom br = BrushesRoom.getBrushesRoom();
         try {
-            BrushesRoom br = jsonReader.readBrushesRoom();
+            jsonReader.readBrushesRoom();
             assertEquals(2, br.getCases().size());
             assertEquals("sponges", br.getCases().get(0).getName());
             assertTrue(br.getCases().get(0).getBrushes().isEmpty());
@@ -64,8 +71,9 @@ public class JsonReaderTest extends JsonTest{
     @Test
     void testReaderCasesAllBrushesRoom() {
         JsonReader jsonReader = new JsonReader("./data/testReaderAllBrushesRoom.json");
+        BrushesRoom br = BrushesRoom.getBrushesRoom();
         try {
-            BrushesRoom br = jsonReader.readBrushesRoom();
+            jsonReader.readBrushesRoom();
             Brush b1 = br.getCases().get(0).getBrushes().get(0);
             Brush b2 = br.getCases().get(1).getBrushes().get(0);
             assertEquals(2, br.getCases().size());

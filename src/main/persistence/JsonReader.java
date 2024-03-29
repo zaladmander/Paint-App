@@ -15,7 +15,8 @@ import java.util.stream.Stream;
 //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 public class JsonReader {
-    private String source;
+    private final String source;
+    private final BrushesRoom br = BrushesRoom.getBrushesRoom();
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -24,10 +25,10 @@ public class JsonReader {
 
     // EFFECTS: reads BrushesRoom from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public BrushesRoom readBrushesRoom() throws IOException {
+    public void readBrushesRoom() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseBrushesRoom(jsonObject);
+        addPencilCases(br, jsonObject);
     }
 
     // EFFECTS: reads DrawingRoom from file and returns it;
@@ -50,10 +51,8 @@ public class JsonReader {
     }
 
     // EFFECTS: parses BrushesRoom from JSON object and returns it
-    private BrushesRoom parseBrushesRoom(JSONObject jsonObject) {
-        BrushesRoom br = new BrushesRoom();
+    private void parseBrushesRoom(JSONObject jsonObject) {
         addPencilCases(br, jsonObject);
-        return br;
     }
 
     // EFFECTS: parses DrawingRoom from JSON object and returns it

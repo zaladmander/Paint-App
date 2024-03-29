@@ -1,8 +1,8 @@
-package ui;
+package ui.gui;
 
 import model.Brush;
 import model.Dot;
-import ui.tools.ColorSelecterTool;
+import ui.gui.tools.ColorSelecterTool;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

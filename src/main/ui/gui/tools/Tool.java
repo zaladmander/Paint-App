@@ -1,9 +1,8 @@
-package ui.tools;
+package ui.gui.tools;
 
-import ui.PaintingEditor;
+import ui.gui.PaintingEditor;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 
 

@@ -1,11 +1,4 @@
 {"cases": [{
-    "name": "coolCase",
-    "brushes": [{
-        "red": 255,
-        "green": 255,
-        "size": 12231,
-        "blue": 0,
-        "name": "cool_sponge",
-        "opacity": 1
-    }]
+    "name": "Fortnite",
+    "brushes": []
 }]}

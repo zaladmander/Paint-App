@@ -1,6 +1,7 @@
 package persistence;
 
 import model.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -9,6 +10,11 @@ import java.nio.file.InvalidPathException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonWriterTest extends JsonTest{
+
+    @BeforeEach
+    void reset() {
+        BrushesRoom.getBrushesRoom().reset();
+    }
 
     @Test
     void testSourceNotFound() {
@@ -69,14 +75,14 @@ public class JsonWriterTest extends JsonTest{
 
     @Test
     void testWriterEmptyBrushesRoom() {
-        BrushesRoom br = new BrushesRoom();
+        BrushesRoom br = BrushesRoom.getBrushesRoom();
         JsonWriter writer = new JsonWriter("./data/testWriterEmptyBrushesRoom.json");
         JsonReader reader = new JsonReader("./data/testWriterEmptyBrushesRoom.json");
         try {
             writer.open();
             writer.writeBrushRoom(br);
             writer.close();
-            br = reader.readBrushesRoom();
+            reader.readBrushesRoom();
             assertTrue(br.getCases().isEmpty());
         } catch (IOException | InvalidPathException e) {
             fail("Exception not expected");
@@ -85,7 +91,7 @@ public class JsonWriterTest extends JsonTest{
 
     @Test
     void testWriterCasesNoBrushes() {
-        BrushesRoom br = new BrushesRoom();
+        BrushesRoom br = BrushesRoom.getBrushesRoom();
         br.addPencilCase(new PencilCase("sponges"));
         br.addPencilCase(new PencilCase("felts"));
         JsonWriter writer = new JsonWriter("./data/testWriterCasesNoBrushes.json");
@@ -94,7 +100,7 @@ public class JsonWriterTest extends JsonTest{
             writer.open();
             writer.writeBrushRoom(br);
             writer.close();
-            br = reader.readBrushesRoom();
+            reader.readBrushesRoom();
             assertFalse(br.getCases().isEmpty());
             PencilCase c1 = br.getCases().get(0);
             PencilCase c2 = br.getCases().get(1);
@@ -109,7 +115,7 @@ public class JsonWriterTest extends JsonTest{
 
     @Test
     void testWriterAllBrushesRoom() {
-        BrushesRoom br = new BrushesRoom();
+        BrushesRoom br = BrushesRoom.getBrushesRoom();
         PencilCase pc1 = new PencilCase("realistic");
         PencilCase pc2 = new PencilCase("stamps");
         pc1.addBrush(new Brush(50, "tree", 100, 100, 0, 1));
@@ -122,7 +128,7 @@ public class JsonWriterTest extends JsonTest{
             writer.open();
             writer.writeBrushRoom(br);
             writer.close();
-            br = reader.readBrushesRoom();
+            reader.readBrushesRoom();
             assertFalse(br.getCases().isEmpty());
             PencilCase c1 = br.getCases().get(0);
             PencilCase c2 = br.getCases().get(1);

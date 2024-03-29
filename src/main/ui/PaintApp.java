@@ -21,7 +21,6 @@ public class PaintApp {
     private Scanner input;
     private BrushesRoom brushroom;
     private DrawingRoom drawroom;
-    private BrushesRoom emptyBrushRoom;
     private DrawingRoom emptyDrawingRoom;
     private JsonWriter jsonWriterBrushesRoom;
     private JsonReader jsonReaderBrushesRoom;
@@ -321,9 +320,8 @@ public class PaintApp {
     // EFFECTS: initialize input, cases, and canvases
     private void initialize() {
         input = new Scanner(System.in);
-        brushroom = new BrushesRoom();
+        brushroom = BrushesRoom.getBrushesRoom();
         drawroom = new DrawingRoom();
-        emptyBrushRoom = new BrushesRoom();
         emptyDrawingRoom = new DrawingRoom();
         jsonWriterBrushesRoom = new JsonWriter(JSON_STORE_BR);
         jsonReaderBrushesRoom = new JsonReader(JSON_STORE_BR);
@@ -355,7 +353,7 @@ public class PaintApp {
 
     private void loadBrushesRoom() {
         try {
-            brushroom = jsonReaderBrushesRoom.readBrushesRoom();
+            jsonReaderBrushesRoom.readBrushesRoom();
         } catch (IOException e) {
             System.out.println("Unable to load file: " + JSON_STORE_BR);
         }
@@ -380,13 +378,9 @@ public class PaintApp {
     }
 
     private void reset() {
-        try {
-            jsonWriterBrushesRoom.open();
-            jsonWriterBrushesRoom.writeBrushRoom(emptyBrushRoom);
-            jsonWriterBrushesRoom.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE_BR);
-        }
+        brushroom.reset();
+        saveBrushesRoom();
+        // TODO: when drawing room is singleton, replace this
         try {
             jsonWriterDrawingRoom.open();
             jsonWriterDrawingRoom.writeDrawingRoom(emptyDrawingRoom);

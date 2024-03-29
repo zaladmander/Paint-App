@@ -8,11 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 // a class that contains all PencilCases with their respective brushes
+// TODO: this class will use the singleton principle
 public class BrushesRoom implements Writable {
     private List<PencilCase> cases;
+    private static BrushesRoom brushesRoom;
 
     // EFFECTS: constructs a BrushesRoom with an empty cases list
-    public BrushesRoom() {
+    private BrushesRoom() {
+        cases = new ArrayList<>();
+    }
+
+    // EFFECTS: resets everything about this BrushesRoom
+    public void reset() {
         cases = new ArrayList<>();
     }
 
@@ -67,6 +74,13 @@ public class BrushesRoom implements Writable {
 
     public List<PencilCase> getCases() {
         return cases;
+    }
+
+    public static BrushesRoom getBrushesRoom() {
+        if (brushesRoom == null) {
+            brushesRoom = new BrushesRoom();
+        }
+        return brushesRoom;
     }
 
     //Referenced from JsonSerializationDemo

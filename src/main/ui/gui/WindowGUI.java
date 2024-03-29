@@ -1,4 +1,4 @@
-package ui;
+package ui.gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +33,7 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         getContentPane().setBackground(color);
         setLocationRelativeTo(null);
         setLayout(layout);
+        setVisible(true);
     }
 
     // Menu Bar
@@ -85,7 +86,7 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
     // popup windows
 
     // EFFECTS: shows abstract popup message window for a menu item
-    private void textMenuItemDialog(String text) {
+    protected void textMenuItemDialog(String text) {
         JOptionPane.showMessageDialog(null, text, windowLabel, JOptionPane.PLAIN_MESSAGE);
     }
 
@@ -114,7 +115,7 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
                 new MainMenu();
             }
         } else if (e.getSource() == brushesMenuItem) {
-            textMenuItemDialog("Add functionality here");
+            new BrushesMenu();
         }
     }
 }

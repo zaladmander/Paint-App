@@ -13,8 +13,9 @@ public class BrushesRoomTest {
 
     @BeforeEach
     void setup() {
+        br1 = BrushesRoom.getBrushesRoom();
+        br1.reset();
         b1 = new Brush(10, "test", 0, 0, 0, 1);
-        br1 = new BrushesRoom();
         pc1 = new PencilCase("testable");
         pc1.addBrush(b1);
         br1.addPencilCase(pc1);
