@@ -16,7 +16,6 @@ public class MainMenu extends WindowGUI implements ActionListener {
     private JButton newCanvasButton;
     private JButton loadCanvasButton;
     private JButton settingsButton;
-    private JPanel buttonPanel;
 
     // EFFECTS: constructs a JFrame GUI window for the "main menu"
     public MainMenu() {

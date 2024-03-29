@@ -1,0 +1,12 @@
+{"canvases": [
+    {
+        "width": 800,
+        "type": "blank",
+        "height": 800
+    },
+    {
+        "width": 1800,
+        "type": "photo",
+        "height": 850
+    }
+]}

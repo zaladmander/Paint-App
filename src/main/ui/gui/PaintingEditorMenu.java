@@ -57,6 +57,11 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
     }
 
     private void addSlider(JComponent parent) {
+        JPanel panel = new JPanel(new GridLayout(2, 1));
+        panel.setOpaque(false);
+        JLabel text = new JLabel("Brush Size");
+        text.setFont(new Font("Spectral", Font.BOLD, 15));
+        text.setHorizontalAlignment(JLabel.CENTER);
         slider = new JSlider(0, 100);
         slider.setPaintTicks(true);
         slider.setPaintTrack(true);
@@ -64,8 +69,9 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
         slider.setMajorTickSpacing(25);
         slider.setPaintLabels(true);
         slider.addChangeListener(this);
-
-        parent.add(slider);
+        panel.add(text);
+        panel.add(slider);
+        parent.add(panel);
     }
 
     private void initializeDrawingSpace() {
