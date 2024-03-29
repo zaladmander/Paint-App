@@ -6,15 +6,15 @@
             "green": 51,
             "size": 77,
             "blue": 51,
-            "name": "lightYellow",
+            "name": "evilRed",
             "opacity": 1
         },
         {
             "red": 255,
-            "green": 51,
-            "size": 77,
+            "green": 255,
+            "size": 24,
             "blue": 51,
-            "name": "evilRed",
+            "name": "lightYellow",
             "opacity": 1
         }
     ]

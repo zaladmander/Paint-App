@@ -50,17 +50,6 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // TODO: could probably delete these methods
-    // EFFECTS: parses BrushesRoom from JSON object and returns it
-    private void parseBrushesRoom(JSONObject jsonObject) {
-        addPencilCases(br, jsonObject);
-    }
-
-    // EFFECTS: parses DrawingRoom from JSON object and returns it
-    private void parseDrawingRoom(JSONObject jsonObject) {
-        addCanvases(dr, jsonObject);
-    }
-
     // EFFECTS: reads canvases from JSONArray and adds to dr DrawingRoom
     private void addCanvases(DrawingRoom dr, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("canvases");

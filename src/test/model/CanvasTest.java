@@ -38,6 +38,8 @@ public class CanvasTest {
     void testSetWidthOutRange() {
         c1.setWidth(-1);
         assertEquals(1200, c1.getWidth());
+        c1.setWidth(11112);
+        assertEquals(1200, c1.getWidth());
     }
 
     @Test
@@ -49,6 +51,8 @@ public class CanvasTest {
     @Test
     void testSetHeightOutRange() {
         c1.setHeight(1000000);
+        assertEquals(800, c1.getHeight());
+        c1.setHeight(-100000);
         assertEquals(800, c1.getHeight());
     }
 
