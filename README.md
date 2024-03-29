@@ -61,3 +61,18 @@ either save and close, or close without saving.
   and reload automatically all of my created brushes in their respective pencilcases
 
 - As a user, I want to be able to remove all saved data by choice like a factory reset ✓
+
+### Phase 3
+
+- As a user, I want to be able to add multiple brushes to a pencilcase 
+(and see the pencilcase with these additions)
+
+# Instructions for Grader
+
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by...
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by...
+- You can locate my visual component by opening the application
+and seeing the main menu
+- You can save the state of my application by...
+- You can reload the state of my application by...
+
