@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+// represents the popup menu for pencil cases that displays button for all pencil cases created, of which can be
+// clicked to display the brushes inside
 public class PencilCasesMenu extends WindowGUI {
     protected static final int WIDTH = 300;
     protected static final int HEIGHT = 450;
@@ -23,18 +25,23 @@ public class PencilCasesMenu extends WindowGUI {
     private JButton deleteButton;
     private WindowGUI parent;
 
+    // EFFECTS: constructs a PencilCasesMenu and initializes the window
     PencilCasesMenu(WindowGUI parent) {
         super(windowLabel);
         this.parent = parent;
-        brushesRoom.reset();
-        try {
-            jsonReader.readBrushesRoom();
-        } catch (IOException e) {
-            System.out.println("Unable to load file: " + FileHelper.JSON_STORE_BR);
-        }
+        //brushesRoom.reset();
+        //try {
+        //    jsonReader.readBrushesRoom();
+        //} catch (IOException e) {
+        //    System.out.println("Unable to load file: " + FileHelper.JSON_STORE_BR);
+        //}
         initializeWindow(new BorderLayout(), BG_COLOR, WIDTH, HEIGHT);
     }
 
+    // MODIFIES: this
+    // EFFECTS: function for initializing a window, sets
+    //          layout of window by given layout, and window background
+    //          color by given color, adds scroll bar and pencilcases buttons
     @Override
     protected void initializeWindow(LayoutManager layout, Color color, int width, int height) {
         super.initializeWindow(layout, color, width, height);
@@ -45,12 +52,16 @@ public class PencilCasesMenu extends WindowGUI {
         this.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a scrollpane to the JFrame
     private void addScrollPane() {
         JScrollPane scrollPane = new JScrollPane(brushesPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the brushes panel, which has an add and delete button, and all the pencilcases
     private void addBrushesPanel(WindowGUI parent) {
         brushesPanel = new JPanel(brushesPanelGrid);
         addButton = new JButton("Create a PencilCase");
@@ -87,6 +98,7 @@ public class PencilCasesMenu extends WindowGUI {
         }
     }
 
+    // MODIFIES: BrushesRoom
     // EFFECTS: shows an input window for the addButton
     private void addButtonPopup() {
         String name = JOptionPane.showInputDialog(null,
@@ -105,6 +117,7 @@ public class PencilCasesMenu extends WindowGUI {
         }
     }
 
+    // MODIFIES: BrushesRoom
     // EFFECTS: shows an input window for the delete button
     private void deleteButtonPopup() {
         String name = JOptionPane.showInputDialog(null,
@@ -123,6 +136,7 @@ public class PencilCasesMenu extends WindowGUI {
         }
     }
 
+    // EFFECTS: returns true if case name is in brushesRoom, false otherwise
     private boolean isNameAlreadyExist(String name) {
         boolean invalidName = false;
         for (PencilCase pc : brushesRoom.getCases()) {
@@ -134,6 +148,7 @@ public class PencilCasesMenu extends WindowGUI {
         return invalidName;
     }
 
+    // EFFECTS: shows popups for addButton and deleteButton
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {

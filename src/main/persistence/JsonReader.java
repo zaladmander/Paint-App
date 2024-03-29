@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 //Referenced from JsonSerializationDemo
 //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-
+// JsonReader loads files from a source into the BrushesRoom and DrawingRoom
 public class JsonReader {
     private final String source;
     private final BrushesRoom br = BrushesRoom.getBrushesRoom();

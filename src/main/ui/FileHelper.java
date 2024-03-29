@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // represents a singular file helper that can be invoked to save and load
+// uses the singleton principle
 public class FileHelper {
     public static final String JSON_STORE_BR = "./data/brushesroom.json";
     public static final String JSON_STORE_DR = "./data/drawingroom.json";
@@ -29,6 +30,7 @@ public class FileHelper {
         jsonReaderDrawingRoom = new JsonReader(JSON_STORE_DR);
     }
 
+    // MODIFIES: fileHelper
     // EFFECTS: returns the single instance of fileHelper
     public static FileHelper getFileHelper() {
         if (fileHelper == null) {
@@ -62,6 +64,7 @@ public class FileHelper {
         }
     }
 
+    // MODIFIES: brushroom
     // EFFECTS: loads the brush room from save
     public void loadBrushesRoom() {
         brushroom.reset();
@@ -83,6 +86,7 @@ public class FileHelper {
         }
     }
 
+    // MODIFIES: drawroom
     // EFFECTS: loads the drawing room from save
     public void loadDrawingRoom() {
         drawroom.reset();

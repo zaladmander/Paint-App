@@ -61,6 +61,8 @@ public class PencilCase implements Writable {
         return null;
     }
 
+    // getters:
+
     public int getNumBrushes() {
         return this.brushes.size();
     }

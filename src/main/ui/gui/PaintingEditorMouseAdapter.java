@@ -18,6 +18,7 @@ public class PaintingEditorMouseAdapter extends MouseAdapter {
     private List<List<Dot>> allPaths;
     private JComponent parent;
 
+    // EFFECTS: creates PaintingEditorMouseAdapter
     PaintingEditorMouseAdapter(Brush currentBrush, List<Dot> currentPath,
                                List<List<Dot>> allPaths, JComponent parent) {
         super();
@@ -27,6 +28,7 @@ public class PaintingEditorMouseAdapter extends MouseAdapter {
         this.parent = parent;
     }
 
+    // EFFECTS: creates a dot at mouse x and y
     @Override
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
@@ -47,6 +49,7 @@ public class PaintingEditorMouseAdapter extends MouseAdapter {
         System.out.println("x: " + x + ", y: " + y);
     }
 
+    // EFFECTS: creates a line at mouse x and y to release point
     @Override
     public void mouseDragged(MouseEvent e) {
         int x = e.getX();
@@ -68,6 +71,7 @@ public class PaintingEditorMouseAdapter extends MouseAdapter {
         currentPath.add(new Dot(brushColor, e.getX(), e.getY()));
     }
 
+    // EFFECTS: adds brush stroke to list of all strokes
     @Override
     public void mouseReleased(MouseEvent e) {
         allPaths.add(currentPath);

@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 
 //Referenced from JsonSerializationDemo
 //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-
+// JsonWriter saves to a given file destination into a Json file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

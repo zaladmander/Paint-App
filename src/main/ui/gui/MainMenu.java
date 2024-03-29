@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.BrushesRoom;
 import model.Canvas;
 import model.DrawingRoom;
 import ui.FileHelper;
@@ -31,6 +32,8 @@ public class MainMenu extends WindowGUI implements ActionListener {
         setMaximumSize(new Dimension(WIDTH, HEIGHT));
         addTitle(this);
         addButtonPanel(this);
+        initializeMenuBar(this);
+        menuBar.remove(toolsMenu);
         setVisible(true);
     }
 
@@ -78,8 +81,9 @@ public class MainMenu extends WindowGUI implements ActionListener {
 
     // MODIFIES: this, button
     // EFFECTS: creates a new anonymous button, and adds to given parent
+    // TODO: label text back to "Load Canvas"
     private void addLoadCanvasButton(JComponent parent) {
-        loadCanvasButton = new JButton("Load Canvas");
+        loadCanvasButton = new JButton("Quick Draw");
         loadCanvasButton.setBounds((WIDTH / 2) - 125, (HEIGHT / 2) - 50, 250, 100);
         loadCanvasButton.setFocusable(false);
         loadCanvasButton.addActionListener(this);
@@ -99,10 +103,12 @@ public class MainMenu extends WindowGUI implements ActionListener {
         parent.add(settingsButton);
     }
 
+    // EFFECTS: depending on button pressed, open different windows
     @Override
     public void actionPerformed(ActionEvent e) {
+        super.actionPerformed(e);
         if (e.getSource() == newCanvasButton) {
-            FileHelper.getFileHelper().loadAll();
+            //FileHelper.getFileHelper().loadAll();
             String width = JOptionPane.showInputDialog(null,
                     "give width of canvas (600 - 1800)",
                     windowLabel, JOptionPane.QUESTION_MESSAGE);
@@ -119,7 +125,9 @@ public class MainMenu extends WindowGUI implements ActionListener {
                 this.dispose();
             }
         } else if (e.getSource() == loadCanvasButton) {
-            new LoadCanvasMenu(this);
+            // TODO: use LoadCanvasMenu here
+            new PaintingEditorMenu(new Canvas("blank", HEIGHT, WIDTH));
+            this.dispose();
         } else if (e.getSource() == settingsButton) {
             textMenuItemDialog("put settings here :) ");
         }

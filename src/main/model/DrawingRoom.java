@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // a single class instance that contains all canvases
+// this class uses the singleton principle
 public class DrawingRoom implements Writable {
     private static DrawingRoom drawingRoom;
     private List<Canvas> canvases;

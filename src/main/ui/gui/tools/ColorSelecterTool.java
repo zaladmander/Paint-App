@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
+// represents a color selector that gives users the option of colors to pick
 public class ColorSelecterTool extends Tool {
     private static final String label = "Color Selector";
     private Color previousColor;
@@ -32,8 +33,8 @@ public class ColorSelecterTool extends Tool {
         //JColorChooser.showDialog(null, "Color Selector", Color.black);
     }
 
+    // a click handler private class for this class
     private class ColorSelectorClickHandler implements ActionListener {
-
         // MODIFIES: chosenColor, currentBrush
         // EFFECTS: opens up the color chooser when button is clicked,
         //          selected color changes current brush color

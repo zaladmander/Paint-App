@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // a single class instance that contains all PencilCases with their respective brushes
-// TODO: this class will use the singleton principle
+// this class uses the singleton principle
 public class BrushesRoom implements Writable {
     private List<PencilCase> cases;
     private static BrushesRoom brushesRoom;

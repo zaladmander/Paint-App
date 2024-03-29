@@ -3,9 +3,11 @@ package ui.gui;
 import ui.FileHelper;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 // represents an abstract GUI window
 public abstract class WindowGUI extends JFrame implements ActionListener {
@@ -17,17 +19,22 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
 
     protected JMenuBar menuBar;
 
-    private JMenuItem saveMenuItem;
-    private JMenuItem loadMenuItem;
-    private JMenuItem quitMenuItem;
-    private JMenuItem paintMainMenuItem;
-    private JMenuItem brushesMenuItem;
+    protected JMenuItem saveMenuItem;
+    protected JMenuItem loadMenuItem;
+    protected JMenuItem resetMenuItem;
+    protected JMenuItem quitMenuItem;
+    protected JMenuItem paintMainMenuItem;
+    protected JMenuItem brushesMenuItem;
+    protected JMenu paintMenu;
+    protected JMenu fileMenu;
+    protected JMenu toolsMenu;
 
     // EFFECTS: constructs a JFrame with the title windowLabel
     public WindowGUI(String windowLabel) {
         super(windowLabel);
     }
 
+    // MODIFIES: this
     // EFFECTS: abstract function for initializing a window, sets
     //          layout of window by given layout, and window background
     //          color by given color
@@ -44,12 +51,13 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
 
     // Menu Bar
 
+    // MODIFIES: menuBar, paintMenu, fileMenu, toolsMenu
     // EFFECTS: adds a menu bar to the given frame
     protected void initializeMenuBar(JFrame frame) {
         menuBar = new JMenuBar();
-        JMenu paintMenu = new JMenu("Paint!");
-        JMenu fileMenu = new JMenu("File");
-        JMenu toolsMenu = new JMenu("Tools");
+        paintMenu = new JMenu("Paint!");
+        fileMenu = new JMenu("File");
+        toolsMenu = new JMenu("Tools");
         addMenuItemsPaint(paintMenu);
         addMenuItemsFile(fileMenu);
         addMenuItemsTools(toolsMenu);
@@ -59,7 +67,7 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         frame.setJMenuBar(menuBar);
     }
 
-    // MODIFIES: menu
+    // MODIFIES: this, menu, brushesMenuItem
     // EFFECTS: adds tools menu dropdowns to given JMenu
     private void addMenuItemsTools(JMenu menu) {
         brushesMenuItem = new JMenuItem("Brushes");
@@ -67,7 +75,7 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         menu.add(brushesMenuItem);
     }
 
-    // MODIFIES: menu
+    // MODIFIES: this, menu, paintMainMenuItem, quitMenuItem
     // EFFECTS: adds "paint" menu dropdowns to given JMenu
     private void addMenuItemsPaint(JMenu menu) {
         paintMainMenuItem = new JMenuItem("Main Menu");
@@ -78,15 +86,18 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         menu.add(quitMenuItem);
     }
 
-    // MODIFIES: menu
+    // MODIFIES: this, menu, saveMenuItem, loadMenuItem, resetMenuItem
     // EFFECTS: adds file menu dropdowns to given JMenu
     protected void addMenuItemsFile(JMenu menu) {
         saveMenuItem = new JMenuItem("Save");
         loadMenuItem = new JMenuItem("Load");
+        resetMenuItem = new JMenuItem("Reset");
         saveMenuItem.addActionListener(this);
         loadMenuItem.addActionListener(this);
+        resetMenuItem.addActionListener(this);
         menu.add(saveMenuItem);
         menu.add(loadMenuItem);
+        menu.add(resetMenuItem);
     }
 
     // popup windows
@@ -108,23 +119,40 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         return response;
     }
 
+    // MODIFIES: BrushesRoom, DrawingRoom
+    // EFFECTS: asks the user if they want to save, if ok is clicked, then save
+    private void saveOptionMenuDialog() {
+        if (confirmMenuItemDialog("Are you sure you want to save?") == 0) {
+            FileHelper.getFileHelper().saveAll();
+            textMenuItemDialog("All data has been successfully saved!");
+        }
+    }
+
     // EFFECTS: listens for ActionEvent, and displays message depending on input
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveMenuItem) {
-            FileHelper.getFileHelper().saveAll();
-            textMenuItemDialog("All data has been successfully saved!");
+            saveOptionMenuDialog();
         } else if (e.getSource() == loadMenuItem) {
             FileHelper.getFileHelper().loadAll();
             textMenuItemDialog("All data has been successfully loaded!");
         } else if (e.getSource() == quitMenuItem) {
-            confirmMenuItemDialog("Are you sure you want to quit?");
+            if (confirmMenuItemDialog("Are you sure you want to quit?") == 0) {
+                saveOptionMenuDialog();
+                System.exit(0);
+            }
         } else if (e.getSource() == paintMainMenuItem) {
             if (confirmMenuItemDialog("Are you sure you want to go to the Main Menu?") == 0) {
+                saveOptionMenuDialog();
                 new MainMenu();
             }
         } else if (e.getSource() == brushesMenuItem) {
             new PencilCasesMenu(this);
+        } else if (e.getSource() == resetMenuItem) {
+            if (confirmMenuItemDialog("Are you sure you want to go reset all data? This cannot be undone!") == 0) {
+                FileHelper.getFileHelper().reset();
+                new MainMenu();
+            }
         }
     }
 }

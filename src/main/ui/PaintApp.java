@@ -320,7 +320,7 @@ public class PaintApp {
     }
 
     // EFFECTS: prevent exception, try to turn string to int but if exception is thrown,
-    //          use default number 10
+    //          use default number DEFAULT_SIZE
     private int stringToInt(String string) {
         try {
             return Integer.parseInt(string);

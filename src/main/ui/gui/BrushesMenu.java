@@ -10,10 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+// represents the popup menu for brushes in a pencilcase
 public class BrushesMenu extends WindowGUI {
     protected static final int WIDTH = 300;
     protected static final int HEIGHT = 450;
@@ -26,6 +26,7 @@ public class BrushesMenu extends WindowGUI {
     private PencilCase pc;
     private PaintingEditorMenu parent;
 
+    // EFFECTS: construct a BrushesMenu
     BrushesMenu(PencilCase pencilCase, PaintingEditorMenu parent) {
         super(windowLabel);
         pc = pencilCase;
@@ -65,14 +66,14 @@ public class BrushesMenu extends WindowGUI {
         deleteButton.setPreferredSize(new Dimension(100, 100));
         deleteButton.addActionListener(this);
         brushesPanel.add(deleteButton);
-        addCases();
+        addBrushes();
         parent.add(brushesPanel);
     }
 
     // Inspired from StackOverFlow answer by Scott Smith
     // https://stackoverflow.com/questions/2430008
-    // EFFECTS: add cases to GUI, all with separate action listeners
-    private void addCases() {
+    // EFFECTS: add brushes to GUI, all with separate action listeners
+    private void addBrushes() {
         Map<JButton, Integer> map = new HashMap<>();
         int i = 1;
         for (Brush br : pc.getBrushes()) {
@@ -104,7 +105,7 @@ public class BrushesMenu extends WindowGUI {
             pc = BrushesRoom.getBrushesRoom().getCaseWithName(pc.getName());
             BrushesRoom.getBrushesRoom().getCaseWithName(pc.getName()).addBrush(brush);
             textMenuItemDialog("Successfully created");
-            addCases();
+            addBrushes();
             repaint();
             FileHelper.getFileHelper().saveBrushesRoom();
             new BrushesMenu(pc, parent);
@@ -123,7 +124,7 @@ public class BrushesMenu extends WindowGUI {
             pc = BrushesRoom.getBrushesRoom().getCaseWithName(pc.getName());
             brushesRoom.deleteBrush(name, pc);
             textMenuItemDialog("Successfully deleted");
-            addCases();
+            addBrushes();
             repaint();
             FileHelper.getFileHelper().saveBrushesRoom();
             new BrushesMenu(pc, parent);
