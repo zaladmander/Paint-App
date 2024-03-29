@@ -29,15 +29,27 @@ public class CanvasTest {
     }
 
     @Test
-    void testSetWidth() {
+    void testSetWidthInRange() {
         c1.setWidth(1000);
         assertEquals(1000, c1.getWidth());
     }
 
     @Test
-    void testSetHeight() {
+    void testSetWidthOutRange() {
+        c1.setWidth(-1);
+        assertEquals(1200, c1.getWidth());
+    }
+
+    @Test
+    void testSetHeightInRange() {
         c1.setHeight(1000);
         assertEquals(1000, c1.getHeight());
+    }
+
+    @Test
+    void testSetHeightOutRange() {
+        c1.setHeight(1000000);
+        assertEquals(800, c1.getHeight());
     }
 
     @Test
