@@ -1,6 +1,6 @@
 package ui.gui.tools;
 
-import ui.gui.PaintingEditor;
+import ui.gui.PaintingEditorMenu;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -9,10 +9,10 @@ import java.awt.event.MouseEvent;
 // uses references from the SimpleDrawingPlayer-Starter from GitHub
 public abstract class Tool {
     protected JButton button;
-    protected PaintingEditor editor;
+    protected PaintingEditorMenu editor;
     private boolean active;
 
-    public Tool(PaintingEditor editor, JComponent parent) {
+    public Tool(PaintingEditorMenu editor, JComponent parent) {
         this.editor = editor;
         createButton(parent);
         addToParent(parent);

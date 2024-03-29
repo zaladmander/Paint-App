@@ -3,6 +3,7 @@ package ui.gui;
 import model.Brush;
 import model.Dot;
 import ui.gui.tools.ColorSelecterTool;
+import model.Canvas;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -10,30 +11,26 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaintingEditor extends WindowGUI implements ActionListener, ChangeListener {
-    //TODO: these will be inputs
-    private static final int WIDTH = 900;
-    private static final int HEIGHT = 600;
-
+// represents the painting window where users can draw things
+public class PaintingEditorMenu extends WindowGUI implements ActionListener, ChangeListener {
     private Brush currentBrush = new Brush(20, "Default", 0, 0, 0, 1);
     private List<Dot> currentPath;
     private List<List<Dot>> allPaths = new ArrayList<>();
     private JSlider slider;
+    private Canvas thisCanvas;
+    private final int width;
+    private final int height;
+    private JPanel drawingSpace;
 
     // EFFECTS: constructs a window, default brush, and JFrame, panels, entire GUI
-    PaintingEditor() {
+    PaintingEditorMenu(Canvas canvas) {
         super(windowLabel);
-        initializeWindow(new BorderLayout(), new Color(160, 160, 160), WIDTH, HEIGHT);
-    }
-
-    // EFFECTS: returns currentBrush
-    public Brush getCurrentBrush() {
-        return currentBrush;
+        width = canvas.getWidth();
+        height = canvas.getHeight();
+        initializeWindow(new BorderLayout(), new Color(160, 160, 160), width, height);
     }
 
     // EFFECTS: initialize window GUI frame
@@ -71,6 +68,27 @@ public class PaintingEditor extends WindowGUI implements ActionListener, ChangeL
         parent.add(slider);
     }
 
+    private void initializeDrawingSpace() {
+        drawingSpace = new JPanel();
+        drawingSpace.setBackground(BG_COLOR);
+        setPreferredSize(new Dimension(width, height));
+        this.add(drawingSpace, BorderLayout.CENTER);
+    }
+
+    // EFFECTS: initializes all mouse input for drawing on the canvas
+    // referenced and inspired by https://www.youtube.com/watch?v=vcgeCYKdyC4 by "TapTap"
+    private void initializeMouseInput(Brush currentBrush) {
+        PaintingEditorMouseAdapter mouseAdapter;
+        mouseAdapter = new PaintingEditorMouseAdapter(currentBrush, currentPath, allPaths, drawingSpace);
+        addMouseListener(mouseAdapter);
+        addMouseMotionListener(mouseAdapter);
+    }
+
+    // EFFECTS: returns currentBrush
+    public Brush getCurrentBrush() {
+        return currentBrush;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
@@ -81,33 +99,5 @@ public class PaintingEditor extends WindowGUI implements ActionListener, ChangeL
         currentBrush.setSize(slider.getValue());
         System.out.println(slider.getValue());
     }
-
-    //private void initializeToolBar(JLayeredPane parent, int level) {
-    //    JPanel toolBar = new JPanel();
-    //    //toolBar.setLayout(null);
-    //    toolBar.setBackground(new Color(250, 250, 210));
-    //    toolBar.setPreferredSize(new Dimension(100, 100));
-//
-    //    new ColorSelecterTool(this, toolBar);
-//
-    //    parent.add(toolBar, JLayeredPane.DEFAULT_LAYER);
-    //}
-//
-    private void initializeDrawingSpace() {
-        JPanel drawingSpace = new JPanel();
-        drawingSpace.setBackground(BG_COLOR);
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        this.add(drawingSpace, BorderLayout.CENTER);
-    }
-
-    // EFFECTS: initializes all mouse input for drawing on the canvas
-    // referenced and inspired by https://www.youtube.com/watch?v=vcgeCYKdyC4 by "TapTap"
-    private void initializeMouseInput(Brush currentBrush) {
-        PaintingEditorMouseAdapter mouseAdapter;
-        mouseAdapter = new PaintingEditorMouseAdapter(currentBrush, currentPath, allPaths, this);
-        addMouseListener(mouseAdapter);
-        addMouseMotionListener(mouseAdapter);
-    }
-
 
 }

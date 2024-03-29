@@ -1,6 +1,6 @@
 package ui.gui.tools;
 
-import ui.gui.PaintingEditor;
+import ui.gui.PaintingEditorMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ public class ColorSelecterTool extends Tool {
     private static final String label = "Color Selector";
     private Color previousColor;
 
-    public ColorSelecterTool(PaintingEditor editor, JComponent parent) {
+    public ColorSelecterTool(PaintingEditorMenu editor, JComponent parent) {
         super(editor, parent);
     }
 

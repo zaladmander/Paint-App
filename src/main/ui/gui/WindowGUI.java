@@ -1,5 +1,7 @@
 package ui.gui;
 
+import ui.FileHelper;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +10,10 @@ import java.awt.event.ActionListener;
 // represents an abstract GUI window
 public abstract class WindowGUI extends JFrame implements ActionListener {
     protected static final Color BG_COLOR = Color.white;
+    protected static final Color BG_COLOR2 = new Color(200, 200, 160);
     protected static final String windowLabel = "Paint!";
+    protected static final int WIDTH = 400;
+    protected static final int HEIGHT = 450;
 
     protected JMenuBar menuBar;
 
@@ -33,6 +38,7 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         getContentPane().setBackground(color);
         setLocationRelativeTo(null);
         setLayout(layout);
+        setResizable(false);
         setVisible(true);
     }
 
@@ -105,8 +111,10 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveMenuItem) {
+            FileHelper.getFileHelper().saveAll();
             textMenuItemDialog("Drawing has been (un)successfully saved!");
         } else if (e.getSource() == loadMenuItem) {
+            //FileHelper.getFileHelper().loadAll();
             textMenuItemDialog("Drawing has been (un)successfully loaded!");
         } else if (e.getSource() == quitMenuItem) {
             confirmMenuItemDialog("Are you sure you want to quit?");
