@@ -33,5 +33,10 @@
         "width": 1200,
         "type": "blank",
         "height": 800
+    },
+    {
+        "width": 1200,
+        "type": "blank",
+        "height": 800
     }
 ]}

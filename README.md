@@ -65,14 +65,21 @@ either save and close, or close without saving.
 ### Phase 3
 
 - As a user, I want to be able to add multiple brushes to a pencilcase 
-(and see the pencilcase with these additions)
+(and see the pencilcase with these additions) ✓
 
 # Instructions for Grader
 
-- You can generate the first required action related to the user story "adding multiple Xs to a Y" by...
-- You can generate the second required action related to the user story "adding multiple Xs to a Y" by...
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by 
+going to the top toolbar in a canvas window,
+  clicking **Tools**, then **Brushes**, and you can create a PencilCase or click to enter a 
+PencilCase and also create Brushes in that PencilCase
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by going to the top toolbar in a canvas window,
+  clicking **Tools**, then **Brushes**, and you can delete a PencilCase or click to enter a
+  PencilCase and also delete Brushes in that PencilCase
 - You can locate my visual component by opening the application
 and seeing the main menu
-- You can save the state of my application by...
-- You can reload the state of my application by...
+- You can save the state of my application by going to the top toolbar in a canvas window,
+clicking file, and clicking save
+- You can reload the state of my application by going to the top toolbar in a canvas window,
+  clicking file, and clicking load
 

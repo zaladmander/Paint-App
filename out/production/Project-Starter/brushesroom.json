@@ -32,6 +32,14 @@
             "blue": 153,
             "name": "turq",
             "opacity": 1
+        },
+        {
+            "red": 102,
+            "green": 255,
+            "size": 51,
+            "blue": 102,
+            "name": "new green",
+            "opacity": 1
         }
     ]
 }]}
