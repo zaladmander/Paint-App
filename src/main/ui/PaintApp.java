@@ -1,11 +1,7 @@
 package ui;
 
 import model.*;
-import persistence.JsonReader;
-import persistence.JsonWriter;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 // represents a paint application with ui, different menus
@@ -13,19 +9,15 @@ import java.util.Scanner;
 // takes user input to travel from menu to menu, lets the user customize
 // brushes, pencilcases, and canvases
 public class PaintApp {
-    private static final String JSON_STORE_BR = "./data/brushesroom.json";
-    private static final String JSON_STORE_DR = "./data/drawingroom.json";
     private static final String BACKTEXT = "\tPress 'q' to go back";
     private static final String INVALIDTEXT = "invalid input...";
     private static final int DEFAULT_SIZE = 50;
 
+    private final BrushesRoom brushroom = BrushesRoom.getBrushesRoom();
+    private final DrawingRoom drawroom = DrawingRoom.getDrawingRoom();
+
     private Scanner input;
-    private BrushesRoom brushroom;
-    private DrawingRoom drawroom;
-    private JsonWriter jsonWriterBrushesRoom;
-    private JsonReader jsonReaderBrushesRoom;
-    private JsonWriter jsonWriterDrawingRoom;
-    private JsonReader jsonReaderDrawingRoom;
+    private final FileHelper fileHelper = FileHelper.getFileHelper();
 
     // EFFECTS: constructs a PaintApp
     public PaintApp() {
@@ -132,13 +124,13 @@ public class PaintApp {
                 runCasesMenu();
                 break;
             case "3":
-                saveAll();
+                fileHelper.saveAll();
                 break;
             case "4":
-                loadAll();
+                fileHelper.loadAll();
                 break;
             case "5":
-                reset();
+                fileHelper.reset();
                 System.out.println("Reset Complete!");
                 break;
             default:
@@ -324,13 +316,7 @@ public class PaintApp {
     // EFFECTS: initialize input, cases, and canvases
     private void initialize() {
         input = new Scanner(System.in);
-        brushroom = BrushesRoom.getBrushesRoom();
-        drawroom = DrawingRoom.getDrawingRoom();
-        jsonWriterBrushesRoom = new JsonWriter(JSON_STORE_BR);
-        jsonReaderBrushesRoom = new JsonReader(JSON_STORE_BR);
-        jsonWriterDrawingRoom = new JsonWriter(JSON_STORE_DR);
-        jsonReaderDrawingRoom = new JsonReader(JSON_STORE_DR);
-        loadBrushesRoom();
+        fileHelper.loadBrushesRoom();
     }
 
     // EFFECTS: prevent exception, try to turn string to int but if exception is thrown,
@@ -342,73 +328,5 @@ public class PaintApp {
             // default size
             return DEFAULT_SIZE;
         }
-    }
-
-    // EFFECTS: saves brushes and drawing room to file
-    private void saveAll() {
-        saveBrushesRoom();
-        saveDrawingRoom();
-        System.out.println("Saving Complete!");
-    }
-
-    // EFFECTS: loads all brushes and drawing room from file
-    private void loadAll() {
-        loadBrushesRoom();
-        loadDrawingRoom();
-        System.out.println("Loading Complete!");
-    }
-
-    // EFFECTS: saves the current brushes room to file
-    private void saveBrushesRoom() {
-        try {
-            jsonWriterBrushesRoom.open();
-            jsonWriterBrushesRoom.writeBrushRoom(brushroom);
-            jsonWriterBrushesRoom.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE_BR);
-        }
-    }
-
-    // EFFECTS: loads the brush room from save
-    private void loadBrushesRoom() {
-        brushroom.reset();
-        try {
-            jsonReaderBrushesRoom.readBrushesRoom();
-        } catch (IOException e) {
-            System.out.println("Unable to load file: " + JSON_STORE_BR);
-        }
-    }
-
-    // EFFECTS: saves the current drawing room to file
-    private void saveDrawingRoom() {
-        try {
-            jsonWriterDrawingRoom.open();
-            jsonWriterDrawingRoom.writeDrawingRoom(drawroom);
-            jsonWriterDrawingRoom.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE_DR);
-        }
-    }
-
-    // EFFECTS: loads the drawing room from save
-    private void loadDrawingRoom() {
-        drawroom.reset();
-        try {
-            jsonReaderDrawingRoom.readDrawingRoom();
-        } catch (IOException e) {
-            System.out.println("Unable to load file: " + JSON_STORE_DR);
-        }
-    }
-
-    // MODIFIES: drawroom, brushroom
-    // EFFECTS: resets the canvases and cases contained within brushroom
-    //          and drawroom, then saves and loads them
-    private void reset() {
-        brushroom.reset();
-        saveBrushesRoom();
-        drawroom.reset();
-        saveDrawingRoom();
-        loadBrushesRoom();
-        loadDrawingRoom();
     }
 }
