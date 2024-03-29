@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 public class JsonReader {
     private final String source;
     private final BrushesRoom br = BrushesRoom.getBrushesRoom();
+    private final DrawingRoom dr = DrawingRoom.getDrawingRoom();
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -33,10 +34,10 @@ public class JsonReader {
 
     // EFFECTS: reads DrawingRoom from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public DrawingRoom readDrawingRoom() throws IOException {
+    public void readDrawingRoom() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseDrawingRoom(jsonObject);
+        addCanvases(dr, jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -50,16 +51,15 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    // TODO: could probably delete these methods
     // EFFECTS: parses BrushesRoom from JSON object and returns it
     private void parseBrushesRoom(JSONObject jsonObject) {
         addPencilCases(br, jsonObject);
     }
 
     // EFFECTS: parses DrawingRoom from JSON object and returns it
-    private DrawingRoom parseDrawingRoom(JSONObject jsonObject) {
-        DrawingRoom dr = new DrawingRoom();
+    private void parseDrawingRoom(JSONObject jsonObject) {
         addCanvases(dr, jsonObject);
-        return dr;
     }
 
     // EFFECTS: reads canvases from JSONArray and adds to dr DrawingRoom

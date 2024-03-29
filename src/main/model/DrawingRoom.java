@@ -7,13 +7,26 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
-// a class that contains all canvases
+// a single class instance that contains all canvases
 public class DrawingRoom implements Writable {
+    private static DrawingRoom drawingRoom;
     private List<Canvas> canvases;
 
     // EFFECTS: constructs a DrawingRoom with an empty list canvases
-    public DrawingRoom() {
+    private DrawingRoom() {
         canvases = new ArrayList<>();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: resets all fields
+    public void reset() {
+        canvases = new ArrayList<>();
+    }
+
+    // MODIFIES: cases
+    // EFFECTS: adds the given canvas to the DrawingRoom cases list
+    public void addCanvas(Canvas canvas) {
+        canvases.add(canvas);
     }
 
     // REQUIRES: canvases not empty and position is a valid position in canvases
@@ -29,6 +42,13 @@ public class DrawingRoom implements Writable {
 
     public List<Canvas> getCanvases() {
         return canvases;
+    }
+
+    public static DrawingRoom getDrawingRoom() {
+        if (drawingRoom == null) {
+            drawingRoom = new DrawingRoom();
+        }
+        return drawingRoom;
     }
 
     //Referenced from JsonSerializationDemo
@@ -48,11 +68,5 @@ public class DrawingRoom implements Writable {
             jsonArray.put(c.toJson());
         }
         return jsonArray;
-    }
-
-    // MODIFIES: cases
-    // EFFECTS: adds the given canvas to the DrawingRoom cases list
-    public void addCanvas(Canvas canvas) {
-        canvases.add(canvas);
     }
 }

@@ -321,8 +321,7 @@ public class PaintApp {
     private void initialize() {
         input = new Scanner(System.in);
         brushroom = BrushesRoom.getBrushesRoom();
-        drawroom = new DrawingRoom();
-        emptyDrawingRoom = new DrawingRoom();
+        drawroom = DrawingRoom.getDrawingRoom();
         jsonWriterBrushesRoom = new JsonWriter(JSON_STORE_BR);
         jsonReaderBrushesRoom = new JsonReader(JSON_STORE_BR);
         jsonWriterDrawingRoom = new JsonWriter(JSON_STORE_DR);
@@ -371,7 +370,7 @@ public class PaintApp {
 
     private void loadDrawingRoom() {
         try {
-            drawroom = jsonReaderDrawingRoom.readDrawingRoom();
+            jsonReaderDrawingRoom.readDrawingRoom();
         } catch (IOException e) {
             System.out.println("Unable to load file: " + JSON_STORE_DR);
         }

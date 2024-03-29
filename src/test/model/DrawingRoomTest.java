@@ -12,7 +12,8 @@ public class DrawingRoomTest {
 
     @BeforeEach
     void setup() {
-        dr1 = new DrawingRoom();
+        dr1 = DrawingRoom.getDrawingRoom();
+        dr1.reset();
         c1 = new Canvas("photo", 800, 800);
         dr1.addCanvas(c1);
     }

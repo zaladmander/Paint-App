@@ -7,7 +7,7 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
-// a class that contains all PencilCases with their respective brushes
+// a single class instance that contains all PencilCases with their respective brushes
 // TODO: this class will use the singleton principle
 public class BrushesRoom implements Writable {
     private List<PencilCase> cases;
@@ -18,6 +18,7 @@ public class BrushesRoom implements Writable {
         cases = new ArrayList<>();
     }
 
+    // MODIFIES: this
     // EFFECTS: resets everything about this BrushesRoom
     public void reset() {
         cases = new ArrayList<>();

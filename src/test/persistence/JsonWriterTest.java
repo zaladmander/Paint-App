@@ -14,6 +14,7 @@ public class JsonWriterTest extends JsonTest{
     @BeforeEach
     void reset() {
         BrushesRoom.getBrushesRoom().reset();
+        DrawingRoom.getDrawingRoom().reset();
     }
 
     @Test
@@ -31,14 +32,14 @@ public class JsonWriterTest extends JsonTest{
 
     @Test
     void testWriterDrawingRoomEmpty() {
-        DrawingRoom dr = new DrawingRoom();
+        DrawingRoom dr = DrawingRoom.getDrawingRoom();
         JsonWriter writer = new JsonWriter("./data/testWriterDrawingRoomEmpty.json");
         JsonReader reader = new JsonReader("./data/testWriterDrawingRoomEmpty.json");
         try {
             writer.open();
             writer.writeDrawingRoom(dr);
             writer.close();
-            dr = reader.readDrawingRoom();
+            reader.readDrawingRoom();
             assertTrue(dr.getCanvases().isEmpty());
         } catch (IOException | InvalidPathException e) {
             fail("Exception not expected");
@@ -47,7 +48,7 @@ public class JsonWriterTest extends JsonTest{
 
     @Test
     void testWriterDrawingRoomCanvasesPresent() {
-        DrawingRoom dr = new DrawingRoom();
+        DrawingRoom dr = DrawingRoom.getDrawingRoom();
         Canvas c1 = new Canvas("blank", 800, 800);
         Canvas c2 = new Canvas("photo", 850, 1800);
         dr.addCanvas(c1);
@@ -58,7 +59,7 @@ public class JsonWriterTest extends JsonTest{
             writer.open();
             writer.writeDrawingRoom(dr);
             writer.close();
-            dr = reader.readDrawingRoom();
+            reader.readDrawingRoom();
             assertFalse(dr.getCanvases().isEmpty());
             Canvas jsonCanvas1 = dr.getCanvases().get(0);
             Canvas jsonCanvas2 = dr.getCanvases().get(1);
