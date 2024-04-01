@@ -17,11 +17,15 @@ public class ColorSelecterTool extends Tool {
         super(editor, parent);
     }
 
+    // MODIFIES: button
+    // EFFECTS: adds an action listener to the button
     @Override
     protected void addListener() {
         button.addActionListener(new ColorSelectorClickHandler());
     }
 
+    // MODIFIES: button
+    // EFFECTS: creates a button
     @Override
     protected void createButton(JComponent parent) {
         button = new JButton(label);

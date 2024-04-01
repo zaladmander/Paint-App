@@ -22,12 +22,14 @@ public class BrushesRoom implements Writable {
     // EFFECTS: resets everything about this BrushesRoom
     public void reset() {
         cases = new ArrayList<>();
+        EventLogHelper.logEvent("BrushesRoom was reset!");
     }
 
     // MODIFIES: cases
     // EFFECTS: deletes a case with same string name as caseToDelete
     public void deleteCase(String caseToDelete) {
         cases.remove(getCaseWithName(caseToDelete));
+        EventLogHelper.logEvent("Case '" + caseToDelete + "' was deleted from BrushesRoom.");
     }
 
     // MODIFIES: pencilCase
@@ -35,6 +37,8 @@ public class BrushesRoom implements Writable {
     public void deleteBrush(String brushToDelete, PencilCase pencilCase) {
         Brush brush = pencilCase.getBrushWithName(brushToDelete);
         pencilCase.getBrushes().remove(brush);
+        EventLogHelper.logEvent("Brush '" + brushToDelete
+                + "' was deleted from " + pencilCase.getName() + ".");
     }
 
     // EFFECTS: return true if name is in the brushes list, false otherwise
@@ -71,6 +75,7 @@ public class BrushesRoom implements Writable {
     // EFFECTS: adds the given pencilCase to the BrushesRoom cases list
     public void addPencilCase(PencilCase pc) {
         cases.add(pc);
+        EventLogHelper.logEvent("Case '" + pc.getName() + "' was added to BrushesRoom.");
     }
 
     public List<PencilCase> getCases() {

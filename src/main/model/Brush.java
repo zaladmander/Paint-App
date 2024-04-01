@@ -37,6 +37,7 @@ public class Brush implements Writable {
         } else {
             this.opacity = opacity;
         }
+        EventLogHelper.logEvent("Brush '" + getName() + "': Opacity set to " + this.opacity);
     }
 
     // REQUIRES: size >= 1
@@ -45,6 +46,7 @@ public class Brush implements Writable {
     //          set to 1
     public void setSize(int size) {
         this.size = Math.max(size, 1);
+        EventLogHelper.logEvent("Brush '" + getName() + "': Size set to " + this.size);
     }
 
     // MODIFIES: this
@@ -57,6 +59,7 @@ public class Brush implements Writable {
         } else {
             this.red = Math.max(red, 0);
         }
+        EventLogHelper.logEvent("Brush '" + getName() + "': Red set to " + this.red);
     }
 
     // MODIFIES: this
@@ -69,6 +72,7 @@ public class Brush implements Writable {
         } else {
             this.green = Math.max(green, 0);
         }
+        EventLogHelper.logEvent("Brush '" + getName() + "': Green set to " + this.green);
     }
 
     // MODIFIES: this
@@ -81,11 +85,13 @@ public class Brush implements Writable {
         } else {
             this.blue = Math.max(blue, 0);
         }
+        EventLogHelper.logEvent("Brush '" + getName() + "': Blue set to " + this.blue);
     }
 
     // EFFECTS: sets name to given name if string at least one letter length
     public void setName(String name) {
         if (name.length() >= 1) {
+            EventLogHelper.logEvent("Brush '" + this.name + "': Name set to " + name);
             this.name = name;
         }
     }

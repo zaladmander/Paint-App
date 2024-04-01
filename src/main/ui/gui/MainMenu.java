@@ -46,7 +46,7 @@ public class MainMenu extends WindowGUI implements ActionListener {
         titleText.setHorizontalTextPosition(JLabel.CENTER);
         titleText.setVerticalTextPosition(JLabel.BOTTOM);
         titleText.setIconTextGap(-30);
-        titleText.setFont(new Font("Spectral", Font.BOLD, 75));
+        titleText.setFont(new Font("Spectral", Font.BOLD, 55));
         titleText.setForeground(new Color(0, 0, 0));
         titleText.setHorizontalAlignment(JLabel.CENTER);
         titleText.setVerticalAlignment(JLabel.CENTER);
@@ -73,9 +73,6 @@ public class MainMenu extends WindowGUI implements ActionListener {
         newCanvasButton.setBounds((WIDTH / 2) - 125, (HEIGHT / 2) - 50, 250, 100);
         newCanvasButton.setFocusable(false);
         newCanvasButton.addActionListener(this);
-        //newCanvasButton.setBorder(BorderFactory.createEtchedBorder());
-        //button.setBorder(new MatteBorder(10, 10, 10, 10, Color.CYAN));
-
         parent.add(newCanvasButton);
     }
 
@@ -87,8 +84,6 @@ public class MainMenu extends WindowGUI implements ActionListener {
         loadCanvasButton.setBounds((WIDTH / 2) - 125, (HEIGHT / 2) - 50, 250, 100);
         loadCanvasButton.setFocusable(false);
         loadCanvasButton.addActionListener(this);
-        //button.setBorder(new MatteBorder(10, 10, 10, 10, Color.CYAN));
-
         parent.add(loadCanvasButton);
     }
 
@@ -99,7 +94,6 @@ public class MainMenu extends WindowGUI implements ActionListener {
         settingsButton.setBounds((WIDTH / 2) - 125, (HEIGHT / 2) - 50, 250, 100);
         settingsButton.setFocusable(false);
         settingsButton.addActionListener(this);
-
         parent.add(settingsButton);
     }
 
@@ -108,7 +102,7 @@ public class MainMenu extends WindowGUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         if (e.getSource() == newCanvasButton) {
-            //FileHelper.getFileHelper().loadAll();
+            //FileHelper.getFileHelper().loadDrawingRoom();
             String width = JOptionPane.showInputDialog(null,
                     "give width of canvas (600 - 1800)",
                     windowLabel, JOptionPane.QUESTION_MESSAGE);

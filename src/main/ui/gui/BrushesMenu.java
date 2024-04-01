@@ -9,6 +9,7 @@ import ui.FileHelper;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,10 +18,10 @@ import java.util.Map;
 public class BrushesMenu extends WindowGUI {
     protected static final int WIDTH = 300;
     protected static final int HEIGHT = 450;
+
+    private final BrushesRoom brushesRoom = BrushesRoom.getBrushesRoom();
     private JPanel brushesPanel;
     private GridLayout brushesPanelGrid = new GridLayout(2, 1);
-    private final BrushesRoom brushesRoom = BrushesRoom.getBrushesRoom();
-    private JsonReader jsonReader = new JsonReader(FileHelper.JSON_STORE_BR);
     private JButton addButton;
     private JButton deleteButton;
     private PencilCase pc;
@@ -31,15 +32,11 @@ public class BrushesMenu extends WindowGUI {
         super(windowLabel);
         pc = pencilCase;
         this.parent = parent;
-        brushesRoom.reset();
-        try {
-            jsonReader.readBrushesRoom();
-        } catch (IOException e) {
-            System.out.println("Unable to load file: " + FileHelper.JSON_STORE_BR);
-        }
+        FileHelper.getFileHelper().loadBrushesRoom();
         initializeWindow(new BorderLayout(), BG_COLOR, WIDTH, HEIGHT);
     }
 
+    // EFFECTS: initializes the window
     @Override
     protected void initializeWindow(LayoutManager layout, Color color, int width, int height) {
         super.initializeWindow(layout, color, width, height);
@@ -50,12 +47,16 @@ public class BrushesMenu extends WindowGUI {
         this.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the scroll pane to the JFrame
     private void addScrollPane() {
-        JScrollPane scrollPane = new JScrollPane(brushesPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        JScrollPane scrollPane = new JScrollPane(brushesPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the brushesPanel to JFrame (a grid of buttons for each brush)
     private void addBrushesPanel(WindowGUI parent) {
         brushesPanel = new JPanel(brushesPanelGrid);
         addButton = new JButton("Create a Brush");
@@ -134,6 +135,7 @@ public class BrushesMenu extends WindowGUI {
         }
     }
 
+    // EFFECTS: returns true if name already exists in list of brushes, false otherwise
     private boolean isNameAlreadyExist(String name) {
         boolean invalidName = false;
         for (Brush b : pc.getBrushes()) {

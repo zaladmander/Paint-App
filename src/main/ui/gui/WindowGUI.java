@@ -1,15 +1,15 @@
 package ui.gui;
 
+import model.EventLogHelper;
 import ui.FileHelper;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 // represents an abstract GUI window
+// TODO: hierarchy may be a bit scuffed so try to clean it up
 public abstract class WindowGUI extends JFrame implements ActionListener {
     protected static final Color BG_COLOR = Color.white;
     protected static final Color BG_COLOR2 = new Color(200, 200, 160);
@@ -110,10 +110,11 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
     // EFFECTS: an abstract popup dialog response window that has
     //          buttons for OK or Cancel, returns an int response depending
     //          on what buttons are clicked in popup window
-    private int confirmMenuItemDialog(String text) {
+    // TODO: this disposes the JFrame so maybe make another method like this or take boolean input
+    private int confirmMenuItemDialog(String text, Boolean dispose) {
         int response = JOptionPane.showConfirmDialog(null, text,
                 windowLabel, JOptionPane.OK_CANCEL_OPTION);
-        if (response == 0) {
+        if (response == 0 && dispose) {
             this.dispose();
         }
         return response;
@@ -122,9 +123,45 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
     // MODIFIES: BrushesRoom, DrawingRoom
     // EFFECTS: asks the user if they want to save, if ok is clicked, then save
     private void saveOptionMenuDialog() {
-        if (confirmMenuItemDialog("Are you sure you want to save?") == 0) {
+        if (confirmMenuItemDialog("Are you sure you want to save?", false) == 0) {
             FileHelper.getFileHelper().saveAll();
             textMenuItemDialog("All data has been successfully saved!");
+        }
+    }
+
+    // EFFECTS: asks the user if they want to load, if ok is clicked, then load
+    private void loadOptionMenuDialog() {
+        if (confirmMenuItemDialog("Are you sure you want to load?", false) == 0) {
+            FileHelper.getFileHelper().loadAll();
+            textMenuItemDialog("All data has been successfully loaded!");
+        }
+    }
+
+    // EFFECTS: asks the user if they want to quit, if ok is clicked, then quit, also prompts to save
+    private void quitOptionMenuDialog() {
+        if (confirmMenuItemDialog("Are you sure you want to quit?", true) == 0) {
+            saveOptionMenuDialog();
+            EventLogHelper.printLogs();
+            System.exit(0);
+        }
+    }
+
+    // EFFECTS: asks the user if they want to go to main menu, if ok is clicked, then create main menu,
+    //          also prompts to save
+    private void mainMenuOptionMenuDialog() {
+        if (confirmMenuItemDialog("Are you sure you want to go to the Main Menu?", true) == 0) {
+            saveOptionMenuDialog();
+            new MainMenu();
+        }
+    }
+
+    // EFFECTS: asks the user if they want to reset all data, if ok is clicked, then create invoke reset()
+    private void resetOptionMenuDialog() {
+        if (confirmMenuItemDialog("Are you sure you want to go reset all data? This cannot be undone!",
+                true) == 0) {
+            FileHelper.getFileHelper().reset();
+            new MainMenu();
+            textMenuItemDialog("All data has been successfully reset.");
         }
     }
 
@@ -134,25 +171,15 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         if (e.getSource() == saveMenuItem) {
             saveOptionMenuDialog();
         } else if (e.getSource() == loadMenuItem) {
-            FileHelper.getFileHelper().loadAll();
-            textMenuItemDialog("All data has been successfully loaded!");
+            loadOptionMenuDialog();
         } else if (e.getSource() == quitMenuItem) {
-            if (confirmMenuItemDialog("Are you sure you want to quit?") == 0) {
-                saveOptionMenuDialog();
-                System.exit(0);
-            }
+            quitOptionMenuDialog();
         } else if (e.getSource() == paintMainMenuItem) {
-            if (confirmMenuItemDialog("Are you sure you want to go to the Main Menu?") == 0) {
-                saveOptionMenuDialog();
-                new MainMenu();
-            }
+            mainMenuOptionMenuDialog();
         } else if (e.getSource() == brushesMenuItem) {
             new PencilCasesMenu(this);
         } else if (e.getSource() == resetMenuItem) {
-            if (confirmMenuItemDialog("Are you sure you want to go reset all data? This cannot be undone!") == 0) {
-                FileHelper.getFileHelper().reset();
-                new MainMenu();
-            }
+            resetOptionMenuDialog();
         }
     }
 }

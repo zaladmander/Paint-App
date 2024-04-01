@@ -29,8 +29,12 @@ public class Canvas implements Writable {
     // REQUIRES: type must be either "photo" or "blank"
     public void setType(String type) {
         if (type.equals("photo") || type.equals("blank")) {
+            EventLogHelper.logEvent(getType() + " " + getWidth() + "x" + getHeight()
+                    + " Canvas type was changed to " + type);
             this.type = type;
         } else {
+            EventLogHelper.logEvent(getType() + " " + getWidth() + "x" + getHeight()
+                    + " Canvas type received incorrect input and was changed to blank");
             this.type = "blank";
         }
     }
@@ -40,8 +44,12 @@ public class Canvas implements Writable {
     //          otherwise, set width to default
     public void setWidth(int width) {
         if (width >= MINIMUM_WIDTH && width <= MAXIMUM_WIDTH) {
+            EventLogHelper.logEvent(getType() + " " + getWidth() + "x" + getHeight()
+                    + " Canvas width was changed to " + width);
             this.width = width;
         } else {
+            EventLogHelper.logEvent(getType() + " " + getWidth() + "x" + getHeight()
+                    + " Canvas width was invalid and changed to " + DEFAULT_WIDTH);
             this.width = DEFAULT_WIDTH;
         }
     }
@@ -51,8 +59,12 @@ public class Canvas implements Writable {
     //          otherwise, set height to default
     public void setHeight(int height) {
         if (height >= MINIMUM_HEIGHT && height <= MAXIMUM_HEIGHT) {
+            EventLogHelper.logEvent(getType() + " " + getWidth() + "x" + getHeight()
+                    + " Canvas height was changed to " + height);
             this.height = height;
         } else {
+            EventLogHelper.logEvent(getType() + " " + getWidth() + "x" + getHeight()
+                    + " Canvas height was invalid and changed to " + DEFAULT_HEIGHT);
             this.height = DEFAULT_HEIGHT;
         }
     }

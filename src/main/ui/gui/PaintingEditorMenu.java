@@ -42,21 +42,20 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
         initializeMenuBar(this);
         initializeDrawingSpace();
         setVisible(true);
-
         initializeMouseInput(currentBrush);
     }
 
+    // EFFECTS: initialize a toolbar for the JFrame
     private void initializeToolbar() {
         JPanel toolBar = new JPanel();
         toolBar.setBackground(new Color(250, 250, 210));
         toolBar.setPreferredSize(new Dimension(100, 100));
-
         addSlider(toolBar);
         new ColorSelecterTool(this, toolBar);
-
         this.add(toolBar, BorderLayout.NORTH);
     }
 
+    // EFFECTS: adds a slider bar to the JFrame
     private void addSlider(JComponent parent) {
         JPanel panel = new JPanel(new GridLayout(2, 1));
         panel.setOpaque(false);
@@ -75,6 +74,7 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
         parent.add(panel);
     }
 
+    // EFFECTS: initializes the drawing space
     private void initializeDrawingSpace() {
         drawingSpace = new JPanel();
         drawingSpace.setBackground(BG_COLOR);

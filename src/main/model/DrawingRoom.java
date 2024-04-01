@@ -22,19 +22,25 @@ public class DrawingRoom implements Writable {
     // EFFECTS: resets all fields
     public void reset() {
         canvases = new ArrayList<>();
+        EventLogHelper.logEvent("DrawingRoom was reset!");
     }
 
-    // MODIFIES: cases
+    // MODIFIES: canvases
     // EFFECTS: adds the given canvas to the DrawingRoom cases list
     public void addCanvas(Canvas canvas) {
         canvases.add(canvas);
+        EventLogHelper.logEvent(canvas.getType() + " " + canvas.getHeight() + "x" + canvas.getWidth()
+                + " canvas was added to DrawingRoom.");
     }
 
     // REQUIRES: canvases not empty and position is a valid position in canvases
     // MODIFIES: canvases
-    // EFFECTS: removes a canvas from position -1
+    // EFFECTS: removes a canvas from position -1 (not zero based indexing)
     public void deleteCanvas(int position) {
         if (position > 0) {
+            Canvas canvas = canvases.get(position - 1);
+            EventLogHelper.logEvent(canvas.getType() + " " + canvas.getHeight() + "x" + canvas.getWidth()
+                    + " canvas was deleted from DrawingRoom.");
             canvases.remove(position - 1);
         }
     }

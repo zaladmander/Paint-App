@@ -24,12 +24,15 @@ public class PencilCase implements Writable {
     // EFFECTS: adds given brush to the brushes list
     public void addBrush(Brush brush) {
         this.brushes.add(brush);
+        EventLogHelper.logEvent("Brush '" + brush.getName() + "' was added to PencilCase " + this.getName());
     }
 
     // REQUIRES: index in brushes list range and brushes must not be empty
     // MODIFIES: this
     // EFFECTS: removes brush at index from brushes
     public void removeBrush(int index) {
+        EventLogHelper.logEvent("Brush '" + brushes.get(index).getName() + "' was removed from PencilCase "
+                + this.getName());
         this.brushes.remove(index);
     }
 
@@ -38,6 +41,7 @@ public class PencilCase implements Writable {
     // MODIFIES: this
     // EFFECTS: sets name to given name
     public void setName(String name) {
+        EventLogHelper.logEvent("PencilCase '" + this.name + "' name changed to " + name);
         this.name = name;
     }
 
