@@ -20,7 +20,6 @@ public class PencilCasesMenu extends WindowGUI {
     private JPanel brushesPanel;
     private GridLayout brushesPanelGrid = new GridLayout(2, 1);
     private final BrushesRoom brushesRoom = BrushesRoom.getBrushesRoom();
-    private JsonReader jsonReader = new JsonReader(FileHelper.JSON_STORE_BR);
     private JButton addButton;
     private JButton deleteButton;
     private WindowGUI parent;
@@ -29,12 +28,6 @@ public class PencilCasesMenu extends WindowGUI {
     PencilCasesMenu(WindowGUI parent) {
         super(windowLabel);
         this.parent = parent;
-        //brushesRoom.reset();
-        //try {
-        //    jsonReader.readBrushesRoom();
-        //} catch (IOException e) {
-        //    System.out.println("Unable to load file: " + FileHelper.JSON_STORE_BR);
-        //}
         initializeWindow(new BorderLayout(), BG_COLOR, WIDTH, HEIGHT);
     }
 

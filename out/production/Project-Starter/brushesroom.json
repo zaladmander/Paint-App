@@ -1,1 +1,21 @@
-{"cases": []}
+{"cases": [{
+    "name": "apple",
+    "brushes": [
+        {
+            "red": 255,
+            "green": 51,
+            "size": 51,
+            "blue": 51,
+            "name": "red",
+            "opacity": 1
+        },
+        {
+            "red": 51,
+            "green": 0,
+            "size": 51,
+            "blue": 153,
+            "name": "ourple",
+            "opacity": 1
+        }
+    ]
+}]}

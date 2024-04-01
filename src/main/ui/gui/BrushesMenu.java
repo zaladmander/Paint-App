@@ -32,7 +32,6 @@ public class BrushesMenu extends WindowGUI {
         super(windowLabel);
         pc = pencilCase;
         this.parent = parent;
-        FileHelper.getFileHelper().loadBrushesRoom();
         initializeWindow(new BorderLayout(), BG_COLOR, WIDTH, HEIGHT);
     }
 

@@ -5,8 +5,7 @@ import model.Dot;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class PaintingEditorMouseAdapter extends MouseAdapter {
 
         currentPath = new ArrayList<>();
         currentPath.add(new Dot(brushColor, e.getX(), e.getY()));
-        System.out.println("x: " + x + ", y: " + y);
+        //System.out.println("x: " + x + ", y: " + y);
     }
 
     // EFFECTS: creates a line at mouse x and y to release point

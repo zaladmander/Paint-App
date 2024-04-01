@@ -62,11 +62,12 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
         JLabel text = new JLabel("Brush Size");
         text.setFont(new Font("Spectral", Font.BOLD, 15));
         text.setHorizontalAlignment(JLabel.CENTER);
-        slider = new JSlider(0, 100);
+        slider = new JSlider(0, 200);
+        slider.setValue(currentBrush.getSize());
         slider.setPaintTicks(true);
         slider.setPaintTrack(true);
         slider.setMinorTickSpacing(10);
-        slider.setMajorTickSpacing(25);
+        slider.setMajorTickSpacing(50);
         slider.setPaintLabels(true);
         slider.addChangeListener(this);
         panel.add(text);
@@ -110,9 +111,5 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
     @Override
     public void stateChanged(ChangeEvent e) {
         currentBrush.setSize(slider.getValue());
-        System.out.println(slider.getValue());
-        System.out.println(currentBrush.getName());
-        System.out.println("size: " + currentBrush.getSize());
     }
-
 }

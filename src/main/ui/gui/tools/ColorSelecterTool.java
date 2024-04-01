@@ -32,11 +32,6 @@ public class ColorSelecterTool extends Tool {
         //button.setBounds(0, 0, 250, 250);
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        //JColorChooser.showDialog(null, "Color Selector", Color.black);
-    }
-
     // a click handler private class for this class
     private class ColorSelectorClickHandler implements ActionListener {
         // MODIFIES: chosenColor, currentBrush
@@ -52,7 +47,6 @@ public class ColorSelecterTool extends Tool {
                 editor.getCurrentBrush().setRed(red);
                 editor.getCurrentBrush().setGreen(green);
                 editor.getCurrentBrush().setBlue(blue);
-
                 previousColor = chosenColor;
             }
         }
