@@ -3,14 +3,11 @@ package ui.gui;
 import model.Brush;
 import model.BrushesRoom;
 import model.PencilCase;
-import persistence.JsonReader;
 import ui.FileHelper;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,7 +82,6 @@ public class BrushesMenu extends WindowGUI {
             map.put(b, i);
             i++;
             b.addActionListener(e -> {
-                System.out.println(br.getName());
                 parent.setCurrentBrush(br);
                 parent.initializeMouseInput(br);
                 this.dispose();

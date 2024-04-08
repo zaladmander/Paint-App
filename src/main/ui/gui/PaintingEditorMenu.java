@@ -11,6 +11,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
         initializeDrawingSpace();
         setVisible(true);
         initializeMouseInput(currentBrush);
+        addWindowListener(this);
     }
 
     // EFFECTS: initialize a toolbar for the JFrame
@@ -111,5 +114,11 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
     @Override
     public void stateChanged(ChangeEvent e) {
         currentBrush.setSize(slider.getValue());
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        mouseAdapter.redrawAllPaths();
+
     }
 }

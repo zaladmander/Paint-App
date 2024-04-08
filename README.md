@@ -83,3 +83,20 @@ clicking file, and clicking save
 - You can reload the state of my application by going to the top toolbar in a canvas window,
   clicking file, and clicking load
 
+## Phase 4: Task 2
+
+- Case 'er' was added to BrushesRoom.
+- New Brush Name set to ranni
+- Brush 'ranni': Opacity set to 1.0
+- Brush 'ranni': Size set to 44
+- Brush 'ranni': Red set to 0
+- Brush 'ranni': Green set to 204
+- Brush 'ranni': Blue set to 204
+- Brush 'ranni' was added to PencilCase er
+- New Brush Name set to godrick
+- Brush 'godrick': Opacity set to 1.0
+- Brush 'godrick': Size set to 129
+- Brush 'godrick': Red set to 255
+- Brush 'godrick': Green set to 255
+- Brush 'godrick': Blue set to 51
+- Brush 'godrick' was added to PencilCase er

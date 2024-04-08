@@ -16,9 +16,9 @@ public class Brush implements Writable {
 
     // EFFECTS: constructs a Paintbrush
     public Brush(int size, String name, int red, int green, int blue, double opacity) {
+        setName(name);
         setOpacity(opacity);
         setSize(size);
-        setName(name);
         setRed(red);
         setGreen(green);
         setBlue(blue);
@@ -89,9 +89,15 @@ public class Brush implements Writable {
     }
 
     // EFFECTS: sets name to given name if string at least one letter length
+    //          if name is null, log event without this.name to avoid null print
+    //          else, logEvent
     public void setName(String name) {
         if (name.length() >= 1) {
-            EventLogHelper.logEvent("Brush '" + this.name + "': Name set to " + name);
+            if (this.name == null) {
+                EventLogHelper.logEvent("New Brush Name set to " + name);
+            } else {
+                EventLogHelper.logEvent("Brush '" + this.name + "': Name set to " + name);
+            }
             this.name = name;
         }
     }

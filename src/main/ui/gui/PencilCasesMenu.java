@@ -2,13 +2,11 @@ package ui.gui;
 
 import model.BrushesRoom;
 import model.PencilCase;
-import persistence.JsonReader;
 import ui.FileHelper;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -84,7 +82,6 @@ public class PencilCasesMenu extends WindowGUI {
             map.put(b, i);
             i++;
             b.addActionListener(e -> {
-                System.out.println(pc.getName());
                 new BrushesMenu(pc, (PaintingEditorMenu) parent);
                 this.dispose();
             });

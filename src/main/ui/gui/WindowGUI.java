@@ -7,10 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 // represents an abstract GUI window
 // TODO: hierarchy may be a bit scuffed so try to clean it up
-public abstract class WindowGUI extends JFrame implements ActionListener {
+public abstract class WindowGUI extends JFrame implements ActionListener, WindowListener {
     protected static final Color BG_COLOR = Color.white;
     protected static final Color BG_COLOR2 = new Color(200, 200, 160);
     protected static final String windowLabel = "Paint!";
@@ -181,5 +183,41 @@ public abstract class WindowGUI extends JFrame implements ActionListener {
         } else if (e.getSource() == resetMenuItem) {
             resetOptionMenuDialog();
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        saveOptionMenuDialog();
+        EventLogHelper.printLogs();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }

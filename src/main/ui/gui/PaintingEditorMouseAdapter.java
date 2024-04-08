@@ -27,6 +27,20 @@ public class PaintingEditorMouseAdapter extends MouseAdapter {
         this.parent = parent;
     }
 
+    // TODO: doesnt seem to work right now
+    // EFFECTS: redraws all dots on the canvas
+    public void redrawAllPaths() {
+        for (List<Dot> path : allPaths) {
+            for (Dot dot : path) {
+                Graphics gdot = parent.getGraphics();
+                gdot.setColor(dot.getColor());
+                gdot.fillRect(dot.getXcoord(), dot.getYcoord(), 20,20);
+                gdot.dispose();
+
+            }
+        }
+    }
+
     // EFFECTS: creates a dot at mouse x and y
     @Override
     public void mousePressed(MouseEvent e) {

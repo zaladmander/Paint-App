@@ -35,6 +35,7 @@ public class MainMenu extends WindowGUI implements ActionListener {
         initializeMenuBar(this);
         menuBar.remove(toolsMenu);
         setVisible(true);
+        addWindowListener(this);
     }
 
     // MODIFIES: parent
@@ -120,7 +121,7 @@ public class MainMenu extends WindowGUI implements ActionListener {
             }
         } else if (e.getSource() == loadCanvasButton) {
             // TODO: use LoadCanvasMenu here
-            new PaintingEditorMenu(new Canvas("blank", HEIGHT, WIDTH));
+            new PaintingEditorMenu(new Canvas("blank", 800, 1200));
             this.dispose();
         } else if (e.getSource() == settingsButton) {
             textMenuItemDialog("put settings here :) ");
