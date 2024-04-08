@@ -106,3 +106,20 @@ clicking file, and clicking save
 
 ## Phase 4: Task 3
 
+Reflecting on the UML class diagram, it is quite messy...
+
+If I had more time to work on the project and refactor my design for 
+improvements, I would certainly refactor a lot to do with Canvas and 
+PaintingEditorMenu. Currently, canvas is a superclass(???) for what would
+probably be a new class called GUIcanvas which would likely extend
+canvas and have visual components, likely from JPanel, and would
+tie into PaintingEditorMenu. This would help with saving and exporting
+canvases.
+
+I would probably refactor to remove any redundant fields that 
+either aren't used or can be inherited. Also, remove any unused
+import statements. 
+
+Finally, I would refactor to create more abstract classes or methods
+because I feel like many of my classes share very similar code
+and thus, can be abstracted.
