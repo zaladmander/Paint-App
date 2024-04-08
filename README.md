@@ -83,6 +83,9 @@ clicking file, and clicking save
 - You can reload the state of my application by going to the top toolbar in a canvas window,
   clicking file, and clicking load
 
+# Phase 4
+
+
 ## Phase 4: Task 2
 
 - Case 'er' was added to BrushesRoom.
@@ -100,3 +103,6 @@ clicking file, and clicking save
 - Brush 'godrick': Green set to 255
 - Brush 'godrick': Blue set to 51
 - Brush 'godrick' was added to PencilCase er
+
+## Phase 4: Task 3
+

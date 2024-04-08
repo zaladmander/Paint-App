@@ -19,10 +19,7 @@ import java.util.List;
 // represents the painting window where users can draw things
 public class PaintingEditorMenu extends WindowGUI implements ActionListener, ChangeListener {
     private Brush currentBrush = new Brush(20, "Default", 0, 0, 0, 1);
-    private List<Dot> currentPath;
-    private List<List<Dot>> allPaths = new ArrayList<>();
     private JSlider slider;
-    private Canvas thisCanvas;
     private final int width;
     private final int height;
     private JPanel drawingSpace;
@@ -91,7 +88,7 @@ public class PaintingEditorMenu extends WindowGUI implements ActionListener, Cha
     public void initializeMouseInput(Brush currentBrush) {
         removeMouseListener(mouseAdapter);
         removeMouseMotionListener(mouseAdapter);
-        mouseAdapter = new PaintingEditorMouseAdapter(currentBrush, currentPath, allPaths, drawingSpace);
+        mouseAdapter = new PaintingEditorMouseAdapter(currentBrush, drawingSpace);
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
     }

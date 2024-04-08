@@ -1,20 +1,20 @@
 {"cases": [{
-    "name": "apple",
+    "name": "bback2me",
     "brushes": [
         {
-            "red": 255,
-            "green": 51,
-            "size": 51,
-            "blue": 51,
-            "name": "red",
+            "red": 102,
+            "green": 255,
+            "size": 20,
+            "blue": 0,
+            "name": "green",
             "opacity": 1
         },
         {
-            "red": 51,
-            "green": 0,
-            "size": 51,
-            "blue": 153,
-            "name": "ourple",
+            "red": 102,
+            "green": 255,
+            "size": 20,
+            "blue": 0,
+            "name": "blue",
             "opacity": 1
         }
     ]

@@ -18,12 +18,11 @@ public class PaintingEditorMouseAdapter extends MouseAdapter {
     private JComponent parent;
 
     // EFFECTS: creates PaintingEditorMouseAdapter
-    PaintingEditorMouseAdapter(Brush currentBrush, List<Dot> currentPath,
-                               List<List<Dot>> allPaths, JComponent parent) {
+    PaintingEditorMouseAdapter(Brush currentBrush, JComponent parent) {
         super();
         this.currentBrush = currentBrush;
-        this.currentPath = currentPath;
-        this.allPaths = allPaths;
+        this.currentPath = new ArrayList<>();
+        this.allPaths = new ArrayList<>();
         this.parent = parent;
     }
 
